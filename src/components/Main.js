@@ -9,7 +9,8 @@ const Main = () => {
 
   return (
   <div className="main">
-  {(<div>
+    {groupState.showGroupCreated === false && (
+    <div>
       <input 
         className="main-input" 
         placeholder="Введите название вашей группы" 
@@ -24,7 +25,7 @@ const Main = () => {
       </button>
     </div>)}
     
-    {!groupState.showGroupCreated === false && groupName !== "" &&(<GroupCreated groupName={groupName}/>)}
+    {!groupState.showGroupCreated === false && (<GroupCreated groupName={groupName}/>)}
   </div>
   );
 };
