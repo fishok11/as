@@ -2,20 +2,26 @@ import { createContext, useReducer } from "react"
 
 const initialState = {
   showGroupCreated: false,
+  groupName: "",
+  groupCreateError: false,
 }
 
-const reducer = (state, action) => {
+const reducer = (state = initialState, action) => {
   switch(action.type) {
     case "GROUP_CREATED": {
-      const input = document.querySelector(".main-input")
-
-      console.log(input.value)
-
-      if (input.value === "") {
-        return initialState
+      const groupName = action.payload.groupName
+      console.log(action)
+      if (groupName === "") {
+        return {
+          ...state,
+          groupCreateError: true,
+        }
       } else {
         return {
+          ...state,
           showGroupCreated: true,
+          groupName: groupName,
+          groupCreateError: false,
         }
       }
     }
