@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
   switch(action.type) {
     case "GROUP_CREATED": {
       const groupName = action.payload.groupName
-      console.log(action)
+
       if (groupName === "") {
         return {
           ...state,
