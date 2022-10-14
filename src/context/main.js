@@ -1,14 +1,14 @@
 import { createContext, useReducer } from "react"
 
 const initialState = {
-  showGroupCreated: false,
   groupName: "",
   groupCreateError: false,
-  groupOwner: {
-    groupOwnerName: "",
-    groupOwnerEmail: "",
-  },
-  groupOwnerError: false,
+  showGroupNameLink: false,
+  budget: "",
+  registrationDate: "",
+  drawDate: "",
+  exchangeDate: "",
+  eventDateError: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -24,31 +24,41 @@ const reducer = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          showGroupCreated: true,
           groupName: groupName,
           groupCreateError: false,
+          showGroupNameLink: true,
         }
       }
     }
-    case "SAVE_GROUP_OWNER": {
-      const groupOwnerName = action.payload.groupOwner.groupOwnerName
+    case "RETURN_CREATE_GROUP_NAME": {
+      return {
+        ...state,
+        showGroupNameLink: false,
+      }
+    }
+    case "CREATE_DATE_OF_EVENT": {
+      const budget = action.payload.budget
+      const registrationDate = action.payload.registrationDate
+      const drawDate = action.payload.drawDate
+      const exchangeDate = action.payload.exchangeDate
 
-      const groupOwnerEmail = action.payload.groupOwner.groupOwnerEmail
-
-      if (groupOwnerName === "" || groupOwnerEmail === "") {
+      if (budget === "" 
+      || registrationDate === "" 
+      || drawDate === "" 
+      || exchangeDate === "") {
         return {
           ...state,
-          groupOwnerError: true,
+          eventDateError: true,
         }
       } else {
         console.log(state)
         return {
           ...state,
-          groupOwner: {
-            groupOwnerName: groupOwnerName,
-            groupOwnerEmail: groupOwnerEmail,
-          },
-          groupOwnerError: false,
+          budget: budget,
+          registrationDate: registrationDate,
+          drawDate: drawDate,
+          exchangeDate: exchangeDate,
+          eventDateError: false,
         }
       }
     }

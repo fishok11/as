@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { GroupContext } from "../context/main";
-import GroupCreated from "./GroupCreated"
+import EventDate from "./EventDate";
+
 
 const Main = () => {
   const [state, dispatch] = useContext(GroupContext);
@@ -8,25 +9,37 @@ const Main = () => {
   const [groupNameInput, setGroupName] = useState("")
 
   return (
-  <div className="main">
-    {state.showGroupCreated === false && (
+  <div className="Main">
+    {state.showGroupNameLink === false && (
     <div>
+      <h1>Введите название вашей группы</h1>
       <input
-        className="main-input"
-        placeholder="Введите название вашей группы"
+        className="g-input"
+        placeholder=""
         value={groupNameInput}
         onChange={event => setGroupName(event.target.value)}
       ></input>
+      {state.groupCreateError === true && (<div className="g-error">Название группы не может быть пустым!</div>)}
+
       <button
-        className="main-button"
+        className="g-button"
         onClick={() => dispatch({type: "GROUP_CREATED", payload: {groupName: groupNameInput}})}
       >
         OK
       </button>
     </div>)}
-    {state.groupCreateError === true && (<div className="main-error">Название группы не может быть пустым!</div>)}
 
-    {!state.showGroupCreated === false && (<GroupCreated/>)}
+    {state.showGroupNameLink === true && (    
+      <>
+        <div 
+          className="GroupNameLink"
+          onClick={() => dispatch({type: "RETURN_CREATE_GROUP_NAME"})}
+        >
+          {state.groupName}
+        </div>
+        <EventDate></EventDate>
+      </>
+    )}
   </div>
   );
 };
