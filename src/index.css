@@ -39,6 +39,7 @@ body {
   display: block;
   margin: 0 auto;
   margin-top: 15px;
+  margin-bottom: 15px;
   padding: 10px;
   outline: none;
   border-radius: 4px;
@@ -50,12 +51,15 @@ body {
   color: #bd2d2d;
   text-align: center;
 }
-.GroupNameLink {
+.g-link {
   font-size: 30px;
-  margin-bottom: 20px;
+  margin: 20px 0;
   border-bottom: 2px solid var(--main-grey);
   cursor: pointer;
 }
 .EventDate-item {
+  margin-bottom: 15px;
+}
+.GroupOwner--item {
   margin-bottom: 15px;
 }
