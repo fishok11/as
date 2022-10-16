@@ -12,7 +12,7 @@ const EventDate = () => {
 
   return (
     <>
-      {state.eventDate.showEventDate === true && state.showGroupName === false && (
+      {state.eventDate.showEventDate === true && state.group.showGroupName === false && (
         <div>
           <div className="EventDate-item">
             <label >Бюджет:

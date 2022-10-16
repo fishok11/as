@@ -30,7 +30,11 @@ const GroupOwner = () => {
 					</div>
 					<button 
 						className="g-button"
-						onClick={() => dispatch({type: "SAVE_GROUP_OWNER", payload: {groupOwner: {groupOwnerName: groupOwnerName, groupOwnerEmail: groupOwnerEmail}}})}
+						onClick={() => dispatch({type: "SAVE_GROUP_OWNER", payload: {
+							groupOwner: {
+								groupOwnerName: groupOwnerName, 
+								groupOwnerEmail: groupOwnerEmail
+							}}})}
 					>
 						OK
 					</button>

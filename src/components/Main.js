@@ -12,13 +12,13 @@ const Main = () => {
     
   <div className="Main">
     <div>
-      {state.showGroupNameLink === true && (    
+      {state.group.showGroupNameLink === true && (    
         <>
           <div 
             className="g-link"
             onClick={() => dispatch({type: "RETURN_CREATE_GROUP_NAME"})}
           >
-            {state.groupName}
+            {state.group.groupName}
           </div>
           
         </>
@@ -45,7 +45,7 @@ const Main = () => {
       )}
     </div>
 
-    {state.showGroupName === true && (
+    {state.group.showGroupName === true && (
       <div>
         <h1>Введите название вашей группы</h1>
         <input
@@ -58,7 +58,10 @@ const Main = () => {
 
         <button
           className="g-button"
-          onClick={() => dispatch({type: "GROUP_CREATED", payload: {groupName: groupNameInput}})}
+          onClick={() => dispatch({type: "GROUP_CREATED", payload:{
+            group: {
+              groupName: groupNameInput
+            }}})}
         >
           OK
         </button>

@@ -1,10 +1,12 @@
 import { createContext, useReducer } from "react"
 
 const initialState = {
-  groupName: "",
-  groupCreateError: false,
-  showGroupName: true,
-  showGroupNameLink: false,
+  group:{
+    groupName: "",
+    groupCreateError: false,
+    showGroupName: true,
+    showGroupNameLink: false,
+  },
   eventDate: {
     budget: "",
     registrationDate: "",
@@ -27,27 +29,36 @@ const reducer = (state = initialState, action) => {
   console.log(state)
   switch(action.type) {
     case "GROUP_CREATED": {
-      const groupName = action.payload.groupName
+      const groupName = action.payload.group.groupName
 
       if (groupName === "") {
         return {
           ...state,
-          groupCreateError: true,
+          group: {
+            ...state.group,
+            groupCreateError: true,
+          },
         }
       } else {
         return {
           ...state,
-          groupName: groupName,
-          groupCreateError: false,
-          showGroupNameLink: true,
-          showGroupName: false,
+          group: {
+            ...state.group,
+            groupName: groupName,
+            groupCreateError: false,
+            showGroupNameLink: true,
+            showGroupName: false,
+          },
         }
       }
     }
     case "RETURN_CREATE_GROUP_NAME": {
       return {
         ...state,
-        showGroupName: true,
+        group: {
+          ...state.group,
+          showGroupName: true,
+        },
       }
     }
     case "CREATE_DATE_OF_EVENT": {
@@ -71,6 +82,7 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           eventDate: {
+            ...state.eventDate,
             budget: budget,
             registrationDate: registrationDate,
             drawDate: drawDate,
@@ -90,7 +102,11 @@ const reducer = (state = initialState, action) => {
           ...state.eventDate,     
           showEventDate: true,
         },
-        showGroupName: false,
+        group: {
+          ...state.group,
+          showGroupName: false,
+        },
+        
       }
     }
     case "SAVE_GROUP_OWNER": {
@@ -128,7 +144,10 @@ const reducer = (state = initialState, action) => {
           ...state.eventDate,     
           showEventDate: false,
         },
-        showGroupName: false,
+        group: {
+          ...state.group,
+          showGroupName: false,
+        },
       }
     }
     default: {
