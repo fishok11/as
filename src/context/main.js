@@ -2,63 +2,63 @@ import { createContext, useReducer } from "react"
 
 const initialState = {
   group:{
-    groupName: "",
-    groupCreateError: false,
-    showGroupName: true,
-    showGroupNameLink: false,
+    name: "",
+    error: false,
+    edit: true,
   },
   eventDate: {
     budget: "",
     registrationDate: "",
     drawDate: "",
     exchangeDate: "",
-    eventDateError: false,
-    showEventDate: true,
-    showEventDateLink: false,
+    error: false,
+    edit: false,
   },
   groupOwner: {
-    groupOwnerName: "",
-    groupOwnerEmail: "",
-    groupOwnerError: false,
-    showGroupOwner: true,
+    name: "",
+    email: "",
+    error: false,
     showGroupOwnerLink: false,
+    edit: false,
   },
+  yourGift: {
+    age: "",
+    gender: "",
+    wishes: "",
+    error: false,
+    edit: false,
+  },
+  step: 1,
 }
 
 const reducer = (state = initialState, action) => {
-  console.log(state)
   switch(action.type) {
     case "GROUP_CREATED": {
-      const groupName = action.payload.group.groupName
+      const groupName = action.payload.group.name
 
       if (groupName === "") {
         return {
           ...state,
           group: {
             ...state.group,
-            groupCreateError: true,
+           error: true,
           },
         }
-      } else {
+      } else if (groupName !== "") {
         return {
           ...state,
           group: {
             ...state.group,
-            groupName: groupName,
-            groupCreateError: false,
-            showGroupNameLink: true,
-            showGroupName: false,
+            name: groupName,
+            error: false,
+            edit: false, 
           },
+          eventDate: {
+            ...state.eventDate,
+            edit: true,
+          },
+          step: 2,
         }
-      }
-    }
-    case "RETURN_CREATE_GROUP_NAME": {
-      return {
-        ...state,
-        group: {
-          ...state.group,
-          showGroupName: true,
-        },
       }
     }
     case "CREATE_DATE_OF_EVENT": {
@@ -75,7 +75,7 @@ const reducer = (state = initialState, action) => {
           ...state,
           eventDate: {
             ...state.eventDate,
-            eventDateError: true,
+            error: true,
           }
         }
       } else {
@@ -87,66 +87,157 @@ const reducer = (state = initialState, action) => {
             registrationDate: registrationDate,
             drawDate: drawDate,
             exchangeDate: exchangeDate,
-            eventDateError: false,
-            showEventDateLink: true,
-            showEventDate: false,
-          }
+            error: false,
+            edit: false,
+          },
+          groupOwner: {
+            ...state.groupOwner,
+            edit: true,
+          },
+          step: 3,
         }
       }
-      
     }
-    case "RETURN_CREATE_EVENT_DATE": {
-      return {
-        ...state,
-        eventDate:{  
-          ...state.eventDate,     
-          showEventDate: true,
-        },
-        group: {
-          ...state.group,
-          showGroupName: false,
-        },
-        
-      }
-    }
-    case "SAVE_GROUP_OWNER": {
-      const groupOwnerName = action.payload.groupOwner.groupOwnerName
-      const groupOwnerEmail = action.payload.groupOwner.groupOwnerEmail
+    case "CREATE_GROUP_OWNER": {
+      const groupOwnerName = action.payload.groupOwner.name
+      const groupOwnerEmail = action.payload.groupOwner.email
 
       if (groupOwnerName === "" || groupOwnerEmail === "") {
         return {
           ...state,
           groupOwner: {
             ...state.groupOwner,
-            groupOwnerError: true,
+            error: true,
           },
         }
       } else {
         return {
           ...state,
           groupOwner: {
-            groupOwnerName: groupOwnerName,
-            groupOwnerEmail: groupOwnerEmail,
-            showGroupOwner: false,
-            showGroupOwnerLink: true,
+            ...state.groupOwner,
+            name: groupOwnerName,
+            email: groupOwnerEmail,
+            edit: false,
           },
+          yourGift: {
+            ...state.yourGift,
+            edit: true,
+          },
+          step: 4,
         }
       }
     }
-    case "RETURN_GROUP_OWNER": {
+    case "CREATE_YOUR_GIFT": {
+      const giftGender = action.payload.yourGift.gender
+      const giftAge = action.payload.yourGift.age
+      const giftWishes = action.payload.yourGift.wishes
+
+      if (giftGender === "" 
+      || giftAge === "" 
+      || giftAge === "") {
+        return {
+          ...state,
+          yourGift : {
+            ...state.yourGift,
+            error: true,
+          }
+        }
+      } else {
+        return {
+          ...state,
+          yourGift: {
+            ...state.yourGift,
+            age: giftAge,
+            gender: giftGender,
+            wishes: giftWishes,
+            error: false,
+            edit: false,
+          },
+          step: 5,
+        }
+      }
+    }
+    case "RETURN_CREATE_GROUP_NAME": {
       return {
         ...state,
-        groupOwner: {
-          ...state.groupOwner,
-          showGroupOwner: true,
-        },
-        eventDate:{  
-          ...state.eventDate,     
-          showEventDate: false,
-        },
         group: {
           ...state.group,
-          showGroupName: false,
+          edit: true,
+        },
+        eventDate: {
+          ...state.eventDate,
+          edit: false,
+        },
+        groupOwner: {
+          ...state.groupOwner,
+          edit: false,
+        },
+        yourGift: {
+          ...state.yourGift,
+          edit: false,
+        },
+      }
+    }
+    case "RETURN_CREATE_EVENT_DATE": {
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          edit: false,
+        },
+        eventDate: {
+          ...state.eventDate,
+          edit: true,
+        },
+        groupOwner: {
+          ...state.groupOwner,
+          edit: false,
+        },
+        yourGift: {
+          ...state.yourGift,
+          edit: false,
+        },
+      }
+    }
+    case "RETURN_CREATE_GROUP_OWNER": {
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          edit: false,
+        },
+        eventDate: {
+          ...state.eventDate,
+          edit: false,
+        },
+        groupOwner: {
+          ...state.groupOwner,
+          edit: true,
+        },
+        yourGift: {
+          ...state.yourGift,
+          edit: false,
+        },
+      }
+    }
+    case "RETURN_CREATE_YOUR_GIFT": {
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          edit: false,
+        },
+        eventDate: {
+          ...state.eventDate,
+          edit: false,
+        },
+        groupOwner: {
+          ...state.groupOwner,
+          edit: false,
+        },
+        yourGift: {
+          ...state.yourGift,
+          edit: true,
         },
       }
     }

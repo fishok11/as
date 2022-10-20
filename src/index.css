@@ -6,13 +6,22 @@ body {
 :root {
   --main-grey:#494949;
 }
+h1 {
+  text-align: center;
+}
 
+.g-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .Main {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
   margin: 0 auto;
 }
 .g-input {
@@ -59,7 +68,25 @@ body {
 }
 .EventDate-item {
   margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .GroupOwner--item {
   margin-bottom: 15px;
+}
+.YourGift-radio-contsiner {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+.YourGift-label {
+  display: flex;
+  flex-direction: column;
+}
+.YourGift-radio--item {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
