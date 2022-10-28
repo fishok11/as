@@ -1,0 +1,20 @@
+{
+  "group": {
+      "name": "",
+    "event": {
+      "budget": "",
+      "registrationDate": "",
+      "drawDate": "",
+      "exchangeDate": ""
+    },
+    "groupOwner": {
+      "name": "",
+      "email": ""
+    },
+    "yourGift": {
+      "age": "",
+      "gender": "",
+      "wishes": ""
+    }
+  }
+}

@@ -9,6 +9,7 @@ const GroupOwner = () => {
 	if (state.groupOwner.edit) {
 		return (
 			<>
+				<h1>Ваши данные</h1>
 				<div>
 					<div className="GroupOwner--item">
 						<input 

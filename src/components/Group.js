@@ -1,4 +1,4 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { GroupContext } from "../context/main";
 import EventDate from "./EventDate"
 import GroupOwner from "./GroupOwner"

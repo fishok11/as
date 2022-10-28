@@ -18,7 +18,6 @@ const initialState = {
     name: "",
     email: "",
     error: false,
-    showGroupOwnerLink: false,
     edit: false,
   },
   yourGift: {

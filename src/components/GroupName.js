@@ -10,10 +10,10 @@ const GroupName = () => {
     return ( 
       <div className="Main">
         <div>
-          <h1>Введите название вашей группы</h1>
+          <h1>Название вашей группы</h1>
           <input
             className="g-input"
-            placeholder=""
+            placeholder="Введите название вашей группы"
             value={groupNameInput}
             onChange={event => setGroupName(event.target.value)}
           ></input>
