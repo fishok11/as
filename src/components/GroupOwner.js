@@ -43,17 +43,6 @@ const GroupOwner = () => {
 				</div>
 			</>
 		)
-	} else {
-		return (
-			<>
-				<div 
-					className="g-link"
-					onClick={() => dispatch({type: "RETURN_CREATE_GROUP_OWNER"})}
-				>
-					Ваши данные
-				</div>
-			</>
-		)
 	}
 };
 

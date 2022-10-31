@@ -32,17 +32,6 @@ const GroupName = () => {
         </div>
       </div>
     );
-  } else {
-    return (  
-      <>
-        <div 
-          className="g-link"
-          onClick={() => dispatch({type: "RETURN_CREATE_GROUP_NAME"})}
-        >
-          {state.group.name}
-        </div>
-      </>
-    )
   }
 };
 

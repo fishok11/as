@@ -69,17 +69,6 @@ const YourGift = () => {
         </button>
       </div>
     )
-  } else {
-    return (
-      <>
-        <div 
-          className="g-link"
-          onClick={() => dispatch({type: "RETURN_CREATE_YOUR_GIFT"})}
-        >
-          Ваш подарок
-        </div>
-      </>
-    )
   }
 };
 

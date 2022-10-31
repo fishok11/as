@@ -81,17 +81,6 @@ const EventDate = () => {
         </div>
       </>
     )
-  } else {
-    return (
-      <>
-        <div 
-          className="g-link"
-          onClick={() => dispatch({type: "RETURN_CREATE_EVENT_DATE"})}
-        >
-          Регистрация участников
-        </div>
-      </>
-    )
   }
 };
 

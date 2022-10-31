@@ -178,66 +178,85 @@ const reducer = (state = initialState, action) => {
       }
     }
     case "RETURN_CREATE_EVENT_DATE": {
-      return {
-        ...state,
-        group: {
-          ...state.group,
-          edit: false,
-        },
-        eventDate: {
-          ...state.eventDate,
-          edit: true,
-        },
-        groupOwner: {
-          ...state.groupOwner,
-          edit: false,
-        },
-        yourGift: {
-          ...state.yourGift,
-          edit: false,
-        },
+      if (state.step >= 2) {
+        return {
+          ...state,
+          group: {
+            ...state.group,
+            edit: false,
+          },
+          eventDate: {
+            ...state.eventDate,
+            edit: true,
+          },
+          groupOwner: {
+            ...state.groupOwner,
+            edit: false,
+          },
+          yourGift: {
+            ...state.yourGift,
+            edit: false,
+          },
+        }
+      } else {
+        return {
+          ...state
+        }
       }
+
     }
     case "RETURN_CREATE_GROUP_OWNER": {
-      return {
-        ...state,
-        group: {
-          ...state.group,
-          edit: false,
-        },
-        eventDate: {
-          ...state.eventDate,
-          edit: false,
-        },
-        groupOwner: {
-          ...state.groupOwner,
-          edit: true,
-        },
-        yourGift: {
-          ...state.yourGift,
-          edit: false,
-        },
+      if (state.step >= 3) {
+        return {
+          ...state,
+          group: {
+            ...state.group,
+            edit: false,
+          },
+          eventDate: {
+            ...state.eventDate,
+            edit: false,
+          },
+          groupOwner: {
+            ...state.groupOwner,
+            edit: true,
+          },
+          yourGift: {
+            ...state.yourGift,
+            edit: false,
+          },
+        }
+      } else {
+        return {
+          ...state
+        }
       }
     }
     case "RETURN_CREATE_YOUR_GIFT": {
-      return {
-        ...state,
-        group: {
-          ...state.group,
-          edit: false,
-        },
-        eventDate: {
-          ...state.eventDate,
-          edit: false,
-        },
-        groupOwner: {
-          ...state.groupOwner,
-          edit: false,
-        },
-        yourGift: {
-          ...state.yourGift,
-          edit: true,
-        },
+      if (state.step >= 4) {
+        return {
+          ...state,
+          group: {
+            ...state.group,
+            edit: false,
+          },
+          eventDate: {
+            ...state.eventDate,
+            edit: false,
+          },
+          groupOwner: {
+            ...state.groupOwner,
+            edit: false,
+          },
+          yourGift: {
+            ...state.yourGift,
+            edit: true,
+          },
+        }
+      } else {
+        return {
+          ...state
+        }
       }
     }
     default: {
