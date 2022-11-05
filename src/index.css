@@ -59,6 +59,7 @@ h1 {
   width: 100px;
   cursor: pointer;
   transition: 0.2s;
+  box-shadow: var(--main-shadow);
 }
 .g-error {
   color: #bd2d2d;

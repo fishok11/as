@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
 import { GroupContext } from "../context/main";
 import { APP_URL } from "../config";
 
@@ -8,7 +8,7 @@ const Congradulations = () => {
   const [groupCreated, setGroupCreated] = useState(false);
   const [errorGroupCreated, setErrorGroupCreated] = useState(false);
   
-  useEffect(() => {
+  useMemo(() => {
     async function createGroup(group) {
       try {
         const response = await fetch('http://localhost:3002/group', {
@@ -31,7 +31,6 @@ const Congradulations = () => {
       } catch (error) {
         setErrorGroupCreated(true)
       }
-
     };
 
     let group = {
@@ -54,7 +53,7 @@ const Congradulations = () => {
     };
 
     createGroup(group) 
-  }, []);  
+  }, [state.editDb]);  
 
   if (errorGroupCreated === true) {
     return (

@@ -28,6 +28,7 @@ const initialState = {
     edit: false,
   },
   step: 1,
+  editDb: 0,
 }
 
 const reducer = (state = initialState, action) => {
@@ -153,6 +154,7 @@ const reducer = (state = initialState, action) => {
             edit: false,
           },
           step: 5,
+          editDb: +1,
         }
       }
     }
