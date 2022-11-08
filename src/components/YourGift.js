@@ -3,7 +3,6 @@ import { GroupContext } from "../context/main";
 
 const YourGift = () => {
   const [state, dispatch] = useContext(GroupContext)
-
   const [giftAge, setGiftAge] = useState(state.yourGift.age)
   const [giftGender, setGiftGender] = useState(state.yourGift.gender)
   const [giftWishes, setGiftWishes] = useState(state.yourGift.wishes)

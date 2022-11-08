@@ -1,15 +1,16 @@
-import { useContext, useState, useMemo } from "react";
-import { GroupContext } from "../context/main";
 import { APP_URL } from "../config";
+import { useContext, useEffect, useState } from "react";
+import { GroupContext } from "../context/main";
 
 const Congradulations = () => {
-  const [state, dispatch] = useContext(GroupContext);
+  const [state, dispatch] = useContext(GroupContext)
   const [groupId, setGroupId] = useState();
   const [groupCreated, setGroupCreated] = useState(false);
   const [errorGroupCreated, setErrorGroupCreated] = useState(false);
+  const editDb = state.editDb === true
   
-  useMemo(() => {
-    async function createGroup(group) {
+  useEffect(() => {
+    const createGroup = async(group) => {
       try {
         const response = await fetch('http://localhost:3002/group', {
           method: 'POST',
@@ -32,39 +33,38 @@ const Congradulations = () => {
         setErrorGroupCreated(true)
       }
     };
-
-    let group = {
-      name: state.group.name,
-      event: {
-        budget: state.eventDate.budget,
-        registrationDate: state.eventDate.registrationDate,
-        drawDate: state.eventDate.drawDate,
-        exchangeDate: state.eventDate.exchangeDate,
-      },
-      groupOwner: {
-        name: state.groupOwner.name,
-        email: state.groupOwner.email,
-      },
-      yourGift: {
-        age: state.yourGift.age,
-        gender: state.yourGift.gender,
-        wishes: state.yourGift.wishes,
-      },
-    };
-
     createGroup(group) 
-  }, [state.editDb]);  
+  }, [editDb]);
+  
+  let group = {
+    name: state.group.name,
+    event: {
+      budget: state.eventDate.budget,
+      registrationDate: state.eventDate.registrationDate,
+      drawDate: state.eventDate.drawDate,
+      exchangeDate: state.eventDate.exchangeDate,
+    },
+    groupOwner: {
+      name: state.groupOwner.name,
+      email: state.groupOwner.email,
+    },
+    yourGift: {
+      age: state.yourGift.age,
+      gender: state.yourGift.wishes,
+      wishes: state.yourGift.gender,
+    },
+  };
 
   if (errorGroupCreated === true) {
     return (
       <p className="g-error">Error</p>
     )
-  }
+  };
   if (groupCreated === false) {
     return (
       <p>Группа создается...</p>
     )
-  } 
+  }; 
 
   return (
     <>
