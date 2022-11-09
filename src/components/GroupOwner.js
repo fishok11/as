@@ -20,6 +20,7 @@ const GroupOwner = () => {
 						></input>
 						{state.groupOwner.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
 					</div>
+
 					<div className="GroupOwner--item" >
 						<input 
 							className="g-input" 
@@ -29,6 +30,7 @@ const GroupOwner = () => {
 						></input>
 						{state.groupOwner.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
 					</div>
+
 					<button 
 						className="g-button"
 						onClick={() => dispatch({type: "CREATE_GROUP_OWNER", payload: {

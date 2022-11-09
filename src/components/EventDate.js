@@ -17,10 +17,10 @@ const EventDate = () => {
           <div className="EventDate-item">
             <label >Бюджет:
               <input 
-              className="g-input" 
-              placeholder="budget"
-              value={budgetInput}
-              onChange={event => setBudgetInput(event.target.value)}
+                className="g-input" 
+                placeholder="Бюджет"
+                value={budgetInput}
+                onChange={event => setBudgetInput(event.target.value)}
               ></input>
             </label>
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
@@ -29,10 +29,11 @@ const EventDate = () => {
           <div className="EventDate-item">
             <label>Регистрация участников до:
               <input 
-              className="g-input" 
-              placeholder="Date"
-              value={registrationDateInput}
-              onChange={event => setRegistrationDateInput(event.target.value)}
+                type="date"
+                className="g-input" 
+                placeholder="Date"
+                value={registrationDateInput}
+                onChange={event => setRegistrationDateInput(event.target.value)}
               ></input>
             </label>
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
@@ -41,10 +42,11 @@ const EventDate = () => {
           <div className="EventDate-item">
             <label>Выбор получателей подарков до:
               <input 
-              className="g-input" 
-              placeholder="Date"
-              value={drawDateInput}
-              onChange={event => setChoiceDateInput(event.target.value)}
+                type="date"
+                className="g-input" 
+                placeholder="Date"
+                value={drawDateInput}
+                onChange={event => setChoiceDateInput(event.target.value)}
               ></input>
             </label>
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
@@ -53,10 +55,11 @@ const EventDate = () => {
           <div className="EventDate-item">
             <label>Обмен подарками:
               <input 
-              className="g-input" 
-              placeholder="Date"
-              value={exchangeDateInput}
-              onChange={event => setExchangeDateInput(event.target.value)}
+                type="date"
+                className="g-input" 
+                placeholder="Date"
+                value={exchangeDateInput}
+                onChange={event => setExchangeDateInput(event.target.value)}
               ></input>
             </label>
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}

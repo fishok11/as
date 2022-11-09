@@ -1,23 +1,4 @@
 {
   "group": [
-    {
-      "name": "v",
-      "event": {
-        "budget": "v",
-        "registrationDate": "v",
-        "drawDate": "v",
-        "exchangeDate": "v"
-      },
-      "groupOwner": {
-        "name": "v",
-        "email": "v"
-      },
-      "yourGift": {
-        "age": "9",
-        "gender": "v",
-        "wishes": "Для девочки"
-      },
-      "id": 1
-    }
   ]
 }

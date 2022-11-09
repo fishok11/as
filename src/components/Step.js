@@ -6,8 +6,8 @@ const Step = ({number, action}) => {
 
   return (
     <div 
-    className="g-link" 
-    onClick={() => dispatch({type: action})}
+      className="g-link" 
+      onClick={() => dispatch({type: action})}
     >
       {number}
     </div>
