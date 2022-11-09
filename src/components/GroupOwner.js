@@ -10,6 +10,7 @@ const GroupOwner = () => {
 		return (
 			<>
 				<h1>Ваши данные</h1>
+				
 				<div>
 					<div className="GroupOwner--item">
 						<input 
