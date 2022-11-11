@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { GroupContext } from "../context/main";
 
-const Step = ({number, action}) => {
+const Step = ({number, action, className}) => {
   const [state, dispatch] = useContext(GroupContext);
 
   return (
     <div 
-      className="g-link" 
+      className={className}
       onClick={() => dispatch({type: action})}
     >
       {number}

@@ -11,7 +11,7 @@ const EventDate = () => {
 
   if (state.eventDate.edit) {
     return (
-      <>
+      <div>
         <h1>Регистрация участников</h1>
         <div>
           <div className="EventDate-item">
@@ -82,7 +82,7 @@ const EventDate = () => {
             OK
           </button>
         </div>
-      </>
+      </div>
     )
   }
 };

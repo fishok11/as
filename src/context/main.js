@@ -28,7 +28,7 @@ const initialState = {
     edit: false,
   },
   step: 1,
-  editDb: false,
+  saveGroup: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -154,7 +154,7 @@ const reducer = (state = initialState, action) => {
             edit: false,
           },
           step: 5,
-          editDb: true,
+          saveGroup: true,
         }
       }
     }
@@ -177,7 +177,7 @@ const reducer = (state = initialState, action) => {
           ...state.yourGift,
           edit: false,
         },
-        editDb: false,
+        saveGroup: false,
       }
     }
     case "RETURN_CREATE_EVENT_DATE": {
@@ -200,7 +200,7 @@ const reducer = (state = initialState, action) => {
             ...state.yourGift,
             edit: false,
           },
-          editDb: false,
+          saveGroup: false,
         }
       } else {
         return {
@@ -229,7 +229,7 @@ const reducer = (state = initialState, action) => {
             ...state.yourGift,
             edit: false,
           },
-          editDb: false,
+          saveGroup: false,
         }
       } else {
         return {
@@ -257,7 +257,7 @@ const reducer = (state = initialState, action) => {
             ...state.yourGift,
             edit: true,
           },
-          editDb: false,
+          saveGroup: false,
         }
       } else {
         return {

@@ -1,4 +1,3 @@
-import { APP_URL } from "../config";
 import { useContext, useEffect, useState } from "react";
 import { GroupContext } from "../context/main";
 
@@ -7,7 +6,7 @@ const Congradulations = () => {
   const [groupId, setGroupId] = useState();
   const [groupCreated, setGroupCreated] = useState(false);
   const [errorGroupCreated, setErrorGroupCreated] = useState(false);
-  const editDb = state.editDb === true
+  const saveGroup = state.saveGroup === true
   
   useEffect(() => {
     const createGroup = async(group) => {
@@ -34,7 +33,7 @@ const Congradulations = () => {
       }
     };
     createGroup(group) 
-  }, [editDb]);
+  }, [saveGroup]);
   
   let group = {
     name: state.group.name,
@@ -70,7 +69,7 @@ const Congradulations = () => {
     <>
       <h1>Группа готова!!!</h1>
       <p>Адрес станицы группы:</p>
-      <a href={`${APP_URL}/group/${groupId}`}>{APP_URL}/group/{groupId}</a>
+      <a href={`http://localhost:3002/group/${groupId}`}>http://localhost:3002/group/{groupId}</a>
       <p>Отправте эту ссылку всем участникам обмена подарками</p>
     </>
   )

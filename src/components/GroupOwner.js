@@ -8,7 +8,7 @@ const GroupOwner = () => {
 
 	if (state.groupOwner.edit) {
 		return (
-			<>
+			<div>
 				<h1>Ваши данные</h1>
 				
 				<div>
@@ -44,7 +44,7 @@ const GroupOwner = () => {
 						OK
 					</button>
 				</div>
-			</>
+			</div>
 		)
 	}
 };

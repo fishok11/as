@@ -9,7 +9,7 @@ const YourGift = () => {
 
   if (state.yourGift.edit) {
     return (
-      <>
+      <div>
         <h1>Ваш подарок</h1>
 
         <label >Для возраста:
@@ -66,7 +66,7 @@ const YourGift = () => {
         >
           OK
         </button>
-      </>
+      </div>
     )
   }
 };
