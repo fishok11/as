@@ -10,8 +10,7 @@ const YourGift = () => {
   if (state.yourGift.edit) {
     return (
       <div>
-        <h1>Ваш подарок</h1>
-
+        <h2>Ваш подарок</h2>
         <label >Для возраста:
           <select 
             className="g-input"

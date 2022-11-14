@@ -9,8 +9,8 @@ const GroupName = () => {
   if (state.group.edit) {
     return ( 
       <div>
-        <h1>Название вашей группы</h1>
-
+        <h2>Название вашей группы</h2>
+        
         <input
           className="g-input"
           placeholder="Введите название вашей группы"

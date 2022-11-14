@@ -66,12 +66,12 @@ const Congradulations = () => {
   }; 
 
   return (
-    <>
-      <h1>Группа готова!!!</h1>
+    <div>
+      <h2>Группа готова!!!</h2>
       <p>Адрес станицы группы:</p>
       <a href={`http://localhost:3002/group/${groupId}`}>http://localhost:3002/group/{groupId}</a>
       <p>Отправте эту ссылку всем участникам обмена подарками</p>
-    </>
+    </div>
   )
 };
 
