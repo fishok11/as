@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Calibri, sans-serif;
-  color: #696d6e;
+  color: #111111;
   font-size: 16px;
   background-color: #54a9ca33;
   height: 100vh;
@@ -11,7 +11,8 @@ body {
 }
 :root {
   --main-blue:#084298;
-  --main-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+  --main-button-color: #0D6EFD;
+  /* --main-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%); */
   --main-border-radius: 6px;
 }
 h2 {
@@ -49,14 +50,13 @@ input {
   margin: 0 auto;
   width: 280px;
   box-sizing: border-box;
-  box-shadow: var(--main-shadow);
 }
 .g-button {
   font-family: Calibri, sans-serif;
   color: #ffffff;
   font-size: 16px;
   border: none;
-  background-color: var(--main-blue);
+  background-color: var(--main-button-color);
   display: block;
   margin: 0 auto;
   margin-top: 15px;
@@ -67,7 +67,6 @@ input {
   width: 100px;
   cursor: pointer;
   transition: 0.2s;
-  box-shadow: var(--main-shadow);
 }
 .g-error {
   font-size: 14px;

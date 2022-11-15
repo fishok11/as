@@ -7,34 +7,6 @@ const Congradulations = () => {
   const [groupCreated, setGroupCreated] = useState(false);
   const [errorGroupCreated, setErrorGroupCreated] = useState(false);
   const saveGroup = state.saveGroup === true
-  
-  useEffect(() => {
-    const createGroup = async(group) => {
-      try {
-        const response = await fetch('http://localhost:3002/group', {
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(group)
-        })
-        const data = await response.json()
-
-        if (response.status < 300) {
-          setGroupId(data.id);
-          setGroupCreated(true);
-          return true;
-        } else if (response.status >= 300) {
-          setErrorGroupCreated(true)
-          return false;
-        };
-      } catch (error) {
-        setErrorGroupCreated(true)
-      }
-    };
-    createGroup(group) 
-  }, [saveGroup]);
-  
   let group = {
     name: state.group.name,
     event: {
@@ -53,6 +25,66 @@ const Congradulations = () => {
       wishes: state.yourGift.gender,
     },
   };
+  
+  useEffect(() => {
+    const createGroup = async(group) => {
+      try {
+        const response = await fetch('http://localhost:3002/group', {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(group)
+        })
+        const data = await response.json()
+
+        if (response.status < 300) {
+          setGroupId(data.id);
+          setGroupCreated(true);
+          dispatch({type: "SAVE_ID", payload: {group: {
+            id: data.id
+          }}});
+          console.log(state)
+          return true;
+        } else if (response.status >= 300) {
+          setErrorGroupCreated(true);
+          return false;
+        };
+      } catch (error) {
+        setErrorGroupCreated(true)
+      }
+    };
+
+    const updateGroup = async(group) => {
+      try {
+        const response = await fetch('http://localhost:3002/group/' + state.group.id, {
+          method: 'PUT',
+          headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(group)
+        })
+        const data = await response.json()
+
+        if (response.status < 300) {
+          setGroupId(data.id);
+          setGroupCreated(true);
+          return true;
+        } else if (response.status >= 300) {
+          setErrorGroupCreated(true);
+          return false;
+        };
+      } catch (error) {
+        setErrorGroupCreated(true)
+      }
+    };
+
+    if (state.group.id !== null && state.group.id !== "") {
+      updateGroup(group)
+    } else {
+      createGroup(group) 
+    }
+  }, [saveGroup]);
 
   if (errorGroupCreated === true) {
     return (
@@ -61,7 +93,7 @@ const Congradulations = () => {
   };
   if (groupCreated === false) {
     return (
-      <p>Группа создается...</p>
+      <p>Группа загружается...</p>
     )
   }; 
 

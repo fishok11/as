@@ -2,6 +2,7 @@ import { createContext, useReducer } from "react"
 
 const initialState = {
   group:{
+    id: null,
     name: "",
     error: false,
     edit: true,
@@ -177,7 +178,6 @@ const reducer = (state = initialState, action) => {
           ...state.yourGift,
           edit: false,
         },
-        saveGroup: false,
       }
     }
     case "RETURN_CREATE_EVENT_DATE": {
@@ -200,7 +200,6 @@ const reducer = (state = initialState, action) => {
             ...state.yourGift,
             edit: false,
           },
-          saveGroup: false,
         }
       } else {
         return {
@@ -229,7 +228,6 @@ const reducer = (state = initialState, action) => {
             ...state.yourGift,
             edit: false,
           },
-          saveGroup: false,
         }
       } else {
         return {
@@ -257,12 +255,22 @@ const reducer = (state = initialState, action) => {
             ...state.yourGift,
             edit: true,
           },
-          saveGroup: false,
         }
       } else {
         return {
           ...state
         }
+      }
+    }
+    case "SAVE_ID": {
+      const groupId = action.payload.group.id;
+
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          id: groupId,
+        },
       }
     }
     default: {
