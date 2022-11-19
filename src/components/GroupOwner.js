@@ -12,22 +12,26 @@ const GroupOwner = () => {
 				<h2>Ваши данные</h2>
 				<div>
 					<div className="GroupOwner--item">
-						<input 
-							className="g-input" 
-							placeholder="Введите ваше имя"
-							value={groupOwnerName}
-							onChange={event => setOwnerName(event.target.value)}
-						></input>
+						<label>Ваше имя:
+							<input 
+								className="g-input" 
+								placeholder="Введите ваше имя"
+								value={groupOwnerName}
+								onChange={event => setOwnerName(event.target.value)}
+							></input>
+						</label>
 						{state.groupOwner.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
 					</div>
 
-					<div className="GroupOwner--item" >
-						<input 
-							className="g-input" 
-							placeholder="Введите ваш email"
-							value={groupOwnerEmail}
-							onChange={event => setOwnerEmail(event.target.value)}
-						></input>
+					<div className="GroupOwner--item">
+						<label>Ваш email:
+							<input 
+								className="g-input" 
+								placeholder="Введите ваш email"
+								value={groupOwnerEmail}
+								onChange={event => setOwnerEmail(event.target.value)}
+							></input>
+						</label>
 						{state.groupOwner.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
 					</div>
 

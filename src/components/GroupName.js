@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { GroupContext } from "../context/main";
 
-
 const GroupName = () => {
   const [state, dispatch] = useContext(GroupContext);
   const [groupNameInput, setGroupName] = useState(state.group.name)

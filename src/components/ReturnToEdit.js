@@ -4,20 +4,21 @@ import Step from "./Step";
 
 const ReturnToEdit = () => {
   const [state, dispatch] = useContext(GroupContext);
+  const groupEdit = state.group.edit ? "edit" : "";
+  const eventDateEdit = state.eventDate.edit ? "edit" : "";
+  const groupOwnerEdit = state.groupOwner.edit ? "edit" : "";
+  const yourGiftEdit = state.yourGift.edit ? "edit" : "";
+  const currentPageGroup = state.step >= 1 ? "current" : "";
+  const currentEventDate = state.step >= 2 ? "current" : "";
+  const currentGroupOwner = state.step >= 3 ? "current" : "";
+  const currentYourGift = state.step >= 4 ? "current" : "";
 
   return (
     <div className="ReturnToEdit-container">
-      {state.group.edit === true && (<Step number="1" action="RETURN_CREATE_GROUP_NAME" className="g-link edit"/>)}
-      {state.group.edit === false && (<Step number="1" action="RETURN_CREATE_GROUP_NAME" className="g-link"/>)}
-
-      {state.eventDate.edit === true && (<Step number="2" action="RETURN_CREATE_EVENT_DATE" className="g-link edit"/>)}
-      {state.eventDate.edit === false && (<Step number="2" action="RETURN_CREATE_EVENT_DATE" className="g-link"/>)}
-
-      {state.groupOwner.edit === true && (<Step number="3" action="RETURN_CREATE_GROUP_OWNER" className="g-link edit"/>)}
-      {state.groupOwner.edit === false && (<Step number="3" action="RETURN_CREATE_GROUP_OWNER" className="g-link"/>)}
-
-      {state.yourGift.edit === true && (<Step number="4" action="RETURN_CREATE_YOUR_GIFT" className="g-link edit"/>)}
-      {state.yourGift.edit === false && (<Step number="4" action="RETURN_CREATE_YOUR_GIFT" className="g-link"/>)}
+      <Step number="1" action="RETURN_CREATE_GROUP_NAME" className={`g-link ${groupEdit} ${currentPageGroup}`}/>
+      <Step number="2" action="RETURN_CREATE_EVENT_DATE" className={`g-link ${eventDateEdit} ${currentEventDate}`}/>
+      <Step number="3" action="RETURN_CREATE_GROUP_OWNER" className={`g-link ${groupOwnerEdit} ${currentGroupOwner}`}/>
+      <Step number="4" action="RETURN_CREATE_YOUR_GIFT" className={`g-link ${yourGiftEdit} ${currentYourGift}`}/>
     </div>
   )
 }

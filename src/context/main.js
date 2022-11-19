@@ -45,7 +45,7 @@ const reducer = (state = initialState, action) => {
            error: true,
           },
         }
-      } else if (groupName !== "") {
+      } else {
         return {
           ...state,
           group: {
