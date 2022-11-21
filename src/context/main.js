@@ -30,6 +30,7 @@ const initialState = {
   },
   step: 1,
   saveGroup: false,
+  saveUser: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -271,6 +272,21 @@ const reducer = (state = initialState, action) => {
           ...state.group,
           id: groupId,
         },
+      }
+    }
+    case "SAVE_USER": {
+      const userName = action.payload.user.userName
+      const userEmail = action.payload.user.userEmail
+
+      if (userName === "" || userEmail === "") {
+        return {
+          ...state
+        }
+      } else {
+        return {
+          ...state,
+          saveUser: true,
+        }
       }
     }
     default: {

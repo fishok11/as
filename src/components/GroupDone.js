@@ -1,16 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { GroupContext } from "../context/main";
-import { Routes, Route, Link } from "react-router-dom";
-import RegistrationUser from "../pages/RegistrationUser";
-import Layout from "./Layout";
-import ReturnToEdit from "./ReturnToEdit";
+import { Link } from "react-router-dom";
 
-const Congradulations = () => {
+const GroupDone = () => {
   const [state, dispatch] = useContext(GroupContext)
-  const [groupId, setGroupId] = useState();
   const [groupCreated, setGroupCreated] = useState(false);
   const [errorGroupCreated, setErrorGroupCreated] = useState(false);
-  const saveGroup = state.saveGroup === true
+  const saveGroup = state.saveGroup === true;
   let group = {
     name: state.group.name,
     event: {
@@ -43,7 +39,6 @@ const Congradulations = () => {
         const data = await response.json()
 
         if (response.status < 300) {
-          setGroupId(data.id);
           setGroupCreated(true);
           dispatch({type: "SAVE_ID", payload: {group: {
             id: data.id
@@ -70,7 +65,6 @@ const Congradulations = () => {
         const data = await response.json()
 
         if (response.status < 300) {
-          setGroupId(data.id);
           setGroupCreated(true);
           return true;
         } else if (response.status >= 300) {
@@ -82,10 +76,12 @@ const Congradulations = () => {
       }
     };
 
-    if (state.group.id !== null && state.group.id !== "") {
-      updateGroup(group)
-    } else {
-      createGroup(group) 
+    if (state.saveGroup === true) {
+      if (state.group.id !== null && state.group.id !== "") {
+        updateGroup(group)
+      } else {
+        createGroup(group) 
+      }
     }
   }, [saveGroup]);
 
@@ -101,18 +97,13 @@ const Congradulations = () => {
   }; 
 
   return (
-    <>
-      <div>
-        <h2>Группа готова!!!</h2>
-        <p>Адрес станицы группы:</p>
-        <Layout/>
-        <p>Отправте эту ссылку всем участникам обмена подарками</p>    
-      </div>
-      <Routes>
-        <Route path="/registration-user" element={<RegistrationUser />}/>
-      </Routes>
-    </>
+    <div>
+      <h2>Группа готова!!!</h2>
+      <p>Адрес станицы группы:</p>
+      <Link to={`/registration-user/${state.group.id}`}>RegistrationUser</Link>
+      <p>Отправте эту ссылку всем участникам обмена подарками</p>    
+    </div>
   )
 };
 
-export default Congradulations;
+export default GroupDone;
