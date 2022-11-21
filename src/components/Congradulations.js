@@ -1,5 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { GroupContext } from "../context/main";
+import { Routes, Route, Link } from "react-router-dom";
+import RegistrationUser from "../pages/RegistrationUser";
+import Layout from "./Layout";
+import ReturnToEdit from "./ReturnToEdit";
 
 const Congradulations = () => {
   const [state, dispatch] = useContext(GroupContext)
@@ -44,7 +48,6 @@ const Congradulations = () => {
           dispatch({type: "SAVE_ID", payload: {group: {
             id: data.id
           }}});
-          console.log(state)
           return true;
         } else if (response.status >= 300) {
           setErrorGroupCreated(true);
@@ -98,12 +101,17 @@ const Congradulations = () => {
   }; 
 
   return (
-    <div>
-      <h2>Группа готова!!!</h2>
-      <p>Адрес станицы группы:</p>
-      <a href={`http://localhost:3002/group/${groupId}`}>http://localhost:3002/group/{groupId}</a>
-      <p>Отправте эту ссылку всем участникам обмена подарками</p>
-    </div>
+    <>
+      <div>
+        <h2>Группа готова!!!</h2>
+        <p>Адрес станицы группы:</p>
+        <Layout/>
+        <p>Отправте эту ссылку всем участникам обмена подарками</p>    
+      </div>
+      <Routes>
+        <Route path="/registration-user" element={<RegistrationUser />}/>
+      </Routes>
+    </>
   )
 };
 
