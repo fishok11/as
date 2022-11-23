@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { GroupContext } from "../context/main";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const GroupDone = () => {
   const [state, dispatch] = useContext(GroupContext)
@@ -21,8 +21,8 @@ const GroupDone = () => {
     },
     yourGift: {
       age: state.yourGift.age,
-      gender: state.yourGift.wishes,
-      wishes: state.yourGift.gender,
+      gender: state.yourGift.gender,
+      wishes: state.yourGift.wishes,
     },
   };
   
@@ -100,7 +100,7 @@ const GroupDone = () => {
     <div>
       <h2>Группа готова!!!</h2>
       <p>Адрес станицы группы:</p>
-      <Link to={`/registration-user/${state.group.id}`}>RegistrationUser</Link>
+      <Link to={`/group-user/${state.group.id}`}>RegistrationUser</Link>
       <p>Отправте эту ссылку всем участникам обмена подарками</p>    
     </div>
   )

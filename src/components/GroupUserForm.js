@@ -52,7 +52,7 @@ const GroupUserForm = () => {
               onChange={event => setUserName(event.target.value)}
             ></input>
           </label>
-          {/* {state.groupOwner.error === true && (<div className="g-error">Поле не может быть пустым!</div>)} */}
+          {state.user.nameError === true && (<div className="g-error">Поле не может быть пустым!</div>)}
         </div>
 
         <div className="GroupOwner--item">
@@ -64,7 +64,7 @@ const GroupUserForm = () => {
               onChange={event => setUserEmail(event.target.value)}
             ></input>
           </label>
-          {/* {state.groupOwner.error === true && (<div className="g-error">Поле не может быть пустым!</div>)} */}
+          {state.user.emailError === true && (<div className="g-error">Поле не может быть пустым!</div>)}
         </div>
 
         <button 

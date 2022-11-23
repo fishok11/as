@@ -1,4 +1,4 @@
-import GroupData from "./GroupData";
+import GroupUserData from "./GroupUserData";
 import GroupUserForm from "./GroupUserForm";
 
 const GroupUser = () => {
@@ -6,7 +6,7 @@ const GroupUser = () => {
 
   return (
     <>
-      <GroupData />
+      <GroupUserData />
       <GroupUserForm />
     </>
   )

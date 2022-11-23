@@ -11,7 +11,8 @@ const Group = () => {
     <>
       <Routes>
         <Route index element={<GroupAdmin />}/>
-        <Route path={`/registration-user/${state.group.id}`} element={<GroupUser />}/>
+        <Route path={`/group-user/:id`} element={<GroupUser />}/>
+        <Route path={`/group-user/:id`} element={<GroupUser />}/>
       </Routes>
     </>
   )
