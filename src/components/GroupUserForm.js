@@ -6,7 +6,7 @@ const GroupUserForm = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [state, dispatch] = useContext(GroupContext);
-  const saveUserState = state.saveUser;
+  const saveUserState = state.user.saveUser;
   let user = {
     groupId: state.group.id,
     name: userName,
@@ -40,7 +40,7 @@ const GroupUserForm = () => {
   }, [saveUserState]);
 
   return (
-    <div className="GroupData-info">
+    <div className="Group-container Group-container--info">
       <h2>Регистрация пользователя</h2>
       <div>
         <div className="GroupOwner--item">

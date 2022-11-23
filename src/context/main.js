@@ -31,10 +31,12 @@ const initialState = {
   user: {
     nameError: false,
     emailError: false,
+    saveUser: false,
+    step: 1,
   },
   step: 1,
   saveGroup: false,
-  saveUser: false,
+  
 }
 
 const reducer = (state = initialState, action) => {
@@ -286,6 +288,7 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           user: {
+            ...state,
             nameError:true
           },
         }
@@ -293,13 +296,19 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           user: {
+            ...state,
             emailError:true
           },
         }
       } else {
+        console.log(state)
         return {
           ...state,
-          saveUser: true,
+          user: {
+            ...state,
+            saveUser: true,
+            step: 2,
+          },
         }
       }
 
