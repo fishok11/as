@@ -6,38 +6,6 @@ const GroupUserForm = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [state, dispatch] = useContext(GroupContext);
-  const saveUserState = state.user.saveUser;
-  let user = {
-    groupId: state.group.id,
-    name: userName,
-    email: userEmail,
-  };
-
-  useEffect(() => {
-    const saveUser = async(user) => {
-      try {
-        const response = await fetch('http://localhost:3002/users', {
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(user)
-        })
-
-        if (response.status < 300) {
-          return true;
-        } else if (response.status >= 300) {
-          return false;
-        };
-      } catch (error) {
-        return false
-      }
-    };
-
-    if (saveUserState === true) {
-      saveUser(user)
-    }
-  }, [saveUserState]);
 
   return (
     <div className="Group-container Group-container--info">
@@ -52,7 +20,7 @@ const GroupUserForm = () => {
               onChange={event => setUserName(event.target.value)}
             ></input>
           </label>
-          {state.user.nameError === true && (<div className="g-error">Поле не может быть пустым!</div>)}
+          {state.user.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
         </div>
 
         <div className="GroupOwner--item">
@@ -64,7 +32,7 @@ const GroupUserForm = () => {
               onChange={event => setUserEmail(event.target.value)}
             ></input>
           </label>
-          {state.user.emailError === true && (<div className="g-error">Поле не может быть пустым!</div>)}
+          {state.user.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
         </div>
 
         <button 

@@ -49,7 +49,8 @@ const GroupDone = () => {
           return false;
         };
       } catch (error) {
-        setErrorGroupCreated(true)
+        setErrorGroupCreated(true);
+        return false;
       }
     };
 
@@ -62,7 +63,6 @@ const GroupDone = () => {
           },
           body: JSON.stringify(group)
         })
-        const data = await response.json()
 
         if (response.status < 300) {
           setGroupCreated(true);

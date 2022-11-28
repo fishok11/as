@@ -29,8 +29,9 @@ const initialState = {
     edit: false,
   },
   user: {
-    nameError: false,
-    emailError: false,
+    name: "",
+    email: "",
+    error: false,
     saveUser: false,
     step: 1,
   },
@@ -284,30 +285,24 @@ const reducer = (state = initialState, action) => {
       const userName = action.payload.user.userName
       const userEmail = action.payload.user.userEmail
 
-      if (userName === "") {
+      if (userName === "" || userName === "") {
+        console.log(state, 1)
         return {
           ...state,
           user: {
-            ...state,
-            nameError:true
-          },
-        }
-      } else if (userEmail === "") {
-        return {
-          ...state,
-          user: {
-            ...state,
-            emailError:true
+            ...state.user,
+            error:true
           },
         }
       } else {
-        console.log(state)
         return {
           ...state,
           user: {
-            ...state,
-            saveUser: true,
+            ...state.user,
+            name: userName,
+            email: userEmail,
             step: 2,
+            saveUser: true,
           },
         }
       }
