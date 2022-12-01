@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react"
+import { createStore } from 'redux'
 
 const initialState = {
   group:{
@@ -40,7 +40,7 @@ const initialState = {
   
 }
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch(action.type) {
     case "GROUP_CREATED": {
       const groupName = action.payload.group.name
@@ -314,12 +314,4 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-export const GroupContext = createContext()
-
-export const GroupProvider = ({children}) => {
-  const value = useReducer(reducer, initialState)
-
-  return (
-    <GroupContext.Provider value={value}>{children}</GroupContext.Provider>
-  );
-};
+export const store = createStore(reducer)

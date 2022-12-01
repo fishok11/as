@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import { GroupContext } from "../context/main";
 import GroupUserData from "./GroupUserData";
 import GroupUserForm from "./GroupUserForm";
 import GroupUserDone from "./GroupUserDone";
+import { useSelector } from "react-redux";
 
 const GroupUser = () => {
-  const [state, dispatch] = useContext(GroupContext);
+  const state = useSelector(state => state)
 
   return (
     <>

@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { GroupContext } from "../context/main";
+import { useDispatch } from "react-redux";
+
 
 const Step = ({number, action, className}) => {
-  const [state, dispatch] = useContext(GroupContext);
+  const dispatch = useDispatch()
 
   return (
     <div 

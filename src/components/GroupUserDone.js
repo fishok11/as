@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useContext } from "react";
-import { GroupContext } from "../context/main";
+import { useSelector } from "react-redux";
 
 const GroupUserDone = () => {
+  const state = useSelector(state => state)
   const [userCreated, seUserCreated] = useState(false)
   const [userCreatedError, seUserCreatedError] = useState(false)
-  const [state, dispatch] = useContext(GroupContext);
   const saveUserState = state.user.saveUser === true;
   let user = {
     groupId: state.group.id,

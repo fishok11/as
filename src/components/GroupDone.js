@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import { GroupContext } from "../context/main";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const GroupDone = () => {
-  const [state, dispatch] = useContext(GroupContext)
+  const state = useSelector(state => state)
+  const dispatch = useDispatch()
   const [groupCreated, setGroupCreated] = useState(false);
   const [errorGroupCreated, setErrorGroupCreated] = useState(false);
   const saveGroup = state.saveGroup === true;

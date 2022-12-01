@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { GroupContext } from "../context/main";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const GroupUserData = () => {
-  const [state, dispatch] = useContext(GroupContext);
   const [groupData, setGroupdata] = useState()
   const {id} = useParams();
 
@@ -11,7 +9,7 @@ const GroupUserData = () => {
     fetch('http://localhost:3002/group/' + id)
     .then(res => res.json())
     .then(data => setGroupdata(data))
-  }, [])
+  }, [id])
   
   if (groupData === undefined) {
     return null

@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
-import { GroupContext } from "../context/main";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const GroupOwner = () => {
-  const [state, dispatch] = useContext(GroupContext)
+	const state = useSelector(state => state)
+  const dispatch = useDispatch()
 	const [groupOwnerName, setOwnerName] = useState(state.groupOwner.name)
 	const [groupOwnerEmail, setOwnerEmail] = useState(state.groupOwner.email)
 

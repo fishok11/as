@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
-import { GroupContext } from "../context/main";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const EventDate = () => {
-  const [state, dispatch] = useContext(GroupContext);
-
+  const state = useSelector(state => state)
+  const dispatch = useDispatch()
   const [budgetInput, setBudgetInput] = useState(state.eventDate.budget)
   const [registrationDateInput, setRegistrationDateInput] = useState(state.eventDate.registrationDate)
   const [drawDateInput, setChoiceDateInput] = useState(state.eventDate.drawDate)

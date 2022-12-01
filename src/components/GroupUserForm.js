@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { useContext } from "react";
-import { GroupContext } from "../context/main";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const GroupUserForm = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const [state, dispatch] = useContext(GroupContext);
+  const state = useSelector(state => state);
+  const dispatch = useDispatch()
 
   return (
     <div className="Group-container Group-container--info">

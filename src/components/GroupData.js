@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { GroupContext } from "../context/main";
+import { useSelector } from "react-redux";
 
 const GroupData = () => {
-  const [state, dispatch] = useContext(GroupContext);
+  const state = useSelector(state => state)
 
   return (
     <div>

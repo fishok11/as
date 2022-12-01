@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { GroupContext } from "../context/main";
 import Step from "./Step";
+import { useSelector } from "react-redux";
 
 const ReturnToEdit = () => {
-  const [state, dispatch] = useContext(GroupContext);
+  const state = useSelector(state => state)
   const groupEdit = state.group.edit ? "edit" : "";
   const eventDateEdit = state.eventDate.edit ? "edit" : "";
   const groupOwnerEdit = state.groupOwner.edit ? "edit" : "";

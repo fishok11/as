@@ -1,8 +1,10 @@
-import { useContext, useState } from "react";
-import { GroupContext } from "../context/main";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const GroupName = () => {
-  const [state, dispatch] = useContext(GroupContext);
+  const state = useSelector(state => state)
+  const dispatch = useDispatch()
   const [groupNameInput, setGroupName] = useState(state.group.name)
 
   if (state.group.edit) {
