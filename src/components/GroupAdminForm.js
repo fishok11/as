@@ -7,7 +7,7 @@ import ReturnToEdit from "./ReturnToEdit";
 import { useSelector } from "react-redux";
 
 const GroupAdminForm = () => {
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.admin)
 
   return (
     <div className="Group-container">

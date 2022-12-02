@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const GroupOwner = () => {
-	const state = useSelector(state => state)
+	const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
 	const [groupOwnerName, setOwnerName] = useState(state.groupOwner.name)
 	const [groupOwnerEmail, setOwnerEmail] = useState(state.groupOwner.email)

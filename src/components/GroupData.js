@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 const GroupData = () => {
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.admin)
 
   return (
     <div>

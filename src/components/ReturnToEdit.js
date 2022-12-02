@@ -2,7 +2,7 @@ import Step from "./Step";
 import { useSelector } from "react-redux";
 
 const ReturnToEdit = () => {
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.admin)
   const groupEdit = state.group.edit ? "edit" : "";
   const eventDateEdit = state.eventDate.edit ? "edit" : "";
   const groupOwnerEdit = state.groupOwner.edit ? "edit" : "";

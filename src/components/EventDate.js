@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const EventDate = () => {
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
   const [budgetInput, setBudgetInput] = useState(state.eventDate.budget)
   const [registrationDateInput, setRegistrationDateInput] = useState(state.eventDate.registrationDate)

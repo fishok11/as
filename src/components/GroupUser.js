@@ -4,17 +4,15 @@ import GroupUserDone from "./GroupUserDone";
 import { useSelector } from "react-redux";
 
 const GroupUser = () => {
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.user)
 
   return (
     <>
-      {state.user.step === 1 && (
-        <>
-          <GroupUserData />
-          <GroupUserForm />
-        </>
+      <GroupUserData />
+      {state.step === 1 && (
+        <GroupUserForm />
       )}
-      {state.user.step === 2 && (
+      {state.step === 2 && (
         <GroupUserDone />
       )}
     </>

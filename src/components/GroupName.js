@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 const GroupName = () => {
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
   const [groupNameInput, setGroupName] = useState(state.group.name)
 

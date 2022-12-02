@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 
-
 const Step = ({number, action, className}) => {
   const dispatch = useDispatch()
 

@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const GroupUserDone = () => {
-  const state = useSelector(state => state)
+  const stateAdmin = useSelector(state => state.admin)
+  const stateUser = useSelector(state => state.user)
   const [userCreated, seUserCreated] = useState(false)
   const [userCreatedError, seUserCreatedError] = useState(false)
-  const saveUserState = state.user.saveUser === true;
+  const saveUserState = stateUser.saveUser === true;
   let user = {
-    groupId: state.group.id,
-    name: state.user.name,
-    email: state.user.email,
+    groupId: stateAdmin.group.id,
+    name: stateUser.name,
+    email: stateUser.email,
   };
 
   useEffect(() => {

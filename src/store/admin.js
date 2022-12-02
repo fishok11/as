@@ -1,6 +1,4 @@
-import { createStore } from 'redux'
-
-const initialState = {
+const initialStateAdmin = {
   group:{
     id: null,
     name: "",
@@ -28,19 +26,11 @@ const initialState = {
     error: false,
     edit: false,
   },
-  user: {
-    name: "",
-    email: "",
-    error: false,
-    saveUser: false,
-    step: 1,
-  },
   step: 1,
   saveGroup: false,
-  
 }
 
-export const reducer = (state = initialState, action) => {
+export const admin = (state = initialStateAdmin, action) => {
   switch(action.type) {
     case "GROUP_CREATED": {
       const groupName = action.payload.group.name
@@ -281,37 +271,8 @@ export const reducer = (state = initialState, action) => {
         },
       }
     }
-    case "SAVE_USER": {
-      const userName = action.payload.user.userName
-      const userEmail = action.payload.user.userEmail
-
-      if (userName === "" || userName === "") {
-        console.log(state, 1)
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            error:true
-          },
-        }
-      } else {
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            name: userName,
-            email: userEmail,
-            step: 2,
-            saveUser: true,
-          },
-        }
-      }
-
-    }
     default: {
       return state;
     }
   }
 }
-
-export const store = createStore(reducer)

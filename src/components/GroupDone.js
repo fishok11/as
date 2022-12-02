@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const GroupDone = () => {
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
   const [groupCreated, setGroupCreated] = useState(false);
   const [errorGroupCreated, setErrorGroupCreated] = useState(false);

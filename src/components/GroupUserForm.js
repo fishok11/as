@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 const GroupUserForm = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const state = useSelector(state => state);
+  const state = useSelector(state => state.user);
   const dispatch = useDispatch()
 
   return (
@@ -20,7 +20,7 @@ const GroupUserForm = () => {
               onChange={event => setUserName(event.target.value)}
             ></input>
           </label>
-          {state.user.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
+          {state.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
         </div>
 
         <div className="GroupOwner--item">
@@ -32,16 +32,15 @@ const GroupUserForm = () => {
               onChange={event => setUserEmail(event.target.value)}
             ></input>
           </label>
-          {state.user.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
+          {state.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
         </div>
 
         <button 
           className="g-button"
           onClick={() => dispatch({type: "SAVE_USER", payload: {
-            user: {
-              userName: userName,
-              userEmail: userEmail
-          }}})}
+            userName: userName,
+            userEmail: userEmail
+          }})}
         >
           OK
         </button>

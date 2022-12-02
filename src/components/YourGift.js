@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const YourGift = () => {
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
   const [giftAge, setGiftAge] = useState(state.yourGift.age)
   const [giftGender, setGiftGender] = useState(state.yourGift.gender)
