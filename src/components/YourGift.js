@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createYourGift } from "../store/actions"
 
 const YourGift = () => {
   const state = useSelector(state => state.admin)
@@ -56,12 +57,12 @@ const YourGift = () => {
 
         <button
           className="g-button"
-          onClick={() => dispatch({type: "CREATE_YOUR_GIFT", payload: {
+          onClick={() => dispatch(createYourGift({
             yourGift: {
               age: giftAge, 
               gender: giftGender, 
               wishes: giftWishes
-            }}})
+            }}))
           }
         >
           OK

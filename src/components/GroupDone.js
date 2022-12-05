@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { saveId } from "../store/actions"
 
 const GroupDone = () => {
   const state = useSelector(state => state.admin)
@@ -41,9 +42,10 @@ const GroupDone = () => {
 
         if (response.status < 300) {
           setGroupCreated(true);
-          dispatch({type: "SAVE_ID", payload: {group: {
-            id: data.id
-          }}});
+          dispatch(saveId({
+            group:{
+              id: data.id
+          }}));
           return true;
         } else if (response.status >= 300) {
           setErrorGroupCreated(true);

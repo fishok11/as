@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createEventDate } from "../store/actions"
 
 const EventDate = () => {
   const state = useSelector(state => state.admin)
@@ -67,17 +68,12 @@ const EventDate = () => {
     
           <button
             className="g-button"
-            onClick={() => dispatch({
-              type: "CREATE_DATE_OF_EVENT", 
-              payload: {
-                eventDate: {
-                  budget: budgetInput, 
-                  registrationDate: registrationDateInput, 
-                  drawDate: drawDateInput, 
-                  exchangeDate: exchangeDateInput,
-                }
-              }})
-            }
+            onClick={() => dispatch(createEventDate({eventDate: {
+              budget: budgetInput, 
+              registrationDate: registrationDateInput, 
+              drawDate: drawDateInput, 
+              exchangeDate: exchangeDateInput,
+            }}))}
           >
             OK
           </button>

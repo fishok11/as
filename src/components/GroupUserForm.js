@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { saveUser } from "../store/actions"
 
 const GroupUserForm = () => {
   const [userName, setUserName] = useState("");
@@ -37,10 +38,10 @@ const GroupUserForm = () => {
 
         <button 
           className="g-button"
-          onClick={() => dispatch({type: "SAVE_USER", payload: {
+          onClick={() => dispatch(saveUser({
             userName: userName,
             userEmail: userEmail
-          }})}
+          }))}
         >
           OK
         </button>

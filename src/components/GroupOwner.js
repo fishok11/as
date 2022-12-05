@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createGroupOwner } from "../store/actions"
 
 const GroupOwner = () => {
 	const state = useSelector(state => state.admin)
@@ -38,11 +39,11 @@ const GroupOwner = () => {
 
 					<button 
 						className="g-button"
-						onClick={() => dispatch({type: "CREATE_GROUP_OWNER", payload: {
+						onClick={() => dispatch(createGroupOwner({
 							groupOwner: {
 								name: groupOwnerName, 
 								email: groupOwnerEmail
-							}}})
+							}}))
 						}
 					>
 						OK

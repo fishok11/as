@@ -22,12 +22,6 @@ const GroupUserData = () => {
       <div className="Group-container Group-container--info">
         <h3>{groupData.event.budget}₽, Регистрация до {groupData.event.registrationDate}</h3>
       </div>
-      <div className="Group-container Group-container--info">
-        <h3>{groupData.groupOwner.name}, {groupData.groupOwner.email}</h3> 
-      </div>
-      <div className="Group-container Group-container--info">
-        <h3>{groupData.yourGift.gender} {groupData.yourGift.age} лет</h3>
-      </div>
     </>
   )
 };

@@ -9,6 +9,7 @@ const initialStateUser = {
 export const user = (state = initialStateUser, action) => {
   switch(action.type) {
     case "SAVE_USER": {
+      console.log(action)
       const userName = action.payload.userName
       const userEmail = action.payload.userEmail
 

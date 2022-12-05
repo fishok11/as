@@ -32,7 +32,7 @@ const initialStateAdmin = {
 
 export const admin = (state = initialStateAdmin, action) => {
   switch(action.type) {
-    case "GROUP_CREATED": {
+    case "CREATE_GROUP": {
       const groupName = action.payload.group.name
 
       if (groupName === "") {
@@ -60,7 +60,7 @@ export const admin = (state = initialStateAdmin, action) => {
         }
       }
     }
-    case "CREATE_DATE_OF_EVENT": {
+    case "CREATE_EVENT_DATE": {
       const budget = action.payload.eventDate.budget
       const registrationDate = action.payload.eventDate.registrationDate
       const drawDate = action.payload.eventDate.drawDate
