@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createYourGift } from "../store/actions"
+import { saveGroup } from "../store/actions/actions"
 
 const YourGift = () => {
   const state = useSelector(state => state.admin)
@@ -8,6 +8,24 @@ const YourGift = () => {
   const [giftAge, setGiftAge] = useState(state.yourGift.age)
   const [giftGender, setGiftGender] = useState(state.yourGift.gender)
   const [giftWishes, setGiftWishes] = useState(state.yourGift.wishes)
+  let group = {
+    name: state.group.name,
+    event: {
+      budget: state.eventDate.budget,
+      registrationDate: state.eventDate.registrationDate,
+      drawDate: state.eventDate.drawDate,
+      exchangeDate: state.eventDate.exchangeDate,
+    },
+    groupOwner: {
+      name: state.groupOwner.name,
+      email: state.groupOwner.email,
+    },
+    yourGift: {
+      age: state.yourGift.age,
+      gender: state.yourGift.gender,
+      wishes: state.yourGift.wishes,
+    },
+  };
 
   if (state.yourGift.edit) {
     return (
@@ -57,7 +75,8 @@ const YourGift = () => {
 
         <button
           className="g-button"
-          onClick={() => dispatch(createYourGift({
+          onClick={() => dispatch(saveGroup({
+            ...group,
             yourGift: {
               age: giftAge, 
               gender: giftGender, 

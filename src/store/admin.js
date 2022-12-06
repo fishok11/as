@@ -1,3 +1,17 @@
+import { 
+  CREATE_GROUP, 
+  CREATE_EVENT_DATE, 
+  CREATE_GROUP_OWNER, 
+  CREATE_YOUR_GIFT, 
+  RETURN_CREATE_GROUP_NAME,
+  RETURN_CREATE_EVENT_DATE,
+  RETURN_CREATE_GROUP_OWNER,
+  RETURN_CREATE_YOUR_GIFT,
+  SAVE_ID, 
+  ERROR_ADMIN_FETCH,
+  GROUP_CREATING,
+} from "../store/actions/actionTypes"
+
 const initialStateAdmin = {
   group:{
     id: null,
@@ -28,11 +42,13 @@ const initialStateAdmin = {
   },
   step: 1,
   saveGroup: false,
+  errorFetch: false,
+  groupCreating: false,
 }
 
 export const admin = (state = initialStateAdmin, action) => {
   switch(action.type) {
-    case "CREATE_GROUP": {
+    case CREATE_GROUP: {
       const groupName = action.payload.group.name
 
       if (groupName === "") {
@@ -60,7 +76,7 @@ export const admin = (state = initialStateAdmin, action) => {
         }
       }
     }
-    case "CREATE_EVENT_DATE": {
+    case CREATE_EVENT_DATE: {
       const budget = action.payload.eventDate.budget
       const registrationDate = action.payload.eventDate.registrationDate
       const drawDate = action.payload.eventDate.drawDate
@@ -97,7 +113,7 @@ export const admin = (state = initialStateAdmin, action) => {
         }
       }
     }
-    case "CREATE_GROUP_OWNER": {
+    case CREATE_GROUP_OWNER: {
       const groupOwnerName = action.payload.groupOwner.name
       const groupOwnerEmail = action.payload.groupOwner.email
 
@@ -126,7 +142,7 @@ export const admin = (state = initialStateAdmin, action) => {
         }
       }
     }
-    case "CREATE_YOUR_GIFT": {
+    case CREATE_YOUR_GIFT: {
       const giftGender = action.payload.yourGift.gender
       const giftAge = action.payload.yourGift.age
       const giftWishes = action.payload.yourGift.wishes
@@ -157,7 +173,7 @@ export const admin = (state = initialStateAdmin, action) => {
         }
       }
     }
-    case "RETURN_CREATE_GROUP_NAME": {
+    case RETURN_CREATE_GROUP_NAME: {
       return {
         ...state,
         group: {
@@ -178,7 +194,7 @@ export const admin = (state = initialStateAdmin, action) => {
         },
       }
     }
-    case "RETURN_CREATE_EVENT_DATE": {
+    case RETURN_CREATE_EVENT_DATE: {
       if (state.step >= 2) {
         return {
           ...state,
@@ -206,7 +222,7 @@ export const admin = (state = initialStateAdmin, action) => {
       }
 
     }
-    case "RETURN_CREATE_GROUP_OWNER": {
+    case RETURN_CREATE_GROUP_OWNER: {
       if (state.step >= 3) {
         return {
           ...state,
@@ -233,7 +249,7 @@ export const admin = (state = initialStateAdmin, action) => {
         }
       }
     }
-    case "RETURN_CREATE_YOUR_GIFT": {
+    case RETURN_CREATE_YOUR_GIFT: {
       if (state.step >= 4) {
         return {
           ...state,
@@ -260,7 +276,7 @@ export const admin = (state = initialStateAdmin, action) => {
         }
       }
     }
-    case "SAVE_ID": {
+    case SAVE_ID: {
       const groupId = action.payload.group.id;
 
       return {
@@ -269,6 +285,20 @@ export const admin = (state = initialStateAdmin, action) => {
           ...state.group,
           id: groupId,
         },
+        groupCreating: false,
+      }
+    }
+    case ERROR_ADMIN_FETCH: {
+      return {
+        ...state,
+        errorFetch: true,
+        groupCreating: false,
+      }
+    }
+    case GROUP_CREATING: {
+      return {
+        ...state,
+        groupCreating: true,
       }
     }
     default: {

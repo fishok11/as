@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveUser } from "../store/actions"
+import { saveUser } from "../store/actions/actions"
 
 const GroupUserForm = () => {
   const [userName, setUserName] = useState("");

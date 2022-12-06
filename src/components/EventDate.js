@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createEventDate } from "../store/actions"
+import { createEventDate } from "../store/actions/actions"
 
 const EventDate = () => {
   const state = useSelector(state => state.admin)

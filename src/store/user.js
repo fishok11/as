@@ -1,3 +1,7 @@
+import { 
+  SAVE_USER, 
+} from "../store/actions/actionTypes"
+
 const initialStateUser = {
   name: "",
   email: "",
@@ -8,8 +12,7 @@ const initialStateUser = {
 
 export const user = (state = initialStateUser, action) => {
   switch(action.type) {
-    case "SAVE_USER": {
-      console.log(action)
+    case SAVE_USER: {
       const userName = action.payload.userName
       const userEmail = action.payload.userEmail
 
