@@ -1,5 +1,7 @@
 import { 
   SAVE_USER, 
+  ERROR_USER_FETCH,
+  USER_CREATING,
 } from "../store/actions/actionTypes"
 
 const initialStateUser = {
@@ -8,6 +10,8 @@ const initialStateUser = {
   error: false,
   saveUser: false,
   step: 1,
+  errorFetch: false,
+  userCreating: false,
 }
 
 export const user = (state = initialStateUser, action) => {
@@ -29,7 +33,21 @@ export const user = (state = initialStateUser, action) => {
           email: userEmail,
           step: 2,
           saveUser: true,
+          userCreating: false,
         }
+      }
+    }
+    case ERROR_USER_FETCH: {
+      return {
+        ...state,
+        errorFetch: true,
+        userCreating: false,
+      }
+    }
+    case USER_CREATING: {
+      return {
+        ...state,
+        userCreating: true,
       }
     }
     default: {

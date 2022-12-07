@@ -5,8 +5,14 @@ import { saveUser } from "../store/actions/actions"
 const GroupUserForm = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const state = useSelector(state => state.user);
+  const stateUser = useSelector(state => state.user);
+  const stateAdmin = useSelector(state => state.admin);
   const dispatch = useDispatch()
+  let user = {
+    groupId: stateAdmin.group.id,
+    name: userName,
+    email: userEmail,
+  };
 
   return (
     <div className="Group-container Group-container--info">
@@ -21,7 +27,7 @@ const GroupUserForm = () => {
               onChange={event => setUserName(event.target.value)}
             ></input>
           </label>
-          {state.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
+          {stateUser.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
         </div>
 
         <div className="GroupOwner--item">
@@ -33,14 +39,15 @@ const GroupUserForm = () => {
               onChange={event => setUserEmail(event.target.value)}
             ></input>
           </label>
-          {state.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
+          {stateUser.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
         </div>
 
         <button 
           className="g-button"
           onClick={() => dispatch(saveUser({
-            userName: userName,
-            userEmail: userEmail
+            user,
+            name: userName,
+            email: userEmail,  
           }))}
         >
           OK

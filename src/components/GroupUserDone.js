@@ -1,52 +1,14 @@
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const GroupUserDone = () => {
-  const stateAdmin = useSelector(state => state.admin)
-  const stateUser = useSelector(state => state.user)
-  const [userCreated, seUserCreated] = useState(false)
-  const [userCreatedError, seUserCreatedError] = useState(false)
-  const saveUserState = stateUser.saveUser === true;
-  let user = {
-    groupId: stateAdmin.group.id,
-    name: stateUser.name,
-    email: stateUser.email,
-  };
+  const state = useSelector(state => state.user)
 
-  useEffect(() => {
-    const saveUser = async(user) => {
-      try {
-        const response = await fetch('http://localhost:3002/users', {
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(user)
-        })
-
-        if (response.status < 300) {
-          seUserCreated(true);
-          return true;
-        } else if (response.status >= 300) {
-          seUserCreatedError(true);
-          return false;
-        };
-      } catch (error) {
-        seUserCreatedError(true);
-        return false;
-      }
-    };
-    if (saveUserState) {
-      saveUser(user)
-    }
-  }, [saveUserState]);
-
-  if (userCreatedError === true) {
+  if (state.errorFetch === true) {
     return (
       <p className="g-error">Error</p>
     )
   };
-  if (userCreated === false) {
+  if (state.userCreating === true) {
     return (
       <p>Данные загружается...</p>
     )
