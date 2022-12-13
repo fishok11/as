@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createGroupOwner } from "../store/actions/actions"
+import { createGroupOwner } from "../../store/actions/actions"
 
 const GroupOwner = () => {
 	const state = useSelector(state => state.admin)

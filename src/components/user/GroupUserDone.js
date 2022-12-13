@@ -19,4 +19,4 @@ const GroupUserDone = () => {
   )
 }
  
-export default GroupUserDone
+export default GroupUserDone;

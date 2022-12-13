@@ -5,7 +5,7 @@ import { applyMiddleware, configureStore } from '@reduxjs/toolkit'
 import { reducer } from './store';
 import { BrowserRouter } from 'react-router-dom'
 import thunk from 'redux-thunk';
-import Group from './components/Group';
+import Group from './components/admin/Group';
 import './index.css';
 
 const store = configureStore({reducer}, applyMiddleware(thunk))

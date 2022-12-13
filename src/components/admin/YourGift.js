@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveGroup } from "../store/actions/actions"
+import { saveGroup } from "../../store/actions/actions"
 
 const YourGift = () => {
   const state = useSelector(state => state.admin)
@@ -21,11 +21,23 @@ const YourGift = () => {
       email: state.groupOwner.email,
     },
     yourGift: {
-      age: state.yourGift.age,
-      gender: state.yourGift.gender,
-      wishes: state.yourGift.wishes,
+      age: giftAge,
+      gender: giftGender,
+      wishes: giftWishes,
     },
   };
+
+  
+  if (state.errorFetch === true) {
+    return (
+      <p className="g-error">Error</p>
+    )
+  };
+  if (state.groupCreating === true) {
+    return (
+      <p>Группа загружается...</p>
+    )
+  }; 
 
   if (state.yourGift.edit) {
     return (
@@ -51,12 +63,12 @@ const YourGift = () => {
           value={giftGender}
           onChange={event => setGiftGender(event.target.value)}
         >
-          <label className="YourGift-radio--item">Для мальчика
-            <input type="radio" value="Для мальчика" name="GiftGender"></input>
+          <label className="YourGift-radio--item">Мужской
+            <input type="radio" value="Мужской" name="GiftGender"></input>
           </label>
 
-          <label className="YourGift-radio--item">Для девочки
-            <input type="radio" value="Для девочки" name="GiftGender"></input>
+          <label className="YourGift-radio--item">Женский
+            <input type="radio" value="Женский" name="GiftGender"></input>
           </label>
           
           <label className="YourGift-radio--item">Не важно
@@ -76,12 +88,14 @@ const YourGift = () => {
         <button
           className="g-button"
           onClick={() => dispatch(saveGroup({
-            ...group,
+            group,
             yourGift: {
               age: giftAge, 
               gender: giftGender, 
               wishes: giftWishes
-            }}))
+            },
+            groupId: state.group.id,
+          }))
           }
         >
           OK

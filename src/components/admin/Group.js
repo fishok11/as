@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import GroupUser from "./GroupUser";
+import GroupUser from "../user/GroupUser";
 import GroupAdmin from "./GroupAdmin";
 
 const Group = () => {

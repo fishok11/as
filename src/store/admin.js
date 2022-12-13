@@ -1,5 +1,5 @@
 import { 
-  CREATE_GROUP, 
+  CREATE_GROUP_NAME, 
   CREATE_EVENT_DATE, 
   CREATE_GROUP_OWNER, 
   CREATE_YOUR_GIFT, 
@@ -48,7 +48,7 @@ const initialStateAdmin = {
 
 export const admin = (state = initialStateAdmin, action) => {
   switch(action.type) {
-    case CREATE_GROUP: {
+    case CREATE_GROUP_NAME: {
       const groupName = action.payload.group.name
 
       if (groupName === "") {
@@ -58,6 +58,63 @@ export const admin = (state = initialStateAdmin, action) => {
             ...state.group,
            error: true,
           },
+        }
+      } else if (state.step > 1) {
+        if (state.step === 2) {
+          return {
+            ...state,
+            group: {
+              ...state.group,
+              name: groupName,
+              error: false,
+              edit: false, 
+            },
+            eventDate: {
+              ...state.eventDate,
+              edit: true,
+            },
+          }
+        }
+        if (state.step === 3) {
+          return {
+            ...state,
+            group: {
+              ...state.group,
+              name: groupName,
+              error: false,
+              edit: false, 
+            },
+            groupOwner: {
+              ...state.groupOwner,
+              edit: true,
+            },
+          }
+        }
+        if (state.step === 4) {
+          return {
+            ...state,
+            group: {
+              ...state.group,
+              name: groupName,
+              error: false,
+              edit: false, 
+            },
+            yourGift: {
+              ...state.yourGift,
+              edit: true,
+            },
+          }
+        }
+        if (state.step === 5) {
+          return {
+            ...state,
+            group: {
+              ...state.group,
+              name: groupName,
+              error: false,
+              edit: false, 
+            },
+          }
         }
       } else {
         return {
@@ -93,6 +150,57 @@ export const admin = (state = initialStateAdmin, action) => {
             error: true,
           }
         }
+      } else if (state.step > 2) {
+        if (state.step === 3) {
+          return {
+            ...state,
+            eventDate: {
+              ...state.eventDate,
+              budget: budget,
+              registrationDate: registrationDate,
+              drawDate: drawDate,
+              exchangeDate: exchangeDate,
+              error: false,
+              edit: false,
+            },
+            groupOwner: {
+              ...state.groupOwner,
+              edit: true,
+            },
+          }
+        }
+        if (state.step === 4) {
+          return {
+            ...state,
+            eventDate: {
+              ...state.eventDate,
+              budget: budget,
+              registrationDate: registrationDate,
+              drawDate: drawDate,
+              exchangeDate: exchangeDate,
+              error: false,
+              edit: false,
+            },
+            yourGift: {
+              ...state.yourGift,
+              edit: true,
+            },
+          }
+        }
+        if (state.step === 5) {
+          return {
+            ...state,
+            eventDate: {
+              ...state.eventDate,
+              budget: budget,
+              registrationDate: registrationDate,
+              drawDate: drawDate,
+              exchangeDate: exchangeDate,
+              error: false,
+              edit: false,
+            },
+          }
+        }
       } else {
         return {
           ...state,
@@ -124,6 +232,33 @@ export const admin = (state = initialStateAdmin, action) => {
             ...state.groupOwner,
             error: true,
           },
+        }
+      } else if (state.step > 3) {
+        if (state.step === 4) {
+          return {
+            ...state,
+            groupOwner: {
+              ...state.groupOwner,
+              name: groupOwnerName,
+              email: groupOwnerEmail,
+              edit: false,
+            },
+            yourGift: {
+              ...state.yourGift,
+              edit: true,
+            },
+          }
+        }
+        if (state.step === 5) {
+          return {
+            ...state,
+            groupOwner: {
+              ...state.groupOwner,
+              name: groupOwnerName,
+              email: groupOwnerEmail,
+              edit: false,
+            },
+          }
         }
       } else {
         return {
@@ -170,6 +305,7 @@ export const admin = (state = initialStateAdmin, action) => {
           },
           step: 5,
           saveGroup: true,
+          groupCreating: false,
         }
       }
     }

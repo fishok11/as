@@ -1,5 +1,5 @@
 import { 
-  CREATE_GROUP, 
+  CREATE_GROUP_NAME, 
   CREATE_EVENT_DATE, 
   CREATE_GROUP_OWNER, 
   CREATE_YOUR_GIFT, 
@@ -12,8 +12,8 @@ import {
 } from "./actionTypes"
 
 
-export const createGroup = (path) => ({
-  type: CREATE_GROUP,
+export const createGroupName = (path) => ({
+  type: CREATE_GROUP_NAME,
   payload: {
     group: path.group
   },
@@ -34,43 +34,74 @@ export const createGroupOwner = (path) => ({
 });
 
 export const saveGroup = (group) => {
-  const isUpdate = Boolean(group.id);
   let isError = false;
-  return async (dispatch) => {
-    try {
-      dispatch({type: GROUP_CREATING})
-      const response = await fetch('http://localhost:3002/group', {
-        method: isUpdate ? 'PUT' : 'POST',
-        headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(group)
-      })
-      const data = await response.json()
 
-      if (response.status < 300) {
-        dispatch({
-          type: CREATE_YOUR_GIFT,
-          payload: {
-            yourGift: group.yourGift
+  if (group.groupId !== null) {
+    return async(dispatch) => {
+      try {
+        dispatch({type: GROUP_CREATING})
+        const response = await fetch('http://localhost:3002/group/' + group.groupId, {
+          method: 'PUT',
+          headers: {
+          'Content-Type': 'application/json;charset=utf-8'
           },
-        });
-        if (isUpdate === false) { 
-          dispatch(saveId({
-            group: {
-            id: data.id
-          }}));
-        }
-      } else if (response.status >= 300) {
+          body: JSON.stringify(group.group)
+        })
+        
+        if (response.status < 300) {
+          dispatch({
+            type: CREATE_YOUR_GIFT,
+            payload: {
+              yourGift: group.yourGift
+            },
+          });
+        } else if (response.status >= 300) {
+          isError = true;
+        };
+      } catch (error) {
         isError = true;
       };
-    } catch (error) {
-      isError = true;
+      if (isError === true) {
+        dispatch({type: ERROR_ADMIN_FETCH});
+      };
     };
-    if (isError === true) {
-      dispatch({type: ERROR_ADMIN_FETCH});
+  } else {
+    return async(dispatch) => {
+      try {
+        dispatch({type: GROUP_CREATING})
+        const response = await fetch('http://localhost:3002/group', {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(group.group)
+        })
+        const data = await response.json()
+
+        if (response.status < 300) {
+          dispatch({
+            type: CREATE_YOUR_GIFT,
+            payload: {
+              yourGift: group.yourGift
+            },
+          });
+          if (group.groupId === null) { 
+            dispatch(saveId({
+              group: {
+              id: data.id
+            }}));
+          }
+        } else if (response.status >= 300) {
+          isError = true;
+        };
+      } catch (error) {
+        isError = true;
+      };
+      if (isError === true) {
+        dispatch({type: ERROR_ADMIN_FETCH});
+      };
     };
-  };
+  }
 };
 
 export const saveId = (path) => ({
@@ -79,7 +110,6 @@ export const saveId = (path) => ({
     group: path.group
   },
 });
-
 
 export const saveUser = (path) => {
   let isError = false;
@@ -103,10 +133,10 @@ export const saveUser = (path) => {
           },
         });
       } else if (response.status >= 300) {
-        isError = true;;
+        isError = true;
       };
     } catch (error) {
-      isError = true;;
+      isError = true;
     };
     if (isError === true) {
       dispatch({type: ERROR_USER_FETCH});

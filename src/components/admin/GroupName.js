@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createGroup } from "../store/actions/actions"
+import { createGroupName } from "../../store/actions/actions"
 
 
 const GroupName = () => {
@@ -23,13 +23,13 @@ const GroupName = () => {
 
         <button
           className="g-button"
-          onClick={() => dispatch(createGroup({group: {name: groupNameInput}}))}
+          onClick={() => dispatch(createGroupName({group: {name: groupNameInput}}))}
         >
           OK
         </button>
       </div>
     );
-  }
+  };
 };
 
 export default GroupName;
