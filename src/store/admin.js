@@ -132,7 +132,8 @@ export const admin = (state = initialStateAdmin, action) => {
           step: 2,
         }
       }
-    }
+      break
+    } 
     case CREATE_EVENT_DATE: {
       const budget = action.payload.eventDate.budget
       const registrationDate = action.payload.eventDate.registrationDate
@@ -220,6 +221,7 @@ export const admin = (state = initialStateAdmin, action) => {
           step: 3,
         }
       }
+      break
     }
     case CREATE_GROUP_OWNER: {
       const groupOwnerName = action.payload.groupOwner.name
@@ -276,6 +278,7 @@ export const admin = (state = initialStateAdmin, action) => {
           step: 4,
         }
       }
+      break
     }
     case CREATE_YOUR_GIFT: {
       const giftGender = action.payload.yourGift.gender
