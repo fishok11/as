@@ -38,7 +38,6 @@ const YourGift = () => {
       <p>Группа загружается...</p>
     )
   }; 
-
   if (state.yourGift.edit) {
     return (
       <div>
@@ -62,7 +61,7 @@ const YourGift = () => {
           className="YourGift-radio-contsiner"
           value={giftGender}
           onChange={event => setGiftGender(event.target.value)}
-        >
+        >Пол:
           <label className="YourGift-radio--item">Мужской
             <input type="radio" value="Мужской" name="GiftGender"></input>
           </label>

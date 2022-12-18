@@ -1,14 +1,32 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createEventDate } from "../../store/actions/actions"
+import { saveEventDate } from "../../store/actions/actions"
 
 const EventDate = () => {
   const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
-  const [budgetInput, setBudgetInput] = useState(state.eventDate.budget)
-  const [registrationDateInput, setRegistrationDateInput] = useState(state.eventDate.registrationDate)
-  const [drawDateInput, setChoiceDateInput] = useState(state.eventDate.drawDate)
-  const [exchangeDateInput, setExchangeDateInput] = useState(state.eventDate.exchangeDate)
+  const [budget, setBudget] = useState(state.eventDate.budget)
+  const [registrationDate, setRegistrationDate] = useState(state.eventDate.registrationDate)
+  const [drawDate, setChoiceDate] = useState(state.eventDate.drawDate)
+  const [exchangeDate, setExchangeDate] = useState(state.eventDate.exchangeDate)
+  let group = {
+    name: state.group.name,
+    event: {
+      budget: budget,
+      registrationDate: registrationDate,
+      drawDate: drawDate,
+      exchangeDate: exchangeDate,
+    },
+    groupOwner: {
+      name: state.groupOwner.name,
+      email: state.groupOwner.email,
+    },
+    yourGift: {
+      age: state.yourGift.age,
+      gender: state.yourGift.gender,
+      wishes: state.yourGift.wishes,
+    },
+  };
 
   if (state.eventDate.edit) {
     return (
@@ -20,8 +38,8 @@ const EventDate = () => {
               <input 
                 className="g-input" 
                 placeholder="Бюджет"
-                value={budgetInput}
-                onChange={event => setBudgetInput(event.target.value)}
+                value={budget}
+                onChange={event => setBudget(event.target.value)}
               ></input>
             </label>
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
@@ -33,8 +51,8 @@ const EventDate = () => {
                 type="date"
                 className="g-input" 
                 placeholder="Date"
-                value={registrationDateInput}
-                onChange={event => setRegistrationDateInput(event.target.value)}
+                value={registrationDate}
+                onChange={event => setRegistrationDate(event.target.value)}
               ></input>
             </label>
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
@@ -46,8 +64,8 @@ const EventDate = () => {
                 type="date"
                 className="g-input" 
                 placeholder="Date"
-                value={drawDateInput}
-                onChange={event => setChoiceDateInput(event.target.value)}
+                value={drawDate}
+                onChange={event => setChoiceDate(event.target.value)}
               ></input>
             </label>
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
@@ -59,8 +77,8 @@ const EventDate = () => {
                 type="date"
                 className="g-input" 
                 placeholder="Date"
-                value={exchangeDateInput}
-                onChange={event => setExchangeDateInput(event.target.value)}
+                value={exchangeDate}
+                onChange={event => setExchangeDate(event.target.value)}
               ></input>
             </label>
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
@@ -68,12 +86,16 @@ const EventDate = () => {
     
           <button
             className="g-button"
-            onClick={() => dispatch(createEventDate({eventDate: {
-              budget: budgetInput, 
-              registrationDate: registrationDateInput, 
-              drawDate: drawDateInput, 
-              exchangeDate: exchangeDateInput,
-            }}))}
+            onClick={() => dispatch(saveEventDate({
+              group,
+              eventDate: {
+                budget: budget, 
+                registrationDate: registrationDate, 
+                drawDate: drawDate, 
+                exchangeDate: exchangeDate,
+              },
+              groupId: state.group.id,
+            }))}
           >
             OK
           </button>

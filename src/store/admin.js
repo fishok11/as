@@ -443,5 +443,5 @@ export const admin = (state = initialStateAdmin, action) => {
     default: {
       return state;
     }
-  }
-}
+  };
+};

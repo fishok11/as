@@ -1,12 +1,30 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createGroupOwner } from "../../store/actions/actions"
+import { saveGroupOwner } from "../../store/actions/actions"
 
 const GroupOwner = () => {
 	const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
 	const [groupOwnerName, setOwnerName] = useState(state.groupOwner.name)
 	const [groupOwnerEmail, setOwnerEmail] = useState(state.groupOwner.email)
+	let group = {
+    name: state.group.name,
+    event: {
+      budget: state.eventDate.budget,
+      registrationDate: state.eventDate.registrationDate,
+      drawDate: state.eventDate.drawDate,
+      exchangeDate: state.eventDate.exchangeDate,
+    },
+    groupOwner: {
+      name: groupOwnerName,
+      email: groupOwnerEmail,
+    },
+    yourGift: {
+      age: state.yourGift.age,
+      gender: state.yourGift.gender,
+      wishes: state.yourGift.wishes,
+    },
+  };
 
 	if (state.groupOwner.edit) {
 		return (
@@ -39,11 +57,14 @@ const GroupOwner = () => {
 
 					<button 
 						className="g-button"
-						onClick={() => dispatch(createGroupOwner({
-							groupOwner: {
-								name: groupOwnerName, 
-								email: groupOwnerEmail
-							}}))
+						onClick={() => dispatch(saveGroupOwner({
+								group,
+								groupOwner: {
+									name: groupOwnerName, 
+									email: groupOwnerEmail
+								},
+								groupId: state.group.id,
+							}))
 						}
 					>
 						OK

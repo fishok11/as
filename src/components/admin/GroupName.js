@@ -1,12 +1,30 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createGroupName } from "../../store/actions/actions"
+import { saveGroupName } from "../../store/actions/actions"
 
 
 const GroupName = () => {
   const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
-  const [groupNameInput, setGroupName] = useState(state.group.name)
+  const [groupName, setGroupName] = useState(state.group.name)
+  let groupJSON = {
+    name: groupName,
+    event: {
+      budget: state.eventDate.budget,
+      registrationDate: state.eventDate.registrationDate,
+      drawDate: state.eventDate.drawDate,
+      exchangeDate: state.eventDate.exchangeDate,
+    },
+    groupOwner: {
+      name: state.groupOwner.name,
+      email: state.groupOwner.email,
+    },
+    yourGift: {
+      age: state.yourGift.age,
+      gender: state.yourGift.gender,
+      wishes: state.yourGift.wishes,
+    },
+  };
 
   if (state.group.edit) {
     return ( 
@@ -16,14 +34,18 @@ const GroupName = () => {
         <input
           className="g-input"
           placeholder="Введите название вашей группы"
-          value={groupNameInput}
+          value={groupName}
           onChange={event => setGroupName(event.target.value)}
         ></input>
         {state.group.error === true && (<div className="g-error">Название группы не может быть пустым!</div>)}
 
         <button
           className="g-button"
-          onClick={() => dispatch(createGroupName({group: {name: groupNameInput}}))}
+          onClick={() => dispatch(saveGroupName({
+            groupJSON,
+            group: {name: groupName},
+            groupId: state.group.id,
+          }))}
         >
           OK
         </button>
