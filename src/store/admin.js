@@ -10,6 +10,9 @@ import {
   SAVE_ID, 
   ERROR_ADMIN_FETCH,
   GROUP_CREATING,
+  NAME_UPDATE,
+  EVENT_DATE_UPDATE,
+  GROUP_OWNER_UPDATE,
 } from "../store/actions/actionTypes"
 
 const initialStateAdmin = {
@@ -438,6 +441,59 @@ export const admin = (state = initialStateAdmin, action) => {
       return {
         ...state,
         groupCreating: true,
+      }
+    }
+    case NAME_UPDATE: {
+      const name = action.payload.group.name
+
+      return {
+        ...state,
+        group:{
+          ...state.group,
+          name: name,
+          error: false,
+          edit: false,
+        },
+        groupCreating: false,
+        errorFetch: false,
+      }
+    }
+    case EVENT_DATE_UPDATE: {
+      const budget = action.payload.group.event.budget
+      const registrationDate = action.payload.group.event.registrationDate
+      const drawDate = action.payload.group.event.drawDate
+      const exchangeDate = action.payload.group.event.exchangeDate
+
+      return {
+        ...state,
+        eventDate: {
+          ...state.eventDate,
+          budget: budget,
+          registrationDate: registrationDate,
+          drawDate: drawDate,
+          exchangeDate: exchangeDate,
+          error: false,
+          edit: false,
+        },
+        groupCreating: false,
+        errorFetch: false,
+      }
+    }
+    case GROUP_OWNER_UPDATE: {
+      const groupOwnerName = action.payload.group.groupOwner.name
+      const groupOwnerEmail = action.payload.group.groupOwner.email
+
+      return {
+        ...state,
+        groupOwner: {
+          ...state.groupOwner,
+          name: groupOwnerName,
+          email: groupOwnerEmail,
+          error: false,
+          edit: false,
+        },
+        groupCreating: false,
+        errorFetch: false,
       }
     }
     default: {

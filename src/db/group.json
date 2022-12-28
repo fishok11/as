@@ -1,5 +1,24 @@
 {
   "group": [
+    {
+      "name": "cascas",
+      "event": {
+        "budget": "ccascac",
+        "registrationDate": "2022-12-24",
+        "drawDate": "2022-12-03",
+        "exchangeDate": "2022-12-23"
+      },
+      "groupOwner": {
+        "name": "ccasc",
+        "email": "cacasc"
+      },
+      "yourGift": {
+        "age": "10",
+        "gender": "Женский",
+        "wishes": "ccascasc"
+      },
+      "id": 1
+    }
   ],
   "users": []
 }

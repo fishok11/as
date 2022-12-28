@@ -7,6 +7,9 @@ import {
   SAVE_USER, 
   ERROR_ADMIN_FETCH,
   GROUP_CREATING,
+  NAME_UPDATE,
+  EVENT_DATE_UPDATE,
+  GROUP_OWNER_UPDATE,
   ERROR_USER_FETCH,
   USER_CREATING,
 } from "./actionTypes"
@@ -42,120 +45,90 @@ export const createYourGift = (path) => ({
 
 export const saveGroupName = (group) => {
   let isError = false;
-  const isUpdate = Boolean(group.groupId)
+  const groupUpdate = group.group;
 
-  if (isUpdate === true) {
-    return async (dispatch) => {
-      try {
-        dispatch(userCreating())
-        const response = await fetch('http://localhost:3002/group/' + group.groupId, {
-          method: 'PUT',
-          headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(group.groupJSON)
-        })
-
-        if (response.status < 300) {
-          dispatch(createGroupName({
-            group: group.group
-          }));
-        } else if (response.status >= 300) {
-          isError = true;
-        };
-      } catch (error) {
+  return async (dispatch) => {
+    try {
+      dispatch(groupCreating())
+      const response = await fetch('http://localhost:3002/group/' + group.groupId, {
+        method: 'PUT',
+        headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(groupUpdate)
+      })
+      
+      if (response.status < 300) {
+        dispatch(nameUpdate({groupUpdate}));
+        return
+      } else if (response.status >= 300) {
         isError = true;
       };
-      if (isError === true) {
-        dispatch(userError());
-      };
+    } catch (error) {
+      isError = true;
     };
-  } else {
-    console.log(group)
-    return async (dispatch) => {
-      dispatch(createGroupName({
-        group: group.group
-      }));
-    }
-  }
+    if (isError === true) {
+      dispatch(adminError());
+    };
+  };
 };
 
 export const saveEventDate = (group) => {
   let isError = false;
-  const isUpdate = Boolean(group.groupId)
+  const groupUpdate = group.group
 
-  if (isUpdate === true) {
-    return async (dispatch) => {
-      try {
-        dispatch(userCreating())
-        const response = await fetch('http://localhost:3002/group/' + group.groupId, {
-          method: 'PUT',
-          headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(group.group)
-        })
+  return async (dispatch) => {
+    try {
+      dispatch(groupCreating())
+      const response = await fetch('http://localhost:3002/group/' + group.groupId, {
+        method: 'PUT',
+        headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(groupUpdate)
+      })
 
-        if (response.status < 300) {
-          dispatch(createEventDate({
-            eventDate: group.eventDate
-          }));
-        } else if (response.status >= 300) {
-          isError = true;
-        };
-      } catch (error) {
+      if (response.status < 300) {
+        dispatch(eventDateUpdate({groupUpdate}));
+      } else if (response.status >= 300) {
         isError = true;
       };
-      if (isError === true) {
-        dispatch(userError());
-      };
+    } catch (error) {
+      isError = true;
     };
-  } else {
-    return async (dispatch) => {
-      dispatch(createEventDate({
-        eventDate: group.eventDate
-      }));
-    }
-  }
+    if (isError === true) {
+      dispatch(adminError());
+    };
+  };
 };
 
 export const saveGroupOwner = (group) => {
   let isError = false;
-  const isUpdate = Boolean(group.groupId)
+  const groupUpdate = group.group
 
-  if (isUpdate === true) {
-    return async (dispatch) => {
-      try {
-        dispatch(userCreating())
-        const response = await fetch('http://localhost:3002/group/' + group.groupId, {
-          method: 'PUT',
-          headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(group.group)
-        })
-
-        if (response.status < 300) {
-          dispatch(createGroupOwner({
-            groupOwner: group.groupOwner
-          }));
-        } else if (response.status >= 300) {
-          isError = true;
-        };
-      } catch (error) {
+  return async (dispatch) => {
+    try {
+      dispatch(groupCreating())
+      const response = await fetch('http://localhost:3002/group/' + group.groupId, {
+        method: 'PUT',
+        headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(groupUpdate)
+      })
+      
+      if (response.status < 300) {
+        dispatch(groupOwnerUpdate({groupUpdate}));
+      } else if (response.status >= 300) {
         isError = true;
       };
-      if (isError === true) {
-        dispatch(userError());
-      };
+    } catch (error) {
+      isError = true;
     };
-  } else {
-    return async (dispatch) => {
-      dispatch(createGroupOwner({
-        groupOwner: group.groupOwner
-      }));
-    }
-  }
+    if (isError === true) {
+      dispatch(adminError());
+    };
+  };
 };
 
 export const saveGroup = (group) => {
@@ -210,6 +183,27 @@ export const groupCreating = () => ({
 
 export const adminError = () => ({
   type: ERROR_ADMIN_FETCH,
+});
+
+export const nameUpdate = (path) => ({
+  type: NAME_UPDATE,
+  payload: {
+    group: path.groupUpdate
+  },
+});
+
+export const eventDateUpdate = (path) => ({
+  type: EVENT_DATE_UPDATE,
+  payload: {
+    group: path.groupUpdate
+  },
+});
+
+export const groupOwnerUpdate = (path) => ({
+  type: GROUP_OWNER_UPDATE,
+  payload: {
+    group: path.groupUpdate
+  },
 });
 
 export const saveUser = (path) => {

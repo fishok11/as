@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveEventDate } from "../../store/actions/actions"
+import { saveEventDate, createEventDate } from "../../store/actions/actions"
 
 const EventDate = () => {
   const state = useSelector(state => state.admin)
@@ -26,7 +26,8 @@ const EventDate = () => {
       gender: state.yourGift.gender,
       wishes: state.yourGift.wishes,
     },
-  };
+  }
+  const isUpdate = Boolean(state.group.id);
 
   if (state.eventDate.edit) {
     return (
@@ -86,16 +87,22 @@ const EventDate = () => {
     
           <button
             className="g-button"
-            onClick={() => dispatch(saveEventDate({
-              group,
-              eventDate: {
-                budget: budget, 
-                registrationDate: registrationDate, 
-                drawDate: drawDate, 
-                exchangeDate: exchangeDate,
-              },
-              groupId: state.group.id,
-            }))}
+            onClick={() => (
+              isUpdate === true
+              ? dispatch(saveEventDate({
+                  group,
+                  groupId: state.group.id,
+                })) 
+              : dispatch(createEventDate({
+                eventDate: {
+                  budget: budget, 
+                  registrationDate: registrationDate, 
+                  drawDate: drawDate, 
+                  exchangeDate: exchangeDate,
+                },
+                groupId: state.group.id,
+              })
+            ))}
           >
             OK
           </button>

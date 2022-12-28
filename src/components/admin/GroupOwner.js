@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveGroupOwner } from "../../store/actions/actions"
+import { saveGroupOwner, createGroupOwner } from "../../store/actions/actions"
 
 const GroupOwner = () => {
 	const state = useSelector(state => state.admin)
@@ -25,6 +25,7 @@ const GroupOwner = () => {
       wishes: state.yourGift.wishes,
     },
   };
+  const isUpdate = Boolean(state.group.id);
 
 	if (state.groupOwner.edit) {
 		return (
@@ -57,15 +58,20 @@ const GroupOwner = () => {
 
 					<button 
 						className="g-button"
-						onClick={() => dispatch(saveGroupOwner({
+						onClick={() => (
+							isUpdate === true
+              ? dispatch(saveGroupOwner({
 								group,
+								groupId: state.group.id,
+							})) 
+              : dispatch(createGroupOwner({
 								groupOwner: {
 									name: groupOwnerName, 
 									email: groupOwnerEmail
 								},
 								groupId: state.group.id,
-							}))
-						}
+              })
+            ))}
 					>
 						OK
 					</button>

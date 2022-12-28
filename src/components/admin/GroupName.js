@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveGroupName } from "../../store/actions/actions"
+import { saveGroupName, createGroupName } from "../../store/actions/actions"
 
 
 const GroupName = () => {
   const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
   const [groupName, setGroupName] = useState(state.group.name)
-  let groupJSON = {
+  let group = {
     name: groupName,
     event: {
       budget: state.eventDate.budget,
@@ -25,6 +25,7 @@ const GroupName = () => {
       wishes: state.yourGift.wishes,
     },
   };
+  const isUpdate = Boolean(state.group.id);
 
   if (state.group.edit) {
     return ( 
@@ -41,11 +42,18 @@ const GroupName = () => {
 
         <button
           className="g-button"
-          onClick={() => dispatch(saveGroupName({
-            groupJSON,
-            group: {name: groupName},
-            groupId: state.group.id,
-          }))}
+          onClick={() => (
+            isUpdate === true
+              ? dispatch(saveGroupName({
+                  group ,
+                  groupId: state.group.id,
+                })) 
+              : dispatch(createGroupName({
+                group: {
+                  name: groupName
+                },
+            }))
+          )}
         >
           OK
         </button>

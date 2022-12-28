@@ -26,7 +26,6 @@ const YourGift = () => {
       wishes: giftWishes,
     },
   };
-
   
   if (state.errorFetch === true) {
     return (
