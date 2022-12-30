@@ -7,9 +7,9 @@ const GroupDone = () => {
   return (
     <div>
       <h2>Группа готова!!!</h2>
-      <p>Адрес станицы группы:</p>
-      <Link to={`/group-user/${state.group.id}`}>http://localhost:3000/group-user/{state.group.id}</Link>
-      <p>Отправте эту ссылку всем участникам обмена подарками</p>    
+      <p>Адрес регистрации участников группы:</p>
+      <Link to={`/group-user/${state.group.id}`} className="g-link">http://localhost:3000/group-user/{state.group.id}</Link>
+      <p>Отправте эту ссылку всем участникам обмена подарками.</p>    
     </div>
   )
 };

@@ -6,9 +6,6 @@ import {
   SAVE_ID, 
   ERROR_ADMIN_FETCH,
   GROUP_CREATING,
-  NAME_UPDATE,
-  EVENT_DATE_UPDATE,
-  GROUP_OWNER_UPDATE,
   CREATE_USER, 
   ERROR_USER_FETCH,
   USER_CREATING,
@@ -25,7 +22,7 @@ export const createGroupName = (path) => ({
 export const createEventDate = (path) => ({
   type: CREATE_EVENT_DATE,
   payload: {
-    eventDate: path.eventDate
+    eventDate: path.eventDate,
   },
 });
 
@@ -43,14 +40,14 @@ export const createYourGift = (path) => ({
   },
 });
 
-export const saveGroupName = (group) => {
+export const saveGroupName = (path) => {
   let isError = false;
-  const groupUpdate = group.group;
+  const groupUpdate = path.group;
 
   return async (dispatch) => {
     try {
       dispatch(groupCreating())
-      const response = await fetch('http://localhost:3002/group/' + group.groupId, {
+      const response = await fetch('http://localhost:3002/group/' + path.groupId, {
         method: 'PUT',
         headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -59,8 +56,8 @@ export const saveGroupName = (group) => {
       })
       
       if (response.status < 300) {
-        dispatch(nameUpdate({
-          groupUpdate,
+        dispatch(createGroupName({
+          group: path.group,
         }));
         return
       } else if (response.status >= 300) {
@@ -68,6 +65,7 @@ export const saveGroupName = (group) => {
       };
     } catch (error) {
       isError = true;
+      console.log(error)
     };
     if (isError === true) {
       dispatch(adminError());
@@ -75,14 +73,14 @@ export const saveGroupName = (group) => {
   };
 };
 
-export const saveEventDate = (group) => {
+export const saveEventDate = (path) => {
   let isError = false;
-  const groupUpdate = group.group
+  const groupUpdate = path.group
 
   return async (dispatch) => {
     try {
       dispatch(groupCreating())
-      const response = await fetch('http://localhost:3002/group/' + group.groupId, {
+      const response = await fetch('http://localhost:3002/group/' + path.groupId, {
         method: 'PUT',
         headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -91,14 +89,16 @@ export const saveEventDate = (group) => {
       })
 
       if (response.status < 300) {
-        dispatch(eventDateUpdate({
-          groupUpdate,
+        dispatch(createEventDate({
+          eventDate: path.group.eventDate,
         }));
+        return
       } else if (response.status >= 300) {
         isError = true;
       };
     } catch (error) {
       isError = true;
+      console.log(error)
     };
     if (isError === true) {
       dispatch(adminError());
@@ -106,14 +106,14 @@ export const saveEventDate = (group) => {
   };
 };
 
-export const saveGroupOwner = (group) => {
+export const saveGroupOwner = (path) => {
   let isError = false;
-  const groupUpdate = group.group
+  const groupUpdate = path.group
 
   return async (dispatch) => {
     try {
       dispatch(groupCreating())
-      const response = await fetch('http://localhost:3002/group/' + group.groupId, {
+      const response = await fetch('http://localhost:3002/group/' + path.groupId, {
         method: 'PUT',
         headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -122,14 +122,16 @@ export const saveGroupOwner = (group) => {
       })
       
       if (response.status < 300) {
-        dispatch(groupOwnerUpdate({
-          groupUpdate,
+        dispatch(createGroupOwner({
+          groupOwner: path.group.groupOwner,
         }));
+        return
       } else if (response.status >= 300) {
         isError = true;
       };
     } catch (error) {
       isError = true;
+      console.log(error)
     };
     if (isError === true) {
       dispatch(adminError());
@@ -189,27 +191,6 @@ export const groupCreating = () => ({
 
 export const adminError = () => ({
   type: ERROR_ADMIN_FETCH,
-});
-
-export const nameUpdate = (path) => ({
-  type: NAME_UPDATE,
-  payload: {
-    group: path.groupUpdate
-  },
-});
-
-export const eventDateUpdate = (path) => ({
-  type: EVENT_DATE_UPDATE,
-  payload: {
-    group: path.groupUpdate
-  },
-});
-
-export const groupOwnerUpdate = (path) => ({
-  type: GROUP_OWNER_UPDATE,
-  payload: {
-    group: path.groupUpdate
-  },
 });
 
 // ===============================================================

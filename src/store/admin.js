@@ -10,9 +10,6 @@ import {
   SAVE_ID, 
   ERROR_ADMIN_FETCH,
   GROUP_CREATING,
-  NAME_UPDATE,
-  EVENT_DATE_UPDATE,
-  GROUP_OWNER_UPDATE,
 } from "../store/actions/actionTypes"
 
 const initialStateAdmin = {
@@ -76,6 +73,8 @@ export const admin = (state = initialStateAdmin, action) => {
               ...state.eventDate,
               edit: true,
             },
+            errorFetch: false,
+            groupCreating: false,
           }
         }
         if (state.step === 3) {
@@ -91,6 +90,8 @@ export const admin = (state = initialStateAdmin, action) => {
               ...state.groupOwner,
               edit: true,
             },
+            errorFetch: false,
+            groupCreating: false,
           }
         }
         if (state.step === 4) {
@@ -106,6 +107,8 @@ export const admin = (state = initialStateAdmin, action) => {
               ...state.yourGift,
               edit: true,
             },
+            errorFetch: false,
+            groupCreating: false,
           }
         }
         if (state.step === 5) {
@@ -117,6 +120,8 @@ export const admin = (state = initialStateAdmin, action) => {
               error: false,
               edit: false, 
             },
+            errorFetch: false,
+            groupCreating: false,
           }
         }
       } else {
@@ -133,6 +138,8 @@ export const admin = (state = initialStateAdmin, action) => {
             edit: true,
           },
           step: 2,
+          errorFetch: false,
+          groupCreating: false,
         }
       }
       break
@@ -171,6 +178,8 @@ export const admin = (state = initialStateAdmin, action) => {
               ...state.groupOwner,
               edit: true,
             },
+            errorFetch: false,
+            groupCreating: false,
           }
         }
         if (state.step === 4) {
@@ -189,6 +198,8 @@ export const admin = (state = initialStateAdmin, action) => {
               ...state.yourGift,
               edit: true,
             },
+            errorFetch: false,
+            groupCreating: false,
           }
         }
         if (state.step === 5) {
@@ -203,6 +214,8 @@ export const admin = (state = initialStateAdmin, action) => {
               error: false,
               edit: false,
             },
+            errorFetch: false,
+            groupCreating: false,
           }
         }
       } else {
@@ -222,13 +235,15 @@ export const admin = (state = initialStateAdmin, action) => {
             edit: true,
           },
           step: 3,
+          errorFetch: false,
+          groupCreating: false,
         }
       }
       break
     }
     case CREATE_GROUP_OWNER: {
       const groupOwnerName = action.payload.groupOwner.name
-      const groupOwnerEmail = action.payload.groupOwner.email
+      const groupOwnerEmail = action.payload.groupOwner.email 
 
       if (groupOwnerName === "" || groupOwnerEmail === "") {
         return {
@@ -252,6 +267,8 @@ export const admin = (state = initialStateAdmin, action) => {
               ...state.yourGift,
               edit: true,
             },
+            errorFetch: false,
+            groupCreating: false,
           }
         }
         if (state.step === 5) {
@@ -263,6 +280,8 @@ export const admin = (state = initialStateAdmin, action) => {
               email: groupOwnerEmail,
               edit: false,
             },
+            errorFetch: false,
+            groupCreating: false,
           }
         }
       } else {
@@ -279,6 +298,8 @@ export const admin = (state = initialStateAdmin, action) => {
             edit: true,
           },
           step: 4,
+          errorFetch: false,
+          groupCreating: false,
         }
       }
       break
@@ -441,59 +462,6 @@ export const admin = (state = initialStateAdmin, action) => {
       return {
         ...state,
         groupCreating: true,
-      }
-    }
-    case NAME_UPDATE: {
-      const name = action.payload.group.name
-
-      return {
-        ...state,
-        group:{
-          ...state.group,
-          name: name,
-          error: false,
-          edit: false,
-        },
-        groupCreating: false,
-        errorFetch: false,
-      }
-    }
-    case EVENT_DATE_UPDATE: {
-      const budget = action.payload.group.eventDate.budget
-      const registrationDate = action.payload.group.eventDate.registrationDate
-      const drawDate = action.payload.group.eventDate.drawDate
-      const exchangeDate = action.payload.group.eventDate.exchangeDate
-
-      return {
-        ...state,
-        eventDate: {
-          ...state.eventDate,
-          budget: budget,
-          registrationDate: registrationDate,
-          drawDate: drawDate,
-          exchangeDate: exchangeDate,
-          error: false,
-          edit: false,
-        },
-        groupCreating: false,
-        errorFetch: false,
-      }
-    }
-    case GROUP_OWNER_UPDATE: {
-      const groupOwnerName = action.payload.group.groupOwner.name
-      const groupOwnerEmail = action.payload.group.groupOwner.email
-
-      return {
-        ...state,
-        groupOwner: {
-          ...state.groupOwner,
-          name: groupOwnerName,
-          email: groupOwnerEmail,
-          error: false,
-          edit: false,
-        },
-        groupCreating: false,
-        errorFetch: false,
       }
     }
     default: {
