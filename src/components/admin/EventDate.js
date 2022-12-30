@@ -11,7 +11,7 @@ const EventDate = () => {
   const [exchangeDate, setExchangeDate] = useState(state.eventDate.exchangeDate)
   let group = {
     name: state.group.name,
-    event: {
+    eventDate: {
       budget: budget,
       registrationDate: registrationDate,
       drawDate: drawDate,
@@ -34,7 +34,7 @@ const EventDate = () => {
       <div>
         <h2>Регистрация участников</h2>
         <div>
-          <div className="EventDate-item">
+          <div className="EventDate__item">
             <label >Бюджет:
               <input 
                 className="g-input" 
@@ -46,7 +46,7 @@ const EventDate = () => {
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
           </div>
     
-          <div className="EventDate-item">
+          <div className="EventDate__item">
             <label>Регистрация участников до:
               <input 
                 type="date"
@@ -59,7 +59,7 @@ const EventDate = () => {
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
           </div>
     
-          <div className="EventDate-item">
+          <div className="EventDate__item">
             <label>Выбор получателей подарков до:
               <input 
                 type="date"
@@ -72,7 +72,7 @@ const EventDate = () => {
             {state.eventDate.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
           </div>
           
-          <div className="EventDate-item">
+          <div className="EventDate__item">
             <label>Обмен подарками:
               <input 
                 type="date"

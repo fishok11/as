@@ -4,12 +4,12 @@ import {
   CREATE_GROUP_OWNER, 
   CREATE_YOUR_GIFT, 
   SAVE_ID, 
-  SAVE_USER, 
   ERROR_ADMIN_FETCH,
   GROUP_CREATING,
   NAME_UPDATE,
   EVENT_DATE_UPDATE,
   GROUP_OWNER_UPDATE,
+  CREATE_USER, 
   ERROR_USER_FETCH,
   USER_CREATING,
 } from "./actionTypes"
@@ -59,7 +59,9 @@ export const saveGroupName = (group) => {
       })
       
       if (response.status < 300) {
-        dispatch(nameUpdate({groupUpdate}));
+        dispatch(nameUpdate({
+          groupUpdate,
+        }));
         return
       } else if (response.status >= 300) {
         isError = true;
@@ -89,7 +91,9 @@ export const saveEventDate = (group) => {
       })
 
       if (response.status < 300) {
-        dispatch(eventDateUpdate({groupUpdate}));
+        dispatch(eventDateUpdate({
+          groupUpdate,
+        }));
       } else if (response.status >= 300) {
         isError = true;
       };
@@ -118,7 +122,9 @@ export const saveGroupOwner = (group) => {
       })
       
       if (response.status < 300) {
-        dispatch(groupOwnerUpdate({groupUpdate}));
+        dispatch(groupOwnerUpdate({
+          groupUpdate,
+        }));
       } else if (response.status >= 300) {
         isError = true;
       };
@@ -206,6 +212,15 @@ export const groupOwnerUpdate = (path) => ({
   },
 });
 
+// ===============================================================
+
+export const createUser = (path) => ({
+  type: CREATE_USER,
+  payload: {
+    user: path,
+  }
+});
+
 export const saveUser = (path) => {
   let isError = false;
   return async (dispatch) => {
@@ -221,7 +236,7 @@ export const saveUser = (path) => {
 
       if (response.status < 300) {
         dispatch({
-          type: SAVE_USER,
+          type: CREATE_USER,
           payload: {
             userName: path.userName,
             userEmail: path.userEmail

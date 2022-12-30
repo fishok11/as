@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const GroupUserData = () => {
+const UserData = () => {
   const [groupData, setGroupdata] = useState()
   const {id} = useParams();
 
@@ -20,10 +20,10 @@ const GroupUserData = () => {
         <h3>{groupData.name}</h3>
       </div>
       <div className="Group-container Group-container--info">
-        <h3>{groupData.event.budget}₽, Регистрация до {groupData.event.registrationDate}</h3>
+        <h3>{groupData.eventDate.budget}₽, Регистрация до {groupData.eventDate.registrationDate}</h3>
       </div>
     </>
   )
 };
 
-export default GroupUserData;
+export default UserData;

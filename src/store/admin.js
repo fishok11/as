@@ -459,10 +459,10 @@ export const admin = (state = initialStateAdmin, action) => {
       }
     }
     case EVENT_DATE_UPDATE: {
-      const budget = action.payload.group.event.budget
-      const registrationDate = action.payload.group.event.registrationDate
-      const drawDate = action.payload.group.event.drawDate
-      const exchangeDate = action.payload.group.event.exchangeDate
+      const budget = action.payload.group.eventDate.budget
+      const registrationDate = action.payload.group.eventDate.registrationDate
+      const drawDate = action.payload.group.eventDate.drawDate
+      const exchangeDate = action.payload.group.eventDate.exchangeDate
 
       return {
         ...state,

@@ -1,5 +1,5 @@
 import { 
-  SAVE_USER, 
+  CREATE_USER, 
   ERROR_USER_FETCH,
   USER_CREATING,
 } from "../store/actions/actionTypes"
@@ -7,6 +7,7 @@ import {
 const initialStateUser = {
   name: "",
   email: "",
+  wishes: "",
   error: false,
   saveUser: false,
   step: 1,
@@ -16,7 +17,7 @@ const initialStateUser = {
 
 export const user = (state = initialStateUser, action) => {
   switch(action.type) {
-    case SAVE_USER: {
+    case CREATE_USER: {
       const userName = action.payload.userName
       const userEmail = action.payload.userEmail
 

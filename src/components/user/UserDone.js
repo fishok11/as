@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-const GroupUserDone = () => {
+const UserDone = () => {
   const state = useSelector(state => state.user)
 
   if (state.errorFetch === true) {
@@ -19,4 +19,4 @@ const GroupUserDone = () => {
   )
 }
  
-export default GroupUserDone;
+export default UserDone;

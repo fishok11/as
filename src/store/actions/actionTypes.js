@@ -13,6 +13,6 @@ export const NAME_UPDATE = "NAME_UPDATE"
 export const EVENT_DATE_UPDATE = "EVENT_DATE_UPDATE"
 export const GROUP_OWNER_UPDATE = "GROUP_OWNER_UPDATE"
 
-export const SAVE_USER = "SAVE_USER";
+export const CREATE_USER = "SAVE_USER";
 export const ERROR_USER_FETCH = "ERROR_USER_FETCH"
 export const USER_CREATING = "USER_CREATING"

@@ -1,24 +1,32 @@
 {
   "group": [
     {
-      "name": "cascas",
-      "event": {
-        "budget": "ccascac",
-        "registrationDate": "2022-12-24",
+      "name": "c",
+      "eventDate": {
+        "budget": "c",
+        "registrationDate": "2022-12-11",
         "drawDate": "2022-12-03",
-        "exchangeDate": "2022-12-23"
+        "exchangeDate": "2022-12-09"
       },
       "groupOwner": {
-        "name": "ccasc",
-        "email": "cacasc"
+        "name": "c",
+        "email": "c"
       },
       "yourGift": {
         "age": "10",
         "gender": "Женский",
-        "wishes": "ccascasc"
+        "wishes": "c"
       },
       "id": 1
     }
   ],
-  "users": []
+  "users": [
+    {
+      "groupId": 1,
+      "name": "c",
+      "email": "c",
+      "wishes": "c",
+      "id": 1
+    }
+  ]
 }

@@ -1,24 +1,27 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../../store/actions/actions"
+import { useParams } from "react-router-dom";
 
-const GroupUserForm = () => {
+const UserForm = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [userWishes, setUserWishes] = useState("");
   const stateUser = useSelector(state => state.user);
-  const stateAdmin = useSelector(state => state.admin);
   const dispatch = useDispatch()
+  const {id} = useParams();
   let user = {
-    groupId: stateAdmin.group.id,
+    groupId: Number(id),
     name: userName,
     email: userEmail,
+    wishes: userWishes,
   };
 
   return (
     <div className="Group-container Group-container--info">
       <h2>Регистрация пользователя</h2>
       <div>
-        <div className="GroupOwner--item">
+        <div className="GroupOwner__item">
           <label>Ваше имя:
             <input 
               className="g-input" 
@@ -30,7 +33,7 @@ const GroupUserForm = () => {
           {stateUser.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
         </div>
 
-        <div className="GroupOwner--item">
+        <div className="GroupOwner__item">
           <label>Ваш email:
             <input 
               className="g-input" 
@@ -42,12 +45,21 @@ const GroupUserForm = () => {
           {stateUser.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
         </div>
 
+        <label className="YourGift-label">Пожелания к подарку (не обязательно)
+          <textarea 
+            className="g-input"
+            value={userWishes}
+            onChange={event => setUserWishes(event.target.value)}
+          ></textarea>
+        </label>
+
         <button 
           className="g-button"
           onClick={() => dispatch(saveUser({
             user,
             name: userName,
             email: userEmail,  
+            wishes: userWishes,
           }))}
         >
           OK
@@ -57,4 +69,4 @@ const GroupUserForm = () => {
   )
 };
 
-export default GroupUserForm;
+export default UserForm;

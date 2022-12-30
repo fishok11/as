@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import GroupUser from "../user/GroupUser";
+import User from "../user/User";
 import GroupAdmin from "./GroupAdmin";
 
 const Group = () => {
@@ -7,7 +7,7 @@ const Group = () => {
     <>
       <Routes>
         <Route index element={<GroupAdmin />}/>
-        <Route path={`/group-user/:id`} element={<GroupUser />}/>
+        <Route path={`/group-user/:id`} element={<User />}/>
       </Routes>
     </>
   )

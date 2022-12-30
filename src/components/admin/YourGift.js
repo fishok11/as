@@ -10,7 +10,7 @@ const YourGift = () => {
   const [giftWishes, setGiftWishes] = useState(state.yourGift.wishes)
   let group = {
     name: state.group.name,
-    event: {
+    eventDate: {
       budget: state.eventDate.budget,
       registrationDate: state.eventDate.registrationDate,
       drawDate: state.eventDate.drawDate,
@@ -57,19 +57,19 @@ const YourGift = () => {
         {state.yourGift.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
 
         <div 
-          className="YourGift-radio-contsiner"
+          className="YourGift-radio-container"
           value={giftGender}
           onChange={event => setGiftGender(event.target.value)}
         >Пол:
-          <label className="YourGift-radio--item">Мужской
+          <label className="YourGift-radio__item">Мужской
             <input type="radio" value="Мужской" name="GiftGender"></input>
           </label>
 
-          <label className="YourGift-radio--item">Женский
+          <label className="YourGift-radio__item">Женский
             <input type="radio" value="Женский" name="GiftGender"></input>
           </label>
           
-          <label className="YourGift-radio--item">Не важно
+          <label className="YourGift-radio__item">Не важно
             <input type="radio" value="Не важно" name="GiftGender"></input>
           </label>
           {state.yourGift.error === true && (<div className="g-error">Выберите что-то одно!</div>)}

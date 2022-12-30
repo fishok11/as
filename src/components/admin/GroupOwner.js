@@ -9,7 +9,7 @@ const GroupOwner = () => {
 	const [groupOwnerEmail, setOwnerEmail] = useState(state.groupOwner.email)
 	let group = {
     name: state.group.name,
-    event: {
+    eventDate: {
       budget: state.eventDate.budget,
       registrationDate: state.eventDate.registrationDate,
       drawDate: state.eventDate.drawDate,
@@ -32,7 +32,7 @@ const GroupOwner = () => {
 			<div>
 				<h2>Ваши данные</h2>
 				<div>
-					<div className="GroupOwner--item">
+					<div className="GroupOwner__item">
 						<label>Ваше имя:
 							<input 
 								className="g-input" 
@@ -69,7 +69,6 @@ const GroupOwner = () => {
 									name: groupOwnerName, 
 									email: groupOwnerEmail
 								},
-								groupId: state.group.id,
               })
             ))}
 					>

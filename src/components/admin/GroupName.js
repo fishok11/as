@@ -9,7 +9,7 @@ const GroupName = () => {
   const [groupName, setGroupName] = useState(state.group.name)
   let group = {
     name: groupName,
-    event: {
+    eventDate: {
       budget: state.eventDate.budget,
       registrationDate: state.eventDate.registrationDate,
       drawDate: state.eventDate.drawDate,
