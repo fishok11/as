@@ -60,6 +60,7 @@ const UserForm = () => {
             name: userName,
             email: userEmail,  
             wishes: userWishes,
+            userId: stateUser.id,
           }))}
         >
           OK

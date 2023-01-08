@@ -45,7 +45,7 @@ input {
   animation: pop-in 1s forwards;
 }
 .Group-container--info {
-  padding: 5px 0px;
+  padding: 5px 15px;
   margin-bottom: 10px;
 }
 @keyframes pop-in {

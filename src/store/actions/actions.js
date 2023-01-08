@@ -9,6 +9,7 @@ import {
   CREATE_USER, 
   ERROR_USER_FETCH,
   USER_CREATING,
+  SAVE_USER_ID
 } from "./actionTypes"
 
 
@@ -198,7 +199,9 @@ export const adminError = () => ({
 export const createUser = (path) => ({
   type: CREATE_USER,
   payload: {
-    user: path,
+    userName: path.userName,
+    userEmail: path.userEmail,
+    userWishes: path.userWishes,
   }
 });
 
@@ -210,19 +213,23 @@ export const saveUser = (path) => {
       const response = await fetch('http://localhost:3002/users', {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json;charset=utf-8'
+          'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(path.user)
       })
+      const data = await response.json()
 
       if (response.status < 300) {
-        dispatch({
-          type: CREATE_USER,
-          payload: {
-            userName: path.userName,
-            userEmail: path.userEmail
-          },
-        });
+        dispatch(createUser({
+          userName: path.name,
+          userEmail: path.email,
+          userWishes: path.wishes,
+        }));
+        if (path.userId === null) {
+          dispatch(saveUserId({
+            userId: data.id
+          }))
+        }
       } else if (response.status >= 300) {
         isError = true;
       };
@@ -234,6 +241,13 @@ export const saveUser = (path) => {
     };
   };
 };
+
+export const saveUserId = (path) => ({
+  type: SAVE_USER_ID,
+  payload: {
+    userId: path.userId
+  },
+});
 
 export const userCreating = () => ({
   type: USER_CREATING,

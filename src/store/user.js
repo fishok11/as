@@ -2,9 +2,11 @@ import {
   CREATE_USER, 
   ERROR_USER_FETCH,
   USER_CREATING,
+  SAVE_USER_ID,
 } from "../store/actions/actionTypes"
 
 const initialStateUser = {
+  id: null,
   name: "",
   email: "",
   wishes: "",
@@ -20,9 +22,9 @@ export const user = (state = initialStateUser, action) => {
     case CREATE_USER: {
       const userName = action.payload.userName
       const userEmail = action.payload.userEmail
+      const userWishes = action.payload.userWishes
 
       if (userName === "" || userName === "") {
-        console.log(state, 1)
         return {
           ...state,
           error:true,
@@ -32,6 +34,7 @@ export const user = (state = initialStateUser, action) => {
           ...state,
           name: userName,
           email: userEmail,
+          wishes: userWishes,
           step: 2,
           saveUser: true,
           userCreating: false,
@@ -49,6 +52,14 @@ export const user = (state = initialStateUser, action) => {
       return {
         ...state,
         userCreating: true,
+      }
+    }
+    case SAVE_USER_ID: {
+      const userId = action.payload.userId
+      console.log(userId)
+      return {
+        ...state,
+        id: userId,
       }
     }
     default: {

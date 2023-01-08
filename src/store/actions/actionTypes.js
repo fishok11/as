@@ -13,3 +13,4 @@ export const GROUP_CREATING = "GROUP_CREATING"
 export const CREATE_USER = "SAVE_USER";
 export const ERROR_USER_FETCH = "ERROR_USER_FETCH"
 export const USER_CREATING = "USER_CREATING"
+export const SAVE_USER_ID = "SAVE_USER_ID";
