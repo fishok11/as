@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../../store/actions/actions"
 import { useParams } from "react-router-dom";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 const UserForm = () => {
   const [userName, setUserName] = useState("");
@@ -18,42 +21,47 @@ const UserForm = () => {
   };
 
   return (
-    <div className="Group-container Group-container--info">
-      <h2>Регистрация пользователя</h2>
-      <div>
-        <div className="GroupOwner__item">
-          <label>Ваше имя:
-            <input 
-              className="g-input" 
-              placeholder="Введите ваше имя"
-              value={userName}
-              onChange={event => setUserName(event.target.value)}
-            ></input>
-          </label>
-          {stateUser.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
-        </div>
+    <div className="Group-container">
+      <Typography variant="h6">Регистрация пользователя</Typography>
 
-        <div className="GroupOwner__item">
-          <label>Ваш email:
-            <input 
-              className="g-input" 
-              placeholder="Введите ваш email"
-              value={userEmail}
-              onChange={event => setUserEmail(event.target.value)}
-            ></input>
-          </label>
-          {stateUser.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
-        </div>
+      <div className="g-container__form">
+        <TextField 
+          id="outlined-size-small" 
+          label="Введите ваше имя" 
+          variant="outlined"
+          size="small"
+          error={stateUser.error === true}
+          margin="normal"
+          fullWidth
+          value={userName}
+          onChange={event => setUserName(event.target.value)}
+        ></TextField>
 
-        <label className="YourGift-label">Пожелания к подарку (не обязательно)
-          <textarea 
-            className="g-input"
-            value={userWishes}
-            onChange={event => setUserWishes(event.target.value)}
-          ></textarea>
-        </label>
+        <TextField 
+          id="outlined-size-small" 
+          label="Введите ваш email" 
+          variant="outlined"
+          size="small"
+          error={stateUser.error === true}
+          margin="normal"
+          fullWidth
+          value={userEmail}
+          onChange={event => setUserEmail(event.target.value)}
+        ></TextField>
 
-        <button 
+        <TextField 
+        id="outlined-multiline-static"
+        label="Пожелания к подарку (не обязательно)"
+        multiline
+        rows={2}
+        margin="normal"
+        fullWidth
+          value={userWishes}
+          onChange={event => setUserWishes(event.target.value)}
+        ></TextField>
+
+        <Button 
+          variant="contained"
           className="g-button"
           onClick={() => dispatch(saveUser({
             user,
@@ -64,7 +72,7 @@ const UserForm = () => {
           }))}
         >
           OK
-        </button>
+        </Button>
       </div>
     </div>
   )

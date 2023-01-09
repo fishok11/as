@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Typography from '@mui/material/Typography';
 
 const UserData = () => {
   const [groupData, setGroupdata] = useState()
@@ -17,10 +18,10 @@ const UserData = () => {
   return (
     <>
       <div className="Group-container Group-container--info">
-        <h3>{groupData.name}</h3>
+        <Typography variant="subtitle1">{groupData.name}</Typography>
       </div>
       <div className="Group-container Group-container--info">
-        <h3>{groupData.eventDate.budget}₽, Регистрация до {groupData.eventDate.registrationDate}</h3>
+        <Typography variant="subtitle1">{groupData.eventDate.budget}₽, Регистрация до {groupData.eventDate.registrationDate}</Typography>
       </div>
     </>
   )

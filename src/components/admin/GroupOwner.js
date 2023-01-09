@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveGroupOwner, createGroupOwner } from "../../store/actions/actions"
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 const GroupOwner = () => {
 	const state = useSelector(state => state.admin)
@@ -29,52 +32,51 @@ const GroupOwner = () => {
 
 	if (state.groupOwner.edit) {
 		return (
-			<div>
-				<h2>Ваши данные</h2>
-				<div>
-					<div className="GroupOwner__item">
-						<label>Ваше имя:
-							<input 
-								className="g-input" 
-								placeholder="Введите ваше имя"
-								value={groupOwnerName}
-								onChange={event => setOwnerName(event.target.value)}
-							></input>
-						</label>
-						{state.groupOwner.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
-					</div>
+			<div className="g-container__form">
+				<Typography variant="h6">Ваши данные</Typography>
 
-					<div className="GroupOwner--item">
-						<label>Ваш email:
-							<input 
-								className="g-input" 
-								placeholder="Введите ваш email"
-								value={groupOwnerEmail}
-								onChange={event => setOwnerEmail(event.target.value)}
-							></input>
-						</label>
-						{state.groupOwner.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
-					</div>
+				<TextField 
+					id="outlined-size-small" 
+					label="Введите ваше имя" 
+					variant="outlined"
+					size="small"
+					error={state.groupOwner.error === true}
+					margin="normal"
+					fullWidth
+					value={groupOwnerName}
+					onChange={event => setOwnerName(event.target.value)}
+				></TextField>
 
-					<button 
-						className="g-button"
-						onClick={() => (
-							isUpdate === true
-              ? dispatch(saveGroupOwner({
-								group,
-								groupId: state.group.id,
-							})) 
-              : dispatch(createGroupOwner({
-								groupOwner: {
-									name: groupOwnerName, 
-									email: groupOwnerEmail
-								},
-              })
-            ))}
-					>
-						OK
-					</button>
-				</div>
+				<TextField 
+					id="outlined-size-small" 
+					label="Введите ваш email" 
+					variant="outlined"
+					size="small"
+					error={state.groupOwner.error === true}
+					margin="normal"
+					fullWidth
+					value={groupOwnerEmail}
+					onChange={event => setOwnerEmail(event.target.value)}
+				></TextField>
+
+				<Button variant="contained"
+					className="g-button"
+					onClick={() => (
+						isUpdate === true
+						? dispatch(saveGroupOwner({
+							group,
+							groupId: state.group.id,
+						})) 
+						: dispatch(createGroupOwner({
+							groupOwner: {
+								name: groupOwnerName, 
+								email: groupOwnerEmail
+							},
+						})
+					))}
+				>
+					OK
+				</Button>
 			</div>
 		)
 	}

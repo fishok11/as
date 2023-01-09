@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveGroup } from "../../store/actions/actions"
+import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 const YourGift = () => {
   const state = useSelector(state => state.admin)
@@ -39,51 +50,57 @@ const YourGift = () => {
   }; 
   if (state.yourGift.edit) {
     return (
-      <div>
-        <h2>Ваш подарок</h2>
-        <label >Для возраста:
-          <select 
-            className="g-input"
+      <div className="g-container__form">
+        <Typography variant="h6">Ваш подарок</Typography>
+        
+        <FormControl           
+          margin="normal"
+          fullWidth
+          size="small"
+          error={state.yourGift.error === true}
+        >
+          <InputLabel id="demo-select-small">Возраст получателя</InputLabel>
+          <Select 
+            labelId="demo-select-small"
+            id="demo-select-small"
+            label="Возраст получателя"
             value={giftAge}
             onChange={event => setGiftAge(event.target.value)}
           >
-            <option>Не выбрано</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-          </select>
-        </label>
-        {state.yourGift.error === true && (<div className="g-error">Поле не может быть пустым!</div>)}
+            <MenuItem value="8">8</MenuItem>
+            <MenuItem value="9">9</MenuItem>
+            <MenuItem value="10">10</MenuItem>
+            <MenuItem value="11">11</MenuItem>
+          </Select>
+        </FormControl>
+        
+        <FormControl 
+          fullWidth
+          error={state.yourGift.error === true}
+        >
+          <FormLabel id="demo-radio-buttons-group-label">Пол</FormLabel>
+          <RadioGroup 
+            value={giftGender}
+            onChange={event => setGiftGender(event.target.value)}
+          >
+            <FormControlLabel value="Мужской" control={<Radio size="small" sx={{ my: "-5px" }}/>} label="Мужской"/>
+            <FormControlLabel value="Женский" control={<Radio size="small" sx={{ my: "-5px" }}/>} label="Женский" />
+            <FormControlLabel value="Другой" control={<Radio size="small" sx={{ my: "-5px" }}/>} label="Другой"/>
+          </RadioGroup>
+        </FormControl>
 
-        <div 
-          className="YourGift-radio-container"
-          value={giftGender}
-          onChange={event => setGiftGender(event.target.value)}
-        >Пол:
-          <label className="YourGift-radio__item">Мужской
-            <input type="radio" value="Мужской" name="GiftGender"></input>
-          </label>
+        <TextField 
+          id="outlined-multiline-static"
+          label="Пожелания к подарку (не обязательно)"
+          multiline
+          rows={2}
+          margin="normal"
+          fullWidth
+          value={giftWishes}
+          onChange={event => setGiftWishes(event.target.value)}
+        ></TextField>
 
-          <label className="YourGift-radio__item">Женский
-            <input type="radio" value="Женский" name="GiftGender"></input>
-          </label>
-          
-          <label className="YourGift-radio__item">Не важно
-            <input type="radio" value="Не важно" name="GiftGender"></input>
-          </label>
-          {state.yourGift.error === true && (<div className="g-error">Выберите что-то одно!</div>)}
-        </div>
-
-        <label className="YourGift-label">Пожелания к подарку (не обязательно)
-          <textarea 
-            className="g-input"
-            value={giftWishes}
-            onChange={event => setGiftWishes(event.target.value)}
-          ></textarea>
-        </label>
-
-        <button
+        <Button variant="contained"
           className="g-button"
           onClick={() => dispatch(saveGroup({
             group,
@@ -97,7 +114,7 @@ const YourGift = () => {
           }
         >
           OK
-        </button>
+        </Button>
       </div>
     )
   }

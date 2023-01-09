@@ -1,15 +1,19 @@
 import { useDispatch } from "react-redux";
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
-const Step = ({number, action, className}) => {
+const Step = ({number, action}) => {
   const dispatch = useDispatch()
 
   return (
-    <div 
-      className={className}
+    <Button
+      variant="contained"   
+      disableElevation
+      sx={{ borderRadius: '50%', minWidth: 0, width: 35, height: 35, p: '8px'}}
       onClick={() => dispatch({type: action})}
     >
-      {number}
-    </div>
+      <Typography variant="button" >{number}</Typography>
+    </Button>
   )
 };
 

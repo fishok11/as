@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Typography from '@mui/material/Typography';
 
 const GroupDone = () => {
   const state = useSelector(state => state.admin)
 
   return (
-    <div>
-      <h2>Группа готова!!!</h2>
-      <p>Адрес регистрации участников группы:</p>
+    <div className="g-container__form">
+      <Typography variant="h6">Группа готова!!!</Typography>
+      <Typography variant="body2">Адрес регистрации участников группы:</Typography>
       <Link to={`/group/${state.group.id}`} className="g-link">http://localhost:3000/group/{state.group.id}</Link>
-      <p>Отправте эту ссылку всем участникам обмена подарками.</p>    
+      <Typography variant="body2">Отправте эту ссылку всем участникам обмена подарками.</Typography>    
     </div>
   )
 };

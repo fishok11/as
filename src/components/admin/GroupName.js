@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveGroupName, createGroupName } from "../../store/actions/actions"
-
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 const GroupName = () => {
   const state = useSelector(state => state.admin)
@@ -29,18 +31,23 @@ const GroupName = () => {
 
   if (state.group.edit) {
     return ( 
-      <div>
-        <h2>Название вашей группы</h2>
+      <div className="g-container__form">
+        <Typography variant="h6">Название вашей группы</Typography>
         
-        <input
-          className="g-input"
-          placeholder="Введите название вашей группы"
+        <TextField 
+          id="outlined-size-small" 
+          label="Введите название вашей группы" 
+          variant="outlined"
+          size="small"
+          error={state.group.error === true}
+          margin="normal"
+          fullWidth
           value={groupName}
           onChange={event => setGroupName(event.target.value)}
-        ></input>
-        {state.group.error === true && (<div className="g-error">Название группы не может быть пустым!</div>)}
+        ></TextField>
 
-        <button
+        <Button 
+          variant="contained"
           className="g-button"
           onClick={() => (
             isUpdate === true
@@ -55,8 +62,8 @@ const GroupName = () => {
             }))
           )}
         >
-          OK
-        </button>
+         <Typography variant="button" display="block">OK</Typography>
+        </Button>
       </div>
     );
   };

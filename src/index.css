@@ -1,35 +1,40 @@
 body {
   margin: 0;
   font-family: Calibri, sans-serif;
-  color: #111111;
+  color: #575656;
   font-size: 16px;
-  background-color: #54a9ca33;
+  background-color: #E7EBF0;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 :root {
-  --main-blue:#084298;
-  --shadow-ReturnToEdit:  0px 0px 0px 3px #08429896;
+  --main-blue:#1976d2;
+  --shadow-ReturnToEdit:  0px 0px 0px 3px #1976d28a;
   --main-grey:#9c9fa3;
   --main-border-radius: 6px;
   --shadow-input: inset 0 1px 4px #11111145
 }
 h2 {
   text-align: center;
-  margin: 15px 0px;
-  color: var(--main-blue);
+  margin: 10px 0px 0px 0px;
+  box-sizing: border-box;
+  color: #575656;
 }
 h3 {
   text-align: center;
   margin: 0px;
-  color: var(--main-blue);
-}
-input {
-  font-family: Calibri, sans-serif;
+  color: #575656;
 }
 
+.g-container__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 .Group-container {
   width: 312px;
   display: flex;
@@ -37,12 +42,10 @@ input {
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
-  padding: 25px 15px 0px 15px;
+  padding: 15px;
   box-sizing: border-box;
-  border-radius: var(--main-border-radius);
-  border: 1px solid #b6d4fe;
-  background-color: #cfe2ff;
   animation: pop-in 1s forwards;
+  background-color: #ffffff;
 }
 .Group-container--info {
   padding: 5px 15px;
@@ -62,95 +65,19 @@ input {
     opacity: 1;
   }
 }
-.g-input {
-  font-family: Calibri, sans-serif;
-  background-color: #ffffff;
-  box-shadow: var(--shadow-input);
-  font-size: 16px;
-  color: #494949;
-  border: none;
-  outline: none;
-  border-radius: var(--main-border-radius);
-  padding: 10px;
-  display: block;
-  margin: 0 auto;
-  max-width: 280px;
-  width: 280px;
-  box-sizing: border-box;
-}
 .g-button {
-  font-family: Calibri, sans-serif;
   color: #ffffff;
   font-size: 16px;
-  border: none;
-  background-color: var(--main-blue);
-  display: block;
-  margin: 0 auto;
   margin-top: 15px;
-  margin-bottom: 15px;
   padding: 10px;
-  box-sizing: border-box;
-  border-radius: var(--main-border-radius);
-  width: 100px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.g-error {
-  font-size: 14px;
-  color: #c44848;
-  text-align: center;
-}
-.ReturnToEdit__item {
-  font-size: 16px;
-  width: 32px;
-  height: 32px;
-  color: #ffffff;
-  border-radius: 50%;
-  background-color: var(--main-grey);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.3s;
-}
-.edit {
-  box-shadow: var(--shadow-ReturnToEdit);
-}
-.current {
-  background-color: var(--main-blue);
-}
-.current:hover {
-  box-shadow: var(--shadow-ReturnToEdit);
-}
-.EventDate__item {
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.GroupOwner__item {
-  margin-bottom: 15px;
-}
-.YourGift-radio-container {
-  display: flex;
-  flex-direction: column;
-  margin: 15px 0;
-}
-.YourGift-label {
-  display: flex;
-  flex-direction: column;
-}
-.YourGift-radio__item {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
+  /* width: 100px; */
 }
 .ReturnToEdit-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  margin-bottom: 10px;
 }
 .g-link {
   background-color: #ffffff;
@@ -163,4 +90,5 @@ input {
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   box-shadow: var(--shadow-input);
   font-size: 13px;
+  margin: 15px 0;
 }
