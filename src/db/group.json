@@ -1,6 +1,32 @@
 {
   "group": [
+    {
+      "name": "v",
+      "eventDate": {
+        "budget": "v",
+        "registrationDate": "09/01/2023",
+        "drawDate": "09/01/2023",
+        "exchangeDate": "09/01/2023"
+      },
+      "groupOwner": {
+        "name": "v",
+        "email": "v"
+      },
+      "yourGift": {
+        "age": "10",
+        "gender": "Женский",
+        "wishes": ""
+      },
+      "id": 1
+    }
   ],
   "users": [
+    {
+      "groupId": 1,
+      "name": "v",
+      "email": "s",
+      "wishes": "",
+      "id": 1
+    }
   ]
 }
