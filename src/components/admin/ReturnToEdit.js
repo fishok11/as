@@ -13,10 +13,10 @@ import RedeemIcon from '@mui/icons-material/Redeem';
 const ReturnToEdit = () => {
   return (
     <div className="ReturnToEdit-container">
-      <Step ico={<PeopleIcon />} action={RETURN_CREATE_GROUP_NAME}/>
-      <Step ico={<CalendarMonthIcon />} action={RETURN_CREATE_EVENT_DATE}/>
-      <Step ico={<PersonIcon />} action={RETURN_CREATE_GROUP_OWNER}/>
-      <Step ico={<RedeemIcon />} action={RETURN_CREATE_YOUR_GIFT}/>
+      <Step ico={<PeopleIcon />} action={RETURN_CREATE_GROUP_NAME} step='1'/>
+      <Step ico={<CalendarMonthIcon />} action={RETURN_CREATE_EVENT_DATE} step='2'/>
+      <Step ico={<PersonIcon />} action={RETURN_CREATE_GROUP_OWNER} step='3'/>
+      <Step ico={<RedeemIcon />} action={RETURN_CREATE_YOUR_GIFT} step='4'/>
     </div>
   )
 }

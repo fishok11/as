@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Input from '../Input'
 
 const UserForm = () => {
   const [userName, setUserName] = useState("");
@@ -25,37 +26,27 @@ const UserForm = () => {
       <Typography variant="h6">Регистрация пользователя</Typography>
 
       <div className="g-container__form">
-        <TextField 
-          id="outlined-size-small" 
+        <Input 
           label="Введите ваше имя" 
-          variant="outlined"
-          size="small"
           error={stateUser.error === true}
-          margin="normal"
-          fullWidth
           value={userName}
           onChange={event => setUserName(event.target.value)}
-        ></TextField>
+        ></Input>
 
-        <TextField 
-          id="outlined-size-small" 
+        <Input 
           label="Введите ваш email" 
-          variant="outlined"
-          size="small"
           error={stateUser.error === true}
-          margin="normal"
-          fullWidth
           value={userEmail}
           onChange={event => setUserEmail(event.target.value)}
-        ></TextField>
+        ></Input>
 
         <TextField 
-        id="outlined-multiline-static"
-        label="Пожелания к подарку (не обязательно)"
-        multiline
-        rows={2}
-        margin="normal"
-        fullWidth
+          id="outlined-multiline-static"
+          label="Пожелания к подарку (не обязательно)"
+          multiline
+          rows={2}
+          margin="normal"
+          fullWidth
           value={userWishes}
           onChange={event => setUserWishes(event.target.value)}
         ></TextField>

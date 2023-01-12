@@ -9,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import Typography from '@mui/material/Typography';
+import Input from '../Input'
 
 const EventDate = () => {
   const state = useSelector(state => state.admin)
@@ -42,45 +43,40 @@ const EventDate = () => {
       <div className="g-container__form">
         <Typography variant="h6">Регистрация участников</Typography>
         
-        <TextField 
-          id="outlined-size-small" 
+        <Input 
           label="Бюджет" 
-          variant="outlined"
-          size="small"
           error={state.eventDate.error === true}
-          margin="normal"
-          fullWidth
           value={budget}
           onChange={event => setBudget(event.target.value)}
-        ></TextField>
+        ></Input>
 
-        <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth>
+        <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth adapterLocale="ru">
           <Stack sx={{ width: '100%' }}>
             <DesktopDatePicker 
               label="Регистрация участников до"
               disableMaskedInput
-              inputFormat="MM/DD/YYYY"
+              inputFormat="DD/MM/YYYY"
               renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
               value={registrationDate}
-              onChange={event => setRegistrationDate(event.target.value)}
+              onChange={newValue => setRegistrationDate(newValue)}
             ></DesktopDatePicker>
 
             <DesktopDatePicker 
               label="Выбор получателей подарков до"
               disableMaskedInput
-              inputFormat="MM/DD/YYYY"
+              inputFormat="DD/MM/YYYY"
               renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
               value={drawDate}
-              onChange={event => setDrawDate(event.target.value)}
+              onChange={newValue => setDrawDate(newValue)}
             ></DesktopDatePicker>
           
             <DesktopDatePicker 
               label="Обмен подарками"
               disableMaskedInput
-              inputFormat="MM/DD/YYYY"
+              inputFormat="DD/MM/YYYY"
               renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
               value={exchangeDate}
-              onChange={event => setExchangeDate(event.target.value)}
+              onChange={newValue => setExchangeDate(newValue)}
             ></DesktopDatePicker>
           </Stack>
         </LocalizationProvider>
@@ -96,9 +92,9 @@ const EventDate = () => {
             : dispatch(createEventDate({
               eventDate: {
                 budget: budget, 
-                registrationDate: registrationDate, 
-                drawDate: drawDate, 
-                exchangeDate: exchangeDate,
+                registrationDate: dayjs(registrationDate).format('DD/MM/YYYY'), 
+                drawDate: dayjs(drawDate).format('DD/MM/YYYY'), 
+                exchangeDate: dayjs(exchangeDate).format('DD/MM/YYYY'),
               },
               groupId: state.group.id,
             })

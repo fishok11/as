@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveGroupOwner, createGroupOwner } from "../../store/actions/actions"
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Input from '../Input'
 
 const GroupOwner = () => {
 	const state = useSelector(state => state.admin)
@@ -35,29 +35,19 @@ const GroupOwner = () => {
 			<div className="g-container__form">
 				<Typography variant="h6">Ваши данные</Typography>
 
-				<TextField 
-					id="outlined-size-small" 
+				<Input 
 					label="Введите ваше имя" 
-					variant="outlined"
-					size="small"
 					error={state.groupOwner.error === true}
-					margin="normal"
-					fullWidth
 					value={groupOwnerName}
 					onChange={event => setOwnerName(event.target.value)}
-				></TextField>
+				></Input>
 
-				<TextField 
-					id="outlined-size-small" 
+				<Input 
 					label="Введите ваш email" 
-					variant="outlined"
-					size="small"
 					error={state.groupOwner.error === true}
-					margin="normal"
-					fullWidth
 					value={groupOwnerEmail}
 					onChange={event => setOwnerEmail(event.target.value)}
-				></TextField>
+				></Input>
 
 				<Button variant="contained"
 					className="g-button"

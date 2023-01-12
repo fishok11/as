@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveGroupName, createGroupName } from "../../store/actions/actions"
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Input from '../Input'
 
 const GroupName = () => {
   const state = useSelector(state => state.admin)
@@ -34,17 +34,12 @@ const GroupName = () => {
       <div className="g-container__form">
         <Typography variant="h6">Название вашей группы</Typography>
         
-        <TextField 
-          id="outlined-size-small" 
+        <Input 
           label="Введите название вашей группы" 
-          variant="outlined"
-          size="small"
           error={state.group.error === true}
-          margin="normal"
-          fullWidth
           value={groupName}
           onChange={event => setGroupName(event.target.value)}
-        ></TextField>
+        ></Input>
 
         <Button 
           variant="contained"
