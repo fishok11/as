@@ -37,7 +37,8 @@ const YourGift = () => {
       wishes: giftWishes,
     },
   };
-  
+  const allAge = [5, 6 ,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]  
+
   if (state.errorFetch === true) {
     return (
       <p className="g-error">Error</p>
@@ -66,11 +67,11 @@ const YourGift = () => {
             label="Возраст получателя"
             value={giftAge}
             onChange={event => setGiftAge(event.target.value)}
+            
           >
-            <MenuItem value="8">8</MenuItem>
-            <MenuItem value="9">9</MenuItem>
-            <MenuItem value="10">10</MenuItem>
-            <MenuItem value="11">11</MenuItem>
+            {allAge.map(age => 
+              <MenuItem key={age} value={age} >{age}</MenuItem> 
+            )}
           </Select>
         </FormControl>
         
@@ -83,9 +84,9 @@ const YourGift = () => {
             value={giftGender}
             onChange={event => setGiftGender(event.target.value)}
           >
-            <FormControlLabel value="Мужской" control={<Radio size="small" sx={{ my: "-5px" }}/>} label="Мужской"/>
-            <FormControlLabel value="Женский" control={<Radio size="small" sx={{ my: "-5px" }}/>} label="Женский" />
-            <FormControlLabel value="Другой" control={<Radio size="small" sx={{ my: "-5px" }}/>} label="Другой"/>
+            <FormControlLabel value="мужского" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Мужской"/>
+            <FormControlLabel value="женского" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Женский" />
+            <FormControlLabel value="другого" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Другой"/>
           </RadioGroup>
         </FormControl>
 
@@ -104,11 +105,6 @@ const YourGift = () => {
           className="g-button"
           onClick={() => dispatch(saveGroup({
             group,
-            yourGift: {
-              age: giftAge, 
-              gender: giftGender, 
-              wishes: giftWishes
-            },
             groupId: state.group.id,
           }))
           }

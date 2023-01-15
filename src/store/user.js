@@ -56,7 +56,7 @@ export const user = (state = initialStateUser, action) => {
     }
     case SAVE_USER_ID: {
       const userId = action.payload.userId
-      console.log(userId)
+
       return {
         ...state,
         id: userId,

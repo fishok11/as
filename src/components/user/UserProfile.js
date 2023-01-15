@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 
 const UserProfile = () => {
-  const [groupData, setGroupdata] = useState()
-  const [userData, setUserdata] = useState()
+  const [groupData, setGroupdata] = useState();
+  const [userData, setUserdata] = useState();
   const {id} = useParams();
   const {userId} = useParams();
 
@@ -12,17 +12,17 @@ const UserProfile = () => {
     fetch('http://localhost:3002/group/' + id)
     .then(res => res.json())
     .then(data => setGroupdata(data))
-  }, [id])
+  }, [id]);
 
   useEffect(() => {
     fetch('http://localhost:3002/users/' + userId)
     .then(res => res.json())
     .then(data => setUserdata(data))
-  }, [userId])
+  }, [userId]);
 
   if (groupData === undefined) {
     return null
-  } 
+  }
   if (userData === undefined) {
     return null
   } 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveGroupName, createGroupName } from "../../store/actions/actions"
+import { saveGroupName } from "../../store/actions/actions"
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Input from '../Input'
@@ -27,7 +27,6 @@ const GroupName = () => {
       wishes: state.yourGift.wishes,
     },
   };
-  const isUpdate = Boolean(state.group.id);
 
   if (state.group.edit) {
     return ( 
@@ -45,16 +44,10 @@ const GroupName = () => {
           variant="contained"
           className="g-button"
           onClick={() => (
-            isUpdate === true
-              ? dispatch(saveGroupName({
-                  group ,
-                  groupId: state.group.id,
-                })) 
-              : dispatch(createGroupName({
-                group: {
-                  name: groupName
-                },
-            }))
+            dispatch(saveGroupName({
+              group ,
+              groupId: state.group.id,
+            })) 
           )}
         >
          <Typography variant="button" display="block">OK</Typography>

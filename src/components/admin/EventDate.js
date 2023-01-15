@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveEventDate, createEventDate } from "../../store/actions/actions"
+import { saveEventDate } from "../../store/actions/actions"
 import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
 import Stack from '@mui/material/Stack';
@@ -15,16 +15,16 @@ const EventDate = () => {
   const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
   const [budget, setBudget] = useState(state.eventDate.budget)
-  const [registrationDate, setRegistrationDate] = useState(dayjs().format('DD/MM/YYYY'))
-  const [drawDate, setDrawDate] = useState(dayjs().format('DD/MM/YYYY'))
-  const [exchangeDate, setExchangeDate] = useState(dayjs().format('DD/MM/YYYY'))
+  const [registrationDate, setRegistrationDate] = useState(dayjs())
+  const [drawDate, setDrawDate] = useState(dayjs())
+  const [exchangeDate, setExchangeDate] = useState(dayjs())
   let group = {
     name: state.group.name,
     eventDate: {
       budget: budget,
-      registrationDate: registrationDate,
-      drawDate: drawDate,
-      exchangeDate: exchangeDate,
+      registrationDate: dayjs(registrationDate).format('DD/MM/YYYY'),
+      drawDate: dayjs(drawDate).format('DD/MM/YYYY'),
+      exchangeDate: dayjs(exchangeDate).format('DD/MM/YYYY'),
     },
     groupOwner: {
       name: state.groupOwner.name,
@@ -36,7 +36,6 @@ const EventDate = () => {
       wishes: state.yourGift.wishes,
     },
   }
-  const isUpdate = Boolean(state.group.id);
 
   if (state.eventDate.edit) {
     return (
@@ -84,21 +83,11 @@ const EventDate = () => {
         <Button variant="contained"
           className="g-button"
           onClick={() => (
-            isUpdate === true
-            ? dispatch(saveEventDate({
-                group,
-                groupId: state.group.id,
-              })) 
-            : dispatch(createEventDate({
-              eventDate: {
-                budget: budget, 
-                registrationDate: dayjs(registrationDate).format('DD/MM/YYYY'), 
-                drawDate: dayjs(drawDate).format('DD/MM/YYYY'), 
-                exchangeDate: dayjs(exchangeDate).format('DD/MM/YYYY'),
-              },
+            dispatch(saveEventDate({
+              group,
               groupId: state.group.id,
-            })
-          ))}
+            })) 
+          )}
         >
           OK
         </Button>

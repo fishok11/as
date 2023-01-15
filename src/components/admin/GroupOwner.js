@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveGroupOwner, createGroupOwner } from "../../store/actions/actions"
+import { saveGroupOwner } from "../../store/actions/actions"
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Input from '../Input'
@@ -28,7 +28,6 @@ const GroupOwner = () => {
       wishes: state.yourGift.wishes,
     },
   };
-  const isUpdate = Boolean(state.group.id);
 
 	if (state.groupOwner.edit) {
 		return (
@@ -52,18 +51,11 @@ const GroupOwner = () => {
 				<Button variant="contained"
 					className="g-button"
 					onClick={() => (
-						isUpdate === true
-						? dispatch(saveGroupOwner({
+						dispatch(saveGroupOwner({
 							group,
 							groupId: state.group.id,
 						})) 
-						: dispatch(createGroupOwner({
-							groupOwner: {
-								name: groupOwnerName, 
-								email: groupOwnerEmail
-							},
-						})
-					))}
+					)}
 				>
 					OK
 				</Button>

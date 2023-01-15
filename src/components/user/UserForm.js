@@ -56,9 +56,6 @@ const UserForm = () => {
           className="g-button"
           onClick={() => dispatch(saveUser({
             user,
-            name: userName,
-            email: userEmail,  
-            wishes: userWishes,
             userId: stateUser.id,
           }))}
         >

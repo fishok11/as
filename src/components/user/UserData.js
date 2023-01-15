@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 
 const UserData = () => {
-  const [groupData, setGroupdata] = useState()
+  const [groupData, setGroupdata] = useState();
   const {id} = useParams();
 
   useEffect(() => {

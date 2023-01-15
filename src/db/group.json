@@ -1,24 +1,6 @@
 {
   "group": [
-    {
-      "name": "v",
-      "eventDate": {
-        "budget": "v",
-        "registrationDate": "01/12/2023",
-        "drawDate": "01/12/2023",
-        "exchangeDate": "01/12/2023"
-      },
-      "groupOwner": {
-        "name": "v",
-        "email": "v"
-      },
-      "yourGift": {
-        "age": "9",
-        "gender": "Женский",
-        "wishes": "c"
-      },
-      "id": 1
-    }
   ],
-  "users": []
+  "users": [
+  ]
 }

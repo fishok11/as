@@ -16,7 +16,7 @@ const GroupData = () => {
         <Typography variant="subtitle1">{state.groupOwner.name}, {state.groupOwner.email}</Typography> 
       </div>)} 
       {state.step > 4 && (<div className="Group-container Group-container--info">
-        <Typography variant="subtitle1">{state.yourGift.gender} {state.yourGift.age} лет</Typography>
+        <Typography variant="subtitle1">Подарок для {state.yourGift.gender} пола {state.yourGift.age} лет</Typography>
       </div>)}
     </div>
   )
