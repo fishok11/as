@@ -9,7 +9,8 @@ import {
   CREATE_USER, 
   ERROR_USER_FETCH,
   USER_CREATING,
-  SAVE_USER_ID
+  SAVE_USER_ID,
+  CREATE_USER_GIFT
 } from "./actionTypes"
 
 
@@ -237,40 +238,37 @@ export const adminError = () => ({
 export const createUser = (path) => ({
   type: CREATE_USER,
   payload: {
-    userName: path.userName,
-    userEmail: path.userEmail,
-    userWishes: path.userWishes,
+    userData: path.userData
   }
 });
 
-export const saveUser = (path) => {
+export const createUserGift = (path) => ({
+  type: CREATE_USER_GIFT,
+  payload: {
+    userGift: path.userGift
+  }
+});
+
+export const saveUserData = (path) => {
   let isError = false;
   const isUpdate = Boolean(path.userId)
   
-  if (path.user.name !== "" && path.user.email !== "") {
+  if (path.user.userData.name !== "" && path.user.userData.email !== "" && isUpdate === true) {
     return async (dispatch) => {
       try {
         dispatch(userCreating())
-        const response = await fetch(isUpdate === true ? 'http://localhost:3002/users' + path.userId : 'http://localhost:3002/users', {
-          method: isUpdate ? 'PUT' :'POST',
+        const response = await fetch('http://localhost:3002/users/' + path.userId, {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json;charset=utf-8'
           },
           body: JSON.stringify(path.user)
         })
-        const data = await response.json()
   
         if (response.status < 300) {
           dispatch(createUser({
-            userName: path.user.name,
-            userEmail: path.user.email,
-            userWishes: path.user.wishes,
+            userData: path.user.userData
           }));
-          if (path.userId === null) {
-            dispatch(saveUserId({
-              userId: data.id
-            }))
-          }
         } else if (response.status >= 300) {
           isError = true;
         };
@@ -284,9 +282,57 @@ export const saveUser = (path) => {
   } else {
     return async (dispatch) => {
       dispatch(createUser({
-        userName: path.user.name,
-        userEmail: path.user.email,
-        userWishes: path.user.wishes,
+        userData: path.user.userData
+      }));
+    };
+  };
+};
+
+export const saveUserGift = (path) => {
+  let isError = false;
+  const isUpdate = Boolean(path.userId)
+  
+  if (path.user.userGift.age !== "" && path.user.userGift.gender !== "") {
+    return async (dispatch) => {
+      try {
+        dispatch(userCreating())
+        const response = await fetch(isUpdate ===  true ? 'http://localhost:3002/users/' + path.userId : 'http://localhost:3002/users', {
+          method: isUpdate ===  true ? 'PUT' : 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(path.user)
+        })
+        const data = await response.json()
+  
+        if (response.status < 300) {
+          dispatch(createUserGift({
+            userGift: path.user.userGift
+          }));
+          if (path.userId === null) {
+            dispatch(saveUserId({
+              userData: {
+                userId: data.id
+              },
+            }))
+            console.log(
+             data.id
+            )
+          }
+        } else if (response.status >= 300) {
+          isError = true;
+        };
+      } catch (error) {
+        isError = true;
+      };
+      if (isError === true) {
+        dispatch(userError());
+      };
+    };
+  } else {
+    return async (dispatch) => {
+      dispatch(createUserGift({
+        userGift: path.user.userGift
       }));
     };
   };
@@ -295,7 +341,7 @@ export const saveUser = (path) => {
 export const saveUserId = (path) => ({
   type: SAVE_USER_ID,
   payload: {
-    userId: path.userId
+    userData: path.userData
   },
 });
 

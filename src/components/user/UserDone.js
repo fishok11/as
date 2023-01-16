@@ -10,10 +10,10 @@ const UserDone = () => {
   const {id} = useParams();
 
   useEffect(() => {
-    fetch('http://localhost:3002/users/' + state.id)
+    fetch('http://localhost:3002/users/' + state.userData.id)
     .then(res => res.json())
     .then(data => setUserdata(data))
-  }, [state.id])
+  }, [state.userData.id])
 
   if (userData === undefined) {
     return null
@@ -28,16 +28,15 @@ const UserDone = () => {
       <p>Данные загружается...</p>
     )
   }; 
-
   return (
     <>
       <div className="Group-container Group-container--info">
-        <Typography variant="subtitle1">{userData.name}, {userData.email}</Typography> 
+        <Typography variant="subtitle1">{userData.userData.name}, {userData.userData.email}</Typography> 
       </div>
       <div className="Group-container">
         <Typography variant="h6">Готово!</Typography>
         <Typography variant="body2">Ссылка на ваш профиль:</Typography>
-        <Link to={`/group/${id}/user-profile/${state.id}`} className="g-link">http://localhost:3000/group/{id}/user-profile/{state.id}</Link>
+        <Link to={`/group/${id}/user-profile/${state.userData.id}`} className="g-link">http://localhost:3000/group/{id}/user-profile/{state.userData.id}</Link>
         <Typography variant="body2">Не потеряйте ее.</Typography>
       </div>
     </>

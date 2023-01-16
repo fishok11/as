@@ -10,7 +10,8 @@ export const SAVE_ID = "SAVE_ID";
 export const ERROR_ADMIN_FETCH = "ERROR_ADMIN_FETCH"
 export const GROUP_CREATING = "GROUP_CREATING"
 
-export const CREATE_USER = "SAVE_USER";
+export const CREATE_USER = "CREATE_USER";
+export const CREATE_USER_GIFT = "CREATE_USER_GIFT";
 export const ERROR_USER_FETCH = "ERROR_USER_FETCH"
 export const USER_CREATING = "USER_CREATING"
 export const SAVE_USER_ID = "SAVE_USER_ID";
