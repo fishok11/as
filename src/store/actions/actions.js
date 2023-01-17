@@ -47,7 +47,7 @@ export const saveGroupName = (path) => {
   const groupUpdate = path.group;
   const isUpdate = Boolean(path.groupId);
 
-  if (path.group.name !== "" && isUpdate === true) {
+  if (path.group.name !=="" && isUpdate === true) {
     return async(dispatch) => {
       try {
         dispatch(groupCreating())
@@ -88,10 +88,10 @@ export const saveEventDate = (path) => {
   const groupUpdate = path.group
   const isUpdate = Boolean(path.groupId);
 
-  if (path.group.eventDate.budget !== "" && 
-    path.group.eventDate.budget !== "" && 
-    path.group.eventDate.budget !== "" && 
-    path.group.eventDate.budget !== "" &&
+  if (path.group.eventDate.budget !=="" && 
+    path.group.eventDate.budget !=="" && 
+    path.group.eventDate.budget !=="" && 
+    path.group.eventDate.budget !=="" &&
     isUpdate === true) {
       return async(dispatch) => {
         try {
@@ -175,7 +175,7 @@ export const saveGroup = (path) => {
   let isError = false;
   const isUpdate = Boolean(path.groupId)
 
-  if (path.group.yourGift.age !== "" && path.group.yourGift.gender !== "") {
+  if (path.group.yourGift.age !=="" && path.group.yourGift.gender !=="") {
     return async(dispatch) => {
       try {
         dispatch(groupCreating())
@@ -252,8 +252,9 @@ export const createUserGift = (path) => ({
 export const saveUserData = (path) => {
   let isError = false;
   const isUpdate = Boolean(path.userId)
-  
-  if (path.user.userData.name !== "" && path.user.userData.email !== "" && isUpdate === true) {
+  const userUpdate = path.user
+
+  if (path.user.userData.name !=="" && path.user.userData.email !=="" && isUpdate === true) {
     return async (dispatch) => {
       try {
         dispatch(userCreating())
@@ -262,7 +263,7 @@ export const saveUserData = (path) => {
           headers: {
             'Content-Type': 'application/json;charset=utf-8'
           },
-          body: JSON.stringify(path.user)
+          body: JSON.stringify(userUpdate)
         })
   
         if (response.status < 300) {
@@ -315,9 +316,6 @@ export const saveUserGift = (path) => {
                 userId: data.id
               },
             }))
-            console.log(
-             data.id
-            )
           }
         } else if (response.status >= 300) {
           isError = true;

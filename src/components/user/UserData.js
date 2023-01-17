@@ -7,9 +7,9 @@ import Typography from '@mui/material/Typography';
 import Input from '../Input'
 
 const UserData = () => {
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
   const state = useSelector(state => state.user);
+  const [userName, setUserName] = useState(state.userData.name);
+  const [userEmail, setUserEmail] = useState(state.userData.email);
   const dispatch = useDispatch()
   const {id} = useParams();
   let user = {
@@ -26,7 +26,7 @@ const UserData = () => {
   };
 
   return (
-    <div className="Group-container">
+    <>
       <Typography variant="h6">Регистрация пользователя</Typography>
 
       <div className="g-container__form">
@@ -49,13 +49,13 @@ const UserData = () => {
           className="g-button"
           onClick={() => dispatch(saveUserData({
             user,
-            userId: state.id,
+            userId: state.userData.id,
           }))}
         >
           OK
         </Button>
       </div>
-    </div>
+    </>
   )
 };
 

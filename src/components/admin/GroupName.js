@@ -28,33 +28,31 @@ const GroupName = () => {
     },
   };
 
-  if (state.group.edit) {
-    return ( 
-      <div className="g-container__form">
-        <Typography variant="h6">Название вашей группы</Typography>
-        
-        <Input 
-          label="Введите название вашей группы" 
-          error={state.group.error === true}
-          value={groupName}
-          onChange={event => setGroupName(event.target.value)}
-        ></Input>
+  return ( 
+    <div className="g-container__form">
+      <Typography variant="h6">Название вашей группы</Typography>
+      
+      <Input 
+        label="Введите название вашей группы" 
+        error={state.group.error === true}
+        value={groupName}
+        onChange={event => setGroupName(event.target.value)}
+      ></Input>
 
-        <Button 
-          variant="contained"
-          className="g-button"
-          onClick={() => (
-            dispatch(saveGroupName({
-              group ,
-              groupId: state.group.id,
-            })) 
-          )}
-        >
-         <Typography variant="button" display="block">OK</Typography>
-        </Button>
-      </div>
-    );
-  };
+      <Button 
+        variant="contained"
+        className="g-button"
+        onClick={() => (
+          dispatch(saveGroupName({
+            group ,
+            groupId: state.group.id,
+          })) 
+        )}
+      >
+        <Typography variant="button" display="block">OK</Typography>
+      </Button>
+    </div>
+  );
 };
 
 export default GroupName;

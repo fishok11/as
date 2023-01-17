@@ -4,6 +4,8 @@ import {
   USER_CREATING,
   SAVE_USER_ID,
   CREATE_USER_GIFT,
+  RETURN_CREATE_USER,
+  RETURN_CREATE_USER_GIFT,
 } from "../store/actions/actionTypes"
 
 const initialStateUser = {
@@ -12,14 +14,15 @@ const initialStateUser = {
     name: "",
     email: "",
     error: false,
+    edit: true,
   },
   userGift: {
     age: "",
     gender: "",
     wishes: "",
     error: false,
+    edit: false,
   },
-  saveUser: false,
   step: 1,
   errorFetch: false,
   userCreating: false,
@@ -39,6 +42,37 @@ export const user = (state = initialStateUser, action) => {
             error: true,
           },
         }
+      } else if (state.step > 1) {
+        if (state.step === 2) {
+          return {
+            ...state,
+            userData: {
+              ...state.userData,
+              name: userName,
+              email: userEmail,
+              edit: false,
+            },
+            userGift: {
+              ...state.userGift,
+              edit: true,
+            },
+            errorFetch: false,
+            userCreating: false,
+          }
+        }
+        if (state.step === 3) {
+          return {
+            ...state,
+            userData: {
+              ...state.userData,
+              name: userName,
+              email: userEmail,
+              edit: false,
+            },
+            errorFetch: false,
+            userCreating: false,
+          }
+        }
       } else {
         return {
           ...state,
@@ -47,9 +81,13 @@ export const user = (state = initialStateUser, action) => {
             name: userName,
             email: userEmail,
             error: false,
+            edit: false,
+          },
+          userGift: {
+            edit: true,
           },
           step: 2,
-          saveUser: true,
+          errorFetch: false,
           userCreating: false,
         }
       }
@@ -71,14 +109,41 @@ export const user = (state = initialStateUser, action) => {
         return {
           ...state,
           userGift: {
+            ...state.userGift,  
             age: userAge,
             gender: userGender,
             wishes: userWishes,
+            edit: false,
           },
           step: 3,
-          saveUser: true,
           userCreating: false,
         }
+      }
+    }
+    case RETURN_CREATE_USER: {
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          edit: true,
+        },
+        userGift: {
+          ...state.userGift,
+          edit: false,
+        },
+      }
+    }
+    case RETURN_CREATE_USER_GIFT: {
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          edit: false,
+        },
+        userGift: {
+          ...state.userGift,
+          edit: true,
+        },
       }
     }
     case ERROR_USER_FETCH: {
@@ -96,7 +161,6 @@ export const user = (state = initialStateUser, action) => {
     }
     case SAVE_USER_ID: {
       const userId = action.payload.userData.userId
-      console.log(userId)
 
       return {
         ...state,

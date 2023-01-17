@@ -37,63 +37,61 @@ const EventDate = () => {
     },
   }
 
-  if (state.eventDate.edit) {
-    return (
-      <div className="g-container__form">
-        <Typography variant="h6">Регистрация участников</Typography>
+  return (
+    <div className="g-container__form">
+      <Typography variant="h6">Регистрация участников</Typography>
+      
+      <Input 
+        label="Бюджет" 
+        error={state.eventDate.error === true}
+        value={budget}
+        onChange={event => setBudget(event.target.value)}
+      ></Input>
+
+      <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth adapterLocale="ru">
+        <Stack sx={{ width: '100%' }}>
+          <DesktopDatePicker 
+            label="Регистрация участников до"
+            disableMaskedInput
+            inputFormat="DD/MM/YYYY"
+            renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
+            value={registrationDate}
+            onChange={newValue => setRegistrationDate(newValue)}
+          ></DesktopDatePicker>
+
+          <DesktopDatePicker 
+            label="Выбор получателей подарков до"
+            disableMaskedInput
+            inputFormat="DD/MM/YYYY"
+            renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
+            value={drawDate}
+            onChange={newValue => setDrawDate(newValue)}
+          ></DesktopDatePicker>
         
-        <Input 
-          label="Бюджет" 
-          error={state.eventDate.error === true}
-          value={budget}
-          onChange={event => setBudget(event.target.value)}
-        ></Input>
+          <DesktopDatePicker 
+            label="Обмен подарками"
+            disableMaskedInput
+            inputFormat="DD/MM/YYYY"
+            renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
+            value={exchangeDate}
+            onChange={newValue => setExchangeDate(newValue)}
+          ></DesktopDatePicker>
+        </Stack>
+      </LocalizationProvider>
 
-        <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth adapterLocale="ru">
-          <Stack sx={{ width: '100%' }}>
-            <DesktopDatePicker 
-              label="Регистрация участников до"
-              disableMaskedInput
-              inputFormat="DD/MM/YYYY"
-              renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
-              value={registrationDate}
-              onChange={newValue => setRegistrationDate(newValue)}
-            ></DesktopDatePicker>
-
-            <DesktopDatePicker 
-              label="Выбор получателей подарков до"
-              disableMaskedInput
-              inputFormat="DD/MM/YYYY"
-              renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
-              value={drawDate}
-              onChange={newValue => setDrawDate(newValue)}
-            ></DesktopDatePicker>
-          
-            <DesktopDatePicker 
-              label="Обмен подарками"
-              disableMaskedInput
-              inputFormat="DD/MM/YYYY"
-              renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
-              value={exchangeDate}
-              onChange={newValue => setExchangeDate(newValue)}
-            ></DesktopDatePicker>
-          </Stack>
-        </LocalizationProvider>
-  
-        <Button variant="contained"
-          className="g-button"
-          onClick={() => (
-            dispatch(saveEventDate({
-              group,
-              groupId: state.group.id,
-            })) 
-          )}
-        >
-          OK
-        </Button>
-      </div>
-    )
-  }
+      <Button variant="contained"
+        className="g-button"
+        onClick={() => (
+          dispatch(saveEventDate({
+            group,
+            groupId: state.group.id,
+          })) 
+        )}
+      >
+        OK
+      </Button>
+    </div>
+  )
 };
 
 export default EventDate;

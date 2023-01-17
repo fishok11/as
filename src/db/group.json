@@ -1,23 +1,42 @@
 {
   "group": [
     {
-      "name": "v",
+      "name": "vvsdvsdv",
       "eventDate": {
-        "budget": "v",
-        "registrationDate": "16/01/2023",
-        "drawDate": "16/01/2023",
-        "exchangeDate": "16/01/2023"
+        "budget": "vvsdvsv",
+        "registrationDate": "17/01/2023",
+        "drawDate": "17/01/2023",
+        "exchangeDate": "17/01/2023"
       },
       "groupOwner": {
-        "name": "v",
-        "email": "v"
+        "name": "vvsdvs",
+        "email": "vvsdvsdv"
       },
       "yourGift": {
-        "age": 11,
+        "age": 14,
         "gender": "женского",
-        "wishes": "v"
+        "wishes": "vvsdvsdv"
       },
       "id": 1
+    },
+    {
+      "name": "Group",
+      "eventDate": {
+        "budget": "2000",
+        "registrationDate": "17/01/2023",
+        "drawDate": "17/01/2023",
+        "exchangeDate": "17/01/2023"
+      },
+      "groupOwner": {
+        "name": "Seva",
+        "email": "svllsd812@gmail.com"
+      },
+      "yourGift": {
+        "age": 20,
+        "gender": "мужского",
+        "wishes": ""
+      },
+      "id": 2
     }
   ],
   "users": [
@@ -28,11 +47,23 @@
         "email": "v"
       },
       "userGift": {
-        "age": 10,
+        "age": 12,
         "gender": "женского",
-        "wishes": "v"
+        "wishes": "c"
       },
       "id": 1
+    },
+    {
+      "groupId": 2,
+      "userData": {
+        "name": "Danya",
+        "email": "svllsd811@gmail.com"
+      },
+      "userGift": {
+        "age": 20,
+        "gender": "мужского"
+      },
+      "id": 2
     }
   ]
 }

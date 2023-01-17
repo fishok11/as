@@ -3,7 +3,7 @@ import GroupOwner from "./GroupOwner"
 import GroupName from "./GroupName"
 import YourGift from "./YourGift";
 import GroupDone from "./GroupDone";
-import ReturnToEdit from "./ReturnToEdit";
+import EditGroup from "./EditGroup";
 import { useSelector } from "react-redux";
 
 const GroupAdminForm = () => {
@@ -11,11 +11,11 @@ const GroupAdminForm = () => {
 
   return (
     <div className="Group-container">
-    <ReturnToEdit/>
-    {state.step >= 1 && (<GroupName/>)}
-    {state.step >= 2 && (<EventDate/>)}
-    {state.step >= 3 && (<GroupOwner/>)}
-    {state.step >= 4 && (<YourGift/>)}
+    <EditGroup/>
+    {(state.step >= 1 && state.group.edit) && (<GroupName/>)}
+    {(state.step >= 2 && state.eventDate.edit) && (<EventDate/>)}
+    {(state.step >= 3 && state.groupOwner.edit) && (<GroupOwner/>)}
+    {(state.step >= 4 && state.yourGift.edit) && (<YourGift/>)}
     {
       state.step >= 5 &&
       state.group.edit === false &&

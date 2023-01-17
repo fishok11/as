@@ -29,39 +29,37 @@ const GroupOwner = () => {
     },
   };
 
-	if (state.groupOwner.edit) {
-		return (
-			<div className="g-container__form">
-				<Typography variant="h6">Ваши данные</Typography>
+	return (
+		<div className="g-container__form">
+			<Typography variant="h6">Ваши данные</Typography>
 
-				<Input 
-					label="Введите ваше имя" 
-					error={state.groupOwner.error === true}
-					value={groupOwnerName}
-					onChange={event => setOwnerName(event.target.value)}
-				></Input>
+			<Input 
+				label="Введите ваше имя" 
+				error={state.groupOwner.error === true}
+				value={groupOwnerName}
+				onChange={event => setOwnerName(event.target.value)}
+			></Input>
 
-				<Input 
-					label="Введите ваш email" 
-					error={state.groupOwner.error === true}
-					value={groupOwnerEmail}
-					onChange={event => setOwnerEmail(event.target.value)}
-				></Input>
+			<Input 
+				label="Введите ваш email" 
+				error={state.groupOwner.error === true}
+				value={groupOwnerEmail}
+				onChange={event => setOwnerEmail(event.target.value)}
+			></Input>
 
-				<Button variant="contained"
-					className="g-button"
-					onClick={() => (
-						dispatch(saveGroupOwner({
-							group,
-							groupId: state.group.id,
-						})) 
-					)}
-				>
-					OK
-				</Button>
-			</div>
-		)
-	}
+			<Button variant="contained"
+				className="g-button"
+				onClick={() => (
+					dispatch(saveGroupOwner({
+						group,
+						groupId: state.group.id,
+					})) 
+				)}
+			>
+				OK
+			</Button>
+		</div>
+	)
 };
 
 export default GroupOwner;

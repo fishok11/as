@@ -32,6 +32,7 @@ const UserProfile = () => {
         <Typography variant="subtitle1">{groupData.name}</Typography>
         <Typography variant="subtitle1">{groupData.eventDate.budget}₽, Регистрация до {groupData.eventDate.registrationDate}</Typography>
         <Typography variant="subtitle1">{userData.userData.name}, {userData.userData.email}</Typography> 
+        <Typography variant="subtitle1">Подарок для {userData.userGift.gender} пола {userData.userGift.age} лет</Typography>
       </div>
     </>
   )

@@ -49,71 +49,70 @@ const YourGift = () => {
       <p>Группа загружается...</p>
     )
   }; 
-  if (state.yourGift.edit) {
-    return (
-      <div className="g-container__form">
-        <Typography variant="h6">Ваш подарок</Typography>
-        
-        <FormControl           
-          margin="normal"
-          fullWidth
-          size="small"
-          error={state.yourGift.error === true}
+  return (
+    <div className="g-container__form">
+      <Typography variant="h6">Ваш подарок</Typography>
+      
+      <FormControl           
+        margin="normal"
+        fullWidth
+        size="small"
+        error={state.yourGift.error === true}
+      >
+        <InputLabel id="demo-select-small">Возраст получателя</InputLabel>
+        <Select 
+          labelId="demo-select-small"
+          id="demo-select-small"
+          label="Возраст получателя"
+          value={giftAge}
+          onChange={event => setGiftAge(event.target.value)}
+          
         >
-          <InputLabel id="demo-select-small">Возраст получателя</InputLabel>
-          <Select 
-            labelId="demo-select-small"
-            id="demo-select-small"
-            label="Возраст получателя"
-            value={giftAge}
-            onChange={event => setGiftAge(event.target.value)}
-            
-          >
-            {allAge.map(age => 
-              <MenuItem key={age} value={age} >{age}</MenuItem> 
-            )}
-          </Select>
-        </FormControl>
-        
-        <FormControl 
-          fullWidth
-          error={state.yourGift.error === true}
+          {allAge.map(age => 
+            <MenuItem key={age} value={age} >{age}</MenuItem> 
+          )}
+        </Select>
+      </FormControl>
+      
+      <FormControl 
+        fullWidth
+        error={state.yourGift.error === true}
+      >
+        <FormLabel id="demo-radio-buttons-group-label">Пол</FormLabel>
+        <RadioGroup 
+          value={giftGender}
+          onChange={event => setGiftGender(event.target.value)}
         >
-          <FormLabel id="demo-radio-buttons-group-label">Пол</FormLabel>
-          <RadioGroup 
-            value={giftGender}
-            onChange={event => setGiftGender(event.target.value)}
-          >
-            <FormControlLabel value="мужского" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Мужской"/>
-            <FormControlLabel value="женского" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Женский" />
-            <FormControlLabel value="другого" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Другой"/>
-          </RadioGroup>
-        </FormControl>
+          <FormControlLabel value="мужского" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Мужской"/>
+          <FormControlLabel value="женского" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Женский" />
+          <FormControlLabel value="другого" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Другой"/>
+        </RadioGroup>
+      </FormControl>
 
-        <TextField 
-          id="outlined-multiline-static"
-          label="Пожелания к подарку (не обязательно)"
-          multiline
-          rows={2}
-          margin="normal"
-          fullWidth
-          value={giftWishes}
-          onChange={event => setGiftWishes(event.target.value)}
-        ></TextField>
+      <TextField 
+        id="outlined-multiline-static"
+        label="Пожелания к подарку (не обязательно)"
+        multiline
+        rows={2}
+        margin="normal"
+        fullWidth
+        value={giftWishes}
+        onChange={event => setGiftWishes(event.target.value)}
+      ></TextField>
 
-        <Button variant="contained"
-          className="g-button"
-          onClick={() => dispatch(saveGroup({
-            group,
-            groupId: state.group.id,
-          }))
-          }
-        >
-          OK
-        </Button>
-      </div>
-    )
-  }
+      <Button variant="contained"
+        className="g-button"
+        onClick={() => dispatch(saveGroup({
+          group,
+          groupId: state.group.id,
+        }))
+        }
+      >
+        OK
+      </Button>
+    </div>
+  )
+
 };
 
 export default YourGift;

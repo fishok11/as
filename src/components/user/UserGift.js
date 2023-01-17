@@ -17,8 +17,8 @@ import { saveUserGift } from "../../store/actions/actions";
 const UserGift = () => {
   const state = useSelector(state => state.user)
   const dispatch = useDispatch()
-  const [userAge, setUserAge] = useState(state.userGift.age)
-  const [userGender, setUserGender] = useState(state.userGift.gender)
+  const [userAge, setUserAge] = useState('')
+  const [userGender, setUserGender] = useState('')
   const [userWishes, setUserWishes] = useState(state.userGift.wishes)
   const allAge = [5, 6 ,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] 
   const {id} = useParams();
@@ -45,9 +45,8 @@ const UserGift = () => {
       <p>Группа загружается...</p>
     )
   }; 
-
   return (
-    <div className="Group-container">
+    <>
       <div className="g-container__form">
         <Typography variant="h6">Ваш подарок</Typography>
         
@@ -107,7 +106,7 @@ const UserGift = () => {
           OK
         </Button>
       </div>
-    </div>
+    </>
   )
 };
 
