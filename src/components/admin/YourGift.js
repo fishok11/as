@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveGroup } from "../../store/actions/actions"
-import Button from '@mui/material/Button';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -12,6 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import GlobalButton from "../navigation/GlobalButton";
 
 const YourGift = () => {
   const state = useSelector(state => state.admin)
@@ -100,16 +100,14 @@ const YourGift = () => {
         onChange={event => setGiftWishes(event.target.value)}
       ></TextField>
 
-      <Button variant="contained"
-        className="g-button"
+      <GlobalButton 
+        text={"OK"}
         onClick={() => dispatch(saveGroup({
           group,
           groupId: state.group.id,
         }))
         }
-      >
-        OK
-      </Button>
+      ></GlobalButton>
     </div>
   )
 

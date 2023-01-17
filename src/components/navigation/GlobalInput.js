@@ -1,8 +1,6 @@
 import TextField from '@mui/material/TextField';
 
-
-const Step = ({label, error, value, onChange}) => {
-
+const GlobalInput = ({label, error, value, onChange}) => {
   return (
     <TextField
       id="outlined-size-small" 
@@ -19,4 +17,4 @@ const Step = ({label, error, value, onChange}) => {
   )
 };
 
-export default Step;
+export default GlobalInput;

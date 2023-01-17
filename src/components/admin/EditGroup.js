@@ -1,4 +1,4 @@
-import Step from "../Step";
+import Step from "../navigation/Step";
 import { 
   RETURN_CREATE_GROUP_NAME,
   RETURN_CREATE_EVENT_DATE,

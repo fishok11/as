@@ -91,7 +91,8 @@ export const user = (state = initialStateUser, action) => {
           userCreating: false,
         }
       }
-    }
+      break
+    } 
     case CREATE_USER_GIFT: {
       const userAge = action.payload.userGift.age
       const userGender = action.payload.userGift.gender

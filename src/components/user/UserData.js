@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUserData } from "../../store/actions/actions"
 import { useParams } from "react-router-dom";
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Input from '../Input'
+import GlobalInput from '../navigation/GlobalInput'
+import GlobalButton from "../navigation/GlobalButton";
 
 const UserData = () => {
   const state = useSelector(state => state.user);
@@ -30,30 +30,27 @@ const UserData = () => {
       <Typography variant="h6">Регистрация пользователя</Typography>
 
       <div className="g-container__form">
-        <Input 
+        <GlobalInput 
           label="Введите ваше имя" 
           error={state.userData.error === true}
           value={userName}
           onChange={event => setUserName(event.target.value)}
-        ></Input>
+        ></GlobalInput>
 
-        <Input 
+        <GlobalInput 
           label="Введите ваш email" 
           error={state.userData.error === true}
           value={userEmail}
           onChange={event => setUserEmail(event.target.value)}
-        ></Input>
+        ></GlobalInput>
 
-        <Button 
-          variant="contained"
-          className="g-button"
+        <GlobalButton 
+          text={"OK"}
           onClick={() => dispatch(saveUserData({
             user,
             userId: state.userData.id,
           }))}
-        >
-          OK
-        </Button>
+        ></GlobalButton>
       </div>
     </>
   )

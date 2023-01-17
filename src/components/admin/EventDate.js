@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveEventDate } from "../../store/actions/actions"
-import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
@@ -9,7 +8,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import Typography from '@mui/material/Typography';
-import Input from '../Input'
+import GlobalInput from '../navigation/GlobalInput'
+import GlobalButton from "../navigation/GlobalButton";
 
 const EventDate = () => {
   const state = useSelector(state => state.admin)
@@ -41,12 +41,12 @@ const EventDate = () => {
     <div className="g-container__form">
       <Typography variant="h6">Регистрация участников</Typography>
       
-      <Input 
+      <GlobalInput 
         label="Бюджет" 
         error={state.eventDate.error === true}
         value={budget}
         onChange={event => setBudget(event.target.value)}
-      ></Input>
+      ></GlobalInput>
 
       <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth adapterLocale="ru">
         <Stack sx={{ width: '100%' }}>
@@ -79,17 +79,15 @@ const EventDate = () => {
         </Stack>
       </LocalizationProvider>
 
-      <Button variant="contained"
-        className="g-button"
+      <GlobalButton 
+        text={"OK"}
         onClick={() => (
           dispatch(saveEventDate({
             group,
             groupId: state.group.id,
           })) 
         )}
-      >
-        OK
-      </Button>
+      ></GlobalButton>
     </div>
   )
 };

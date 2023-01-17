@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import Button from '@mui/material/Button';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -13,6 +12,7 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { saveUserGift } from "../../store/actions/actions";
+import GlobalButton from "../navigation/GlobalButton";
 
 const UserGift = () => {
   const state = useSelector(state => state.user)
@@ -96,15 +96,13 @@ const UserGift = () => {
           onChange={event => setUserWishes(event.target.value)}
         ></TextField>
 
-        <Button variant="contained"
-          className="g-button"
+        <GlobalButton 
+          text={"OK"}
           onClick={() => dispatch(saveUserGift({
             user,
             userId: state.userData.id,
           }))}
-        >
-          OK
-        </Button>
+        ></GlobalButton>
       </div>
     </>
   )

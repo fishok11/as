@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveGroupOwner } from "../../store/actions/actions"
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Input from '../Input'
+import GlobalInput from '../navigation/GlobalInput'
+import GlobalButton from "../navigation/GlobalButton";
 
 const GroupOwner = () => {
 	const state = useSelector(state => state.admin)
@@ -33,31 +33,29 @@ const GroupOwner = () => {
 		<div className="g-container__form">
 			<Typography variant="h6">Ваши данные</Typography>
 
-			<Input 
+			<GlobalInput 
 				label="Введите ваше имя" 
 				error={state.groupOwner.error === true}
 				value={groupOwnerName}
 				onChange={event => setOwnerName(event.target.value)}
-			></Input>
+			></GlobalInput>
 
-			<Input 
+			<GlobalInput 
 				label="Введите ваш email" 
 				error={state.groupOwner.error === true}
 				value={groupOwnerEmail}
 				onChange={event => setOwnerEmail(event.target.value)}
-			></Input>
+			></GlobalInput>
 
-			<Button variant="contained"
-				className="g-button"
+			<GlobalButton 
+        text={"OK"}
 				onClick={() => (
 					dispatch(saveGroupOwner({
 						group,
 						groupId: state.group.id,
 					})) 
 				)}
-			>
-				OK
-			</Button>
+			></GlobalButton>
 		</div>
 	)
 };
