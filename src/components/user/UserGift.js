@@ -33,6 +33,7 @@ const UserGift = () => {
       gender: userGender,
       wishes: userWishes,
     },
+    admin: false,
   }; 
 
   if (state.errorFetch === true) {

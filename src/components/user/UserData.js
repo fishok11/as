@@ -23,11 +23,12 @@ const UserData = () => {
       gender: state.userGift.gender,
       wishes: state.userGift.wishes,
     },
+    admin: false,
   };
 
   return (
     <>
-      <Typography variant="h6">Регистрация пользователя</Typography>
+      <Typography variant="h6">Ваши данные</Typography>
 
       <div className="g-container__form">
         <GlobalInput 

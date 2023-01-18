@@ -26,15 +26,15 @@ const EventDate = () => {
       drawDate: dayjs(drawDate).format('DD/MM/YYYY'),
       exchangeDate: dayjs(exchangeDate).format('DD/MM/YYYY'),
     },
-    groupOwner: {
-      name: state.groupOwner.name,
-      email: state.groupOwner.email,
-    },
-    yourGift: {
-      age: state.yourGift.age,
-      gender: state.yourGift.gender,
-      wishes: state.yourGift.wishes,
-    },
+    // groupOwner: {
+    //   name: state.groupOwner.name,
+    //   email: state.groupOwner.email,
+    // },
+    // yourGift: {
+    //   age: state.yourGift.age,
+    //   gender: state.yourGift.gender,
+    //   wishes: state.yourGift.wishes,
+    // },
   }
 
   return (

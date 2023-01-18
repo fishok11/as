@@ -1,10 +1,10 @@
-// import UserInfo from "./UserInfo";
+import UserInfo from "./UserInfo";
 import UserForm from "./UserForm";
 
 const User = () => {
   return (
     <>
-      {/* <UserInfo /> */}
+      <UserInfo />
       <UserForm />
     </>
   )

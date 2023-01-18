@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveGroupOwner } from "../../store/actions/actions"
+import { saveAdminData } from "../../store/actions/actions"
 import Typography from '@mui/material/Typography';
 import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
@@ -8,25 +8,20 @@ import GlobalButton from "../navigation/GlobalButton";
 const GroupOwner = () => {
 	const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
-	const [groupOwnerName, setOwnerName] = useState(state.groupOwner.name)
-	const [groupOwnerEmail, setOwnerEmail] = useState(state.groupOwner.email)
-	let group = {
-    name: state.group.name,
-    eventDate: {
-      budget: state.eventDate.budget,
-      registrationDate: state.eventDate.registrationDate,
-      drawDate: state.eventDate.drawDate,
-      exchangeDate: state.eventDate.exchangeDate,
-    },
-    groupOwner: {
+	const [groupOwnerName, setOwnerName] = useState(state.userData.name)
+	const [groupOwnerEmail, setOwnerEmail] = useState(state.userData.email)
+	let user = {
+		groupId: Number(state.group.id),
+    userData: {
       name: groupOwnerName,
       email: groupOwnerEmail,
     },
-    yourGift: {
-      age: state.yourGift.age,
-      gender: state.yourGift.gender,
-      wishes: state.yourGift.wishes,
+    userGift: {
+      age: state.userGift.age,
+      gender: state.userGift.gender,
+      wishes: state.userGift.wishes,
     },
+		admin: true,
   };
 
 	return (
@@ -35,14 +30,14 @@ const GroupOwner = () => {
 
 			<GlobalInput 
 				label="Введите ваше имя" 
-				error={state.groupOwner.error === true}
+				error={state.userData.error === true}
 				value={groupOwnerName}
 				onChange={event => setOwnerName(event.target.value)}
 			></GlobalInput>
 
 			<GlobalInput 
 				label="Введите ваш email" 
-				error={state.groupOwner.error === true}
+				error={state.userData.error === true}
 				value={groupOwnerEmail}
 				onChange={event => setOwnerEmail(event.target.value)}
 			></GlobalInput>
@@ -50,9 +45,9 @@ const GroupOwner = () => {
 			<GlobalButton 
         text={"OK"}
 				onClick={() => (
-					dispatch(saveGroupOwner({
-						group,
-						groupId: state.group.id,
+					dispatch(saveAdminData({
+						user,
+						userId: state.userData.id,
 					})) 
 				)}
 			></GlobalButton>

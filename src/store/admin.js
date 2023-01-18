@@ -1,13 +1,14 @@
 import { 
   CREATE_GROUP_NAME, 
   CREATE_EVENT_DATE, 
-  CREATE_GROUP_OWNER, 
-  CREATE_YOUR_GIFT, 
+  CREATE_ADMIN_DATA, 
+  CREATE_ADMIN_GIFT, 
   RETURN_CREATE_GROUP_NAME,
   RETURN_CREATE_EVENT_DATE,
   RETURN_CREATE_GROUP_OWNER,
   RETURN_CREATE_YOUR_GIFT,
-  SAVE_ID, 
+  SAVE_ID,
+  SAVE_ADMIN_ID, 
   ERROR_ADMIN_FETCH,
   GROUP_CREATING,
 } from "../store/actions/actionTypes"
@@ -27,13 +28,14 @@ const initialStateAdmin = {
     error: false,
     edit: false,
   },
-  groupOwner: {
+  userData: {
+    id: null,
     name: "",
     email: "",
     error: false,
     edit: false,
   },
-  yourGift: {
+  userGift: {
     age: "",
     gender: "",
     wishes: "",
@@ -86,8 +88,8 @@ export const admin = (state = initialStateAdmin, action) => {
               error: false,
               edit: false, 
             },
-            groupOwner: {
-              ...state.groupOwner,
+            userData: {
+              ...state.userData,
               edit: true,
             },
             errorFetch: false,
@@ -103,8 +105,8 @@ export const admin = (state = initialStateAdmin, action) => {
               error: false,
               edit: false, 
             },
-            yourGift: {
-              ...state.yourGift,
+            userGift: {
+              ...state.userGift,
               edit: true,
             },
             errorFetch: false,
@@ -174,8 +176,8 @@ export const admin = (state = initialStateAdmin, action) => {
               error: false,
               edit: false,
             },
-            groupOwner: {
-              ...state.groupOwner,
+            userData: {
+              ...state.userData,
               edit: true,
             },
             errorFetch: false,
@@ -194,8 +196,8 @@ export const admin = (state = initialStateAdmin, action) => {
               error: false,
               edit: false,
             },
-            yourGift: {
-              ...state.yourGift,
+            userGift: {
+              ...state.userGift,
               edit: true,
             },
             errorFetch: false,
@@ -230,8 +232,8 @@ export const admin = (state = initialStateAdmin, action) => {
             error: false,
             edit: false,
           },
-          groupOwner: {
-            ...state.groupOwner,
+          userData: {
+            ...state.userData,
             edit: true,
           },
           step: 3,
@@ -241,15 +243,15 @@ export const admin = (state = initialStateAdmin, action) => {
       }
       break
     }
-    case CREATE_GROUP_OWNER: {
-      const groupOwnerName = action.payload.groupOwner.name
-      const groupOwnerEmail = action.payload.groupOwner.email 
+    case CREATE_ADMIN_DATA: {
+      const userDataName = action.payload.userData.name
+      const userDataEmail = action.payload.userData.email 
 
-      if (groupOwnerName === "" || groupOwnerEmail === "") {
+      if (userDataName === "" || userDataEmail === "") {
         return {
           ...state,
-          groupOwner: {
-            ...state.groupOwner,
+          userData: {
+            ...state.userData,
             error: true,
           },
         }
@@ -257,14 +259,14 @@ export const admin = (state = initialStateAdmin, action) => {
         if (state.step === 4) {
           return {
             ...state,
-            groupOwner: {
-              ...state.groupOwner,
-              name: groupOwnerName,
-              email: groupOwnerEmail,
+            userData: {
+              ...state.userData,
+              name: userDataName,
+              email: userDataEmail,
               edit: false,
             },
-            yourGift: {
-              ...state.yourGift,
+            userGift: {
+              ...state.userGift,
               edit: true,
             },
             errorFetch: false,
@@ -274,10 +276,10 @@ export const admin = (state = initialStateAdmin, action) => {
         if (state.step === 5) {
           return {
             ...state,
-            groupOwner: {
-              ...state.groupOwner,
-              name: groupOwnerName,
-              email: groupOwnerEmail,
+            userData: {
+              ...state.userData,
+              name: userDataName,
+              email: userDataEmail,
               edit: false,
             },
             errorFetch: false,
@@ -287,14 +289,14 @@ export const admin = (state = initialStateAdmin, action) => {
       } else {
         return {
           ...state,
-          groupOwner: {
-            ...state.groupOwner,
-            name: groupOwnerName,
-            email: groupOwnerEmail,
+          userData: {
+            ...state.userData,
+            name: userDataName,
+            email: userDataEmail,
             edit: false,
           },
-          yourGift: {
-            ...state.yourGift,
+          userGift: {
+            ...state.userGift,
             edit: true,
           },
           step: 4,
@@ -304,26 +306,26 @@ export const admin = (state = initialStateAdmin, action) => {
       }
       break
     }
-    case CREATE_YOUR_GIFT: {
-      const giftGender = action.payload.yourGift.gender
-      const giftAge = action.payload.yourGift.age
-      const giftWishes = action.payload.yourGift.wishes
-
+    case CREATE_ADMIN_GIFT: {
+      const giftGender = action.payload.userGift.gender
+      const giftAge = action.payload.userGift.age
+      const giftWishes = action.payload.userGift.wishes
+ 
       if (giftGender === "" 
       || giftAge === "" 
       || giftAge === "") {
         return {
           ...state,
-          yourGift : {
-            ...state.yourGift,
+          userGift : {
+            ...state.userGift,
             error: true,
           }
         }
       } else {
         return {
           ...state,
-          yourGift: {
-            ...state.yourGift,
+          userGift: {
+            ...state.userGift,
             age: giftAge,
             gender: giftGender,
             wishes: giftWishes,
@@ -347,12 +349,12 @@ export const admin = (state = initialStateAdmin, action) => {
           ...state.eventDate,
           edit: false,
         },
-        groupOwner: {
-          ...state.groupOwner,
+        userData: {
+          ...state.userData,
           edit: false,
         },
-        yourGift: {
-          ...state.yourGift,
+        userGift: {
+          ...state.userGift,
           edit: false,
         },
       }
@@ -369,12 +371,12 @@ export const admin = (state = initialStateAdmin, action) => {
             ...state.eventDate,
             edit: true,
           },
-          groupOwner: {
-            ...state.groupOwner,
+          userData: {
+            ...state.userData,
             edit: false,
           },
-          yourGift: {
-            ...state.yourGift,
+          userGift: {
+            ...state.userGift,
             edit: false,
           },
         }
@@ -397,12 +399,12 @@ export const admin = (state = initialStateAdmin, action) => {
             ...state.eventDate,
             edit: false,
           },
-          groupOwner: {
-            ...state.groupOwner,
+          userData: {
+            ...state.userData,
             edit: true,
           },
-          yourGift: {
-            ...state.yourGift,
+          userGift: {
+            ...state.userGift,
             edit: false,
           },
         }
@@ -424,12 +426,12 @@ export const admin = (state = initialStateAdmin, action) => {
             ...state.eventDate,
             edit: false,
           },
-          groupOwner: {
-            ...state.groupOwner,
+          userData: {
+            ...state.userData,
             edit: false,
           },
-          yourGift: {
-            ...state.yourGift,
+          userGift: {
+            ...state.userGift,
             edit: true,
           },
         }
@@ -447,6 +449,18 @@ export const admin = (state = initialStateAdmin, action) => {
         group: {
           ...state.group,
           id: groupId,
+        },
+        groupCreating: false,
+      }
+    }
+    case SAVE_ADMIN_ID: {
+      const userId = action.payload.userData.id;
+
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          id: userId,
         },
         groupCreating: false,
       }

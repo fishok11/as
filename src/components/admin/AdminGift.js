@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveGroup } from "../../store/actions/actions"
+import { saveAdmin } from "../../store/actions/actions"
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -13,29 +13,24 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import GlobalButton from "../navigation/GlobalButton";
 
-const YourGift = () => {
+const AdminGift = () => {
   const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
-  const [giftAge, setGiftAge] = useState(state.yourGift.age)
-  const [giftGender, setGiftGender] = useState(state.yourGift.gender)
-  const [giftWishes, setGiftWishes] = useState(state.yourGift.wishes)
-  let group = {
-    name: state.group.name,
-    eventDate: {
-      budget: state.eventDate.budget,
-      registrationDate: state.eventDate.registrationDate,
-      drawDate: state.eventDate.drawDate,
-      exchangeDate: state.eventDate.exchangeDate,
+  const [giftAge, setGiftAge] = useState(state.userGift.age)
+  const [giftGender, setGiftGender] = useState(state.userGift.gender)
+  const [giftWishes, setGiftWishes] = useState(state.userGift.wishes)
+  let user = {
+    groupId: Number(state.group.id),
+    userData: {
+      name: state.userData.name,
+      email: state.userData.email,
     },
-    groupOwner: {
-      name: state.groupOwner.name,
-      email: state.groupOwner.email,
-    },
-    yourGift: {
+    userGift: {
       age: giftAge,
       gender: giftGender,
       wishes: giftWishes,
     },
+    admin: true,
   };
   const allAge = [5, 6 ,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]  
 
@@ -57,7 +52,7 @@ const YourGift = () => {
         margin="normal"
         fullWidth
         size="small"
-        error={state.yourGift.error === true}
+        error={state.userGift.error === true}
       >
         <InputLabel id="demo-select-small">Возраст получателя</InputLabel>
         <Select 
@@ -76,7 +71,7 @@ const YourGift = () => {
       
       <FormControl 
         fullWidth
-        error={state.yourGift.error === true}
+        error={state.userGift.error === true}
       >
         <FormLabel id="demo-radio-buttons-group-label">Пол</FormLabel>
         <RadioGroup 
@@ -102,9 +97,9 @@ const YourGift = () => {
 
       <GlobalButton 
         text={"OK"}
-        onClick={() => dispatch(saveGroup({
-          group,
-          groupId: state.group.id,
+        onClick={() => dispatch(saveAdmin({
+          user,
+          userId: state.userData.id,
         }))
         }
       ></GlobalButton>
@@ -113,4 +108,4 @@ const YourGift = () => {
 
 };
 
-export default YourGift;
+export default AdminGift;

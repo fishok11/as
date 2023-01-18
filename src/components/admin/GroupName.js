@@ -17,15 +17,15 @@ const GroupName = () => {
       drawDate: state.eventDate.drawDate,
       exchangeDate: state.eventDate.exchangeDate,
     },
-    groupOwner: {
-      name: state.groupOwner.name,
-      email: state.groupOwner.email,
-    },
-    yourGift: {
-      age: state.yourGift.age,
-      gender: state.yourGift.gender,
-      wishes: state.yourGift.wishes,
-    },
+    // groupOwner: {
+    //   name: state.groupOwner.name,
+    //   email: state.groupOwner.email,
+    // },
+    // yourGift: {
+    //   age: state.yourGift.age,
+    //   gender: state.yourGift.gender,
+    //   wishes: state.yourGift.wishes,
+    // },
   };
 
   return ( 

@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 
 const UserInfo = () => {
   const [groupData, setGroupdata] = useState();
-  const [userData, setUserdata] = useState();
   const state = useSelector(state => state.user)
   const {id} = useParams();
 
@@ -14,16 +13,8 @@ const UserInfo = () => {
     .then(res => res.json())
     .then(data => setGroupdata(data))
   }, [id])
-  useEffect(() => {
-    fetch('http://localhost:3002/users/' + state.userData.id)
-    .then(res => res.json())
-    .then(data => setUserdata(data))
-  }, [state.userData.id])
   
   if (groupData === undefined) {
-    return null
-  } 
-  if (userData === undefined) {
     return null
   } 
   return (
@@ -34,8 +25,11 @@ const UserInfo = () => {
       <div className="Group-container Group-container--info">
         <Typography variant="subtitle1">{groupData.eventDate.budget}₽, Регистрация до {groupData.eventDate.registrationDate}</Typography>
       </div>
-      {state.step === 3 && (<div className="Group-container Group-container--info">
-        <Typography variant="subtitle1">{userData.userData.name}, {userData.userData.email}</Typography> 
+      {state.step >= 2 && (<div className="Group-container Group-container--info">
+        <Typography variant="subtitle1">{state.userData.name}, {state.userData.email}</Typography> 
+      </div>)}
+      {state.step >= 3 && (<div className="Group-container Group-container--info">
+        <Typography variant="subtitle1">Подарок для {state.userGift.gender} пола {state.userGift.age} лет</Typography>
       </div>)}
     </>
   )

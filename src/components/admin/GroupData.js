@@ -13,10 +13,10 @@ const GroupData = () => {
         <Typography variant="subtitle1">{state.eventDate.budget}₽, Регистрация до {state.eventDate.registrationDate}</Typography>
       </div>)}
       {state.step > 3 && (<div className="Group-container Group-container--info">
-        <Typography variant="subtitle1">{state.groupOwner.name}, {state.groupOwner.email}</Typography> 
+        <Typography variant="subtitle1">{state.userData.name}, {state.userData.email}</Typography> 
       </div>)} 
       {state.step > 4 && (<div className="Group-container Group-container--info">
-        <Typography variant="subtitle1">Подарок для {state.yourGift.gender} пола {state.yourGift.age} лет</Typography>
+        <Typography variant="subtitle1">Подарок для {state.userGift.gender} пола {state.userGift.age} лет</Typography>
       </div>)}
     </div>
   )
