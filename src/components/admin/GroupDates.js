@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
 
-const EventDate = () => {
+const GroupDates = () => {
   const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
   const [budget, setBudget] = useState(state.eventDate.budget)
@@ -26,15 +26,6 @@ const EventDate = () => {
       drawDate: dayjs(drawDate).format('DD/MM/YYYY'),
       exchangeDate: dayjs(exchangeDate).format('DD/MM/YYYY'),
     },
-    // groupOwner: {
-    //   name: state.groupOwner.name,
-    //   email: state.groupOwner.email,
-    // },
-    // yourGift: {
-    //   age: state.yourGift.age,
-    //   gender: state.yourGift.gender,
-    //   wishes: state.yourGift.wishes,
-    // },
   }
 
   return (
@@ -46,7 +37,7 @@ const EventDate = () => {
         error={state.eventDate.error === true}
         value={budget}
         onChange={event => setBudget(event.target.value)}
-      ></GlobalInput>
+      />
 
       <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth adapterLocale="ru">
         <Stack sx={{ width: '100%' }}>
@@ -87,9 +78,9 @@ const EventDate = () => {
             groupId: state.group.id,
           })) 
         )}
-      ></GlobalButton>
+      />
     </div>
   )
 };
 
-export default EventDate;
+export default GroupDates;

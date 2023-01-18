@@ -36,14 +36,14 @@ const UserData = () => {
           error={state.userData.error === true}
           value={userName}
           onChange={event => setUserName(event.target.value)}
-        ></GlobalInput>
+        />
 
         <GlobalInput 
           label="Введите ваш email" 
           error={state.userData.error === true}
           value={userEmail}
           onChange={event => setUserEmail(event.target.value)}
-        ></GlobalInput>
+        />
 
         <GlobalButton 
           text={"OK"}
@@ -51,7 +51,7 @@ const UserData = () => {
             user,
             userId: state.userData.id,
           }))}
-        ></GlobalButton>
+        />
       </div>
     </>
   )

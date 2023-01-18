@@ -93,7 +93,7 @@ const AdminGift = () => {
         fullWidth
         value={giftWishes}
         onChange={event => setGiftWishes(event.target.value)}
-      ></TextField>
+      />
 
       <GlobalButton 
         text={"OK"}
@@ -102,7 +102,7 @@ const AdminGift = () => {
           userId: state.userData.id,
         }))
         }
-      ></GlobalButton>
+      />
     </div>
   )
 

@@ -17,15 +17,6 @@ const GroupName = () => {
       drawDate: state.eventDate.drawDate,
       exchangeDate: state.eventDate.exchangeDate,
     },
-    // groupOwner: {
-    //   name: state.groupOwner.name,
-    //   email: state.groupOwner.email,
-    // },
-    // yourGift: {
-    //   age: state.yourGift.age,
-    //   gender: state.yourGift.gender,
-    //   wishes: state.yourGift.wishes,
-    // },
   };
 
   return ( 
@@ -37,7 +28,7 @@ const GroupName = () => {
         error={state.group.error === true}
         value={groupName}
         onChange={event => setGroupName(event.target.value)}
-      ></GlobalInput>
+      />
 
       <GlobalButton 
         text={"OK"}
@@ -47,7 +38,7 @@ const GroupName = () => {
             groupId: state.group.id,
           })) 
         )}
-      ></GlobalButton>
+      />
     </div>
   );
 };

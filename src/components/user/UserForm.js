@@ -2,7 +2,7 @@ import UserDone from "./UserDone";
 import { useSelector } from "react-redux";
 import UserGift from "./UserGift";
 import UserData from "./UserData";
-import EditUser from "./EditUser";
+import EditUser from "../navigation/EditUser";
 
 const UserForm = () => {
   const state = useSelector(state => state.user)

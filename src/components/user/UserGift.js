@@ -17,8 +17,8 @@ import GlobalButton from "../navigation/GlobalButton";
 const UserGift = () => {
   const state = useSelector(state => state.user)
   const dispatch = useDispatch()
-  const [userAge, setUserAge] = useState('')
-  const [userGender, setUserGender] = useState('')
+  const [userAge, setUserAge] = useState(state.userGift.age)
+  const [userGender, setUserGender] = useState(state.userGift.gender)
   const [userWishes, setUserWishes] = useState(state.userGift.wishes)
   const allAge = [5, 6 ,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] 
   const {id} = useParams();
@@ -95,7 +95,7 @@ const UserGift = () => {
           fullWidth
           value={userWishes}
           onChange={event => setUserWishes(event.target.value)}
-        ></TextField>
+        />
 
         <GlobalButton 
           text={"OK"}
@@ -103,7 +103,7 @@ const UserGift = () => {
             user,
             userId: state.userData.id,
           }))}
-        ></GlobalButton>
+        />
       </div>
     </>
   )

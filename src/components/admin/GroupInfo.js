@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
 
-const GroupData = () => {
+const GroupInfo = () => {
   const state = useSelector(state => state.admin)
 
   return (
@@ -22,4 +22,4 @@ const GroupData = () => {
   )
 };
 
-export default GroupData;
+export default GroupInfo;

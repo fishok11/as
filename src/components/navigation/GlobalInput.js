@@ -12,8 +12,7 @@ const GlobalInput = ({label, error, value, onChange}) => {
       fullWidth
       value={value}
       onChange={onChange}
-    >
-    </TextField>
+    />
   )
 };
 

@@ -1,13 +1,13 @@
-import GroupData from "./GroupData";
+import GroupInfo from "./GroupInfo";
 import GroupAdminForm from "./GroupAdminForm";
 
-const GroupAdmin = () => {
+const Admin = () => {
   return (
     <div>
-      <GroupData/>
+      <GroupInfo/>
       <GroupAdminForm/>
     </div>
   )
 }
 
-export default GroupAdmin;
+export default Admin;

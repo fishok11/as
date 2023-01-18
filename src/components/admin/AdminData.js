@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
 
-const GroupOwner = () => {
+const AdminData = () => {
 	const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
 	const [groupOwnerName, setOwnerName] = useState(state.userData.name)
@@ -33,14 +33,14 @@ const GroupOwner = () => {
 				error={state.userData.error === true}
 				value={groupOwnerName}
 				onChange={event => setOwnerName(event.target.value)}
-			></GlobalInput>
+			/>
 
 			<GlobalInput 
 				label="Введите ваш email" 
 				error={state.userData.error === true}
 				value={groupOwnerEmail}
 				onChange={event => setOwnerEmail(event.target.value)}
-			></GlobalInput>
+			/>
 
 			<GlobalButton 
         text={"OK"}
@@ -50,9 +50,9 @@ const GroupOwner = () => {
 						userId: state.userData.id,
 					})) 
 				)}
-			></GlobalButton>
+			/>
 		</div>
 	)
 };
 
-export default GroupOwner;
+export default AdminData;

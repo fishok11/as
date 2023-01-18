@@ -1,4 +1,4 @@
-import Step from "../navigation/Step";
+import Step from "./Step";
 import { 
   RETURN_CREATE_USER,
   RETURN_CREATE_USER_GIFT,
