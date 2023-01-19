@@ -1,10 +1,11 @@
-import GroupDates from "./GroupDates"
-import AdminData from "./AdminData"
 import GroupName from "./GroupName"
-import AdminGift from "./AdminGift";
+import GroupDates from "./GroupDates"
+import UserData from "../createUser/UserData";
+import UserGift from "../createUser/UserGift";
 import GroupDone from "./GroupDone";
 import EditGroup from "../navigation/EditGroup";
 import { useSelector } from "react-redux";
+
 
 const GroupAdminForm = () => {
   const state = useSelector(state => state.admin)
@@ -14,8 +15,8 @@ const GroupAdminForm = () => {
     <EditGroup/>
     {(state.step >= 1 && state.group.edit) && (<GroupName/>)}
     {(state.step >= 2 && state.eventDate.edit) && (<GroupDates/>)}
-    {(state.step >= 3 && state.userData.edit) && (<AdminData/>)}
-    {(state.step >= 4 && state.userGift.edit) && (<AdminGift/>)}
+    {(state.step >= 3 && state.userData.edit) && (<UserData admin={true} state={state}/>)}
+    {(state.step >= 4 && state.userGift.edit) && (<UserGift admin={true} state={state}/>)}
     {
       state.step >= 5 &&
       state.group.edit === false &&

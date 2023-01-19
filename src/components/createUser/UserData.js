@@ -1,19 +1,18 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { saveUserData } from "../../store/actions/actions"
 import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
 
-const UserData = () => {
-  const state = useSelector(state => state.user);
+const UserData = ({admin, state}) => {
   const [userName, setUserName] = useState(state.userData.name);
   const [userEmail, setUserEmail] = useState(state.userData.email);
   const dispatch = useDispatch()
   const {id} = useParams();
   let user = {
-    groupId: Number(id),
+    groupId: Number(admin === true ? state.group.id : id),
     userData:{
       name: userName,
       email: userEmail,
@@ -23,7 +22,7 @@ const UserData = () => {
       gender: state.userGift.gender,
       wishes: state.userGift.wishes,
     },
-    admin: false,
+    admin: admin,
   };
 
   return (

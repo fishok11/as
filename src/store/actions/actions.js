@@ -141,7 +141,7 @@ export const saveAdminData = (path) => {
   const isUpdate = Boolean(path.userId);
 
   if (path.user.userData.name !=="" && 
-    path.user.userData.name !=="" && 
+    path.user.userData.email !=="" && 
     isUpdate === true) {
       return async(dispatch) => {
         try {
@@ -269,7 +269,9 @@ export const saveUserData = (path) => {
   const isUpdate = Boolean(path.userId)
   const userUpdate = path.user
 
-  if (path.user.userData.name !=="" && path.user.userData.email !=="" && isUpdate === true) {
+  if (path.user.userData.name !=="" && 
+    path.user.userData.email !=="" && 
+    isUpdate === true) {
     return async (dispatch) => {
       try {
         dispatch(userCreating())
@@ -282,9 +284,16 @@ export const saveUserData = (path) => {
         })
   
         if (response.status < 300) {
-          dispatch(createUser({
-            userData: path.user.userData
-          }));
+          if (path.user.admin === true) {
+            dispatch(createAdminData({
+              userData: path.user.userData,
+            }));
+          }
+          if (path.user.admin === false) {
+            dispatch(createUser({
+              userData: path.user.userData
+            }));
+          }
         } else if (response.status >= 300) {
           isError = true;
         };
@@ -296,11 +305,20 @@ export const saveUserData = (path) => {
       };
     };
   } else {
-    return async (dispatch) => {
-      dispatch(createUser({
-        userData: path.user.userData
-      }));
-    };
+    if (path.user.admin === true) {
+      return async (dispatch) => {
+        dispatch(createAdminData({
+          userData: path.user.userData
+        }));
+      };
+    }
+    if (path.user.admin === false) {
+      return async (dispatch) => {
+        dispatch(createUser({
+          userData: path.user.userData
+        }));
+      };
+    }
   };
 };
 
@@ -322,15 +340,31 @@ export const saveUserGift = (path) => {
         const data = await response.json()
   
         if (response.status < 300) {
-          dispatch(createUserGift({
-            userGift: path.user.userGift
-          }));
+          if (path.user.admin === true) {
+            dispatch(createAdminGift({
+              userGift: path.user.userGift
+            }));
+          }
+          if (path.user.admin === false) {
+            dispatch(createUserGift({
+              userGift: path.user.userGift
+            }));
+          }
           if (path.userId === null) {
-            dispatch(saveUserId({
-              userData: {
-                userId: data.id
-              },
-            }))
+            if (path.user.admin === true) {
+              dispatch(saveAdminId({
+                userData: {
+                  id: data.id
+                }
+              }));
+            }
+            if (path.user.admin === false) {
+              dispatch(saveUserId({
+                userData: {
+                  userId: data.id
+                },
+              }));
+            }
           }
         } else if (response.status >= 300) {
           isError = true;
@@ -343,11 +377,20 @@ export const saveUserGift = (path) => {
       };
     };
   } else {
-    return async (dispatch) => {
-      dispatch(createUserGift({
-        userGift: path.user.userGift
-      }));
-    };
+    if (path.user.admin === true) {
+      return async (dispatch) => {
+        dispatch(createAdminGift({
+          userGift: path.user.userGift
+        }));
+      };
+    }
+    if (path.user.admin === false) {
+      return async (dispatch) => {
+        dispatch(createUserGift({
+          userGift: path.user.userGift
+        }));
+      };
+    }
   };
 };
 

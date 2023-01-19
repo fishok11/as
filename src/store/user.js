@@ -25,7 +25,7 @@ const initialStateUser = {
   },
   step: 1,
   errorFetch: false,
-  userCreating: false,
+  creating: false,
 }
 
 export const user = (state = initialStateUser, action) => {
@@ -57,7 +57,7 @@ export const user = (state = initialStateUser, action) => {
               edit: true,
             },
             errorFetch: false,
-            userCreating: false,
+            creating: false,
           }
         }
         if (state.step === 3) {
@@ -70,7 +70,7 @@ export const user = (state = initialStateUser, action) => {
               edit: false,
             },
             errorFetch: false,
-            userCreating: false,
+            creating: false,
           }
         }
       } else {
@@ -88,7 +88,7 @@ export const user = (state = initialStateUser, action) => {
           },
           step: 2,
           errorFetch: false,
-          userCreating: false,
+          creating: false,
         }
       }
       break
@@ -117,7 +117,7 @@ export const user = (state = initialStateUser, action) => {
             edit: false,
           },
           step: 3,
-          userCreating: false,
+          creating: false,
         }
       }
     }
@@ -151,13 +151,13 @@ export const user = (state = initialStateUser, action) => {
       return {
         ...state,
         errorFetch: true,
-        userCreating: false,
+        creating: false,
       }
     }
     case USER_CREATING: {
       return {
         ...state,
-        userCreating: true,
+        creating: true,
       }
     }
     case SAVE_USER_ID: {

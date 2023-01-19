@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -14,16 +14,15 @@ import Typography from '@mui/material/Typography';
 import { saveUserGift } from "../../store/actions/actions";
 import GlobalButton from "../navigation/GlobalButton";
 
-const UserGift = () => {
-  const state = useSelector(state => state.user)
+const UserGift = ({admin, state}) => {
   const dispatch = useDispatch()
-  const [userAge, setUserAge] = useState(state.userGift.age)
-  const [userGender, setUserGender] = useState(state.userGift.gender)
+  const [userAge, setUserAge] = useState('')
+  const [userGender, setUserGender] = useState('')
   const [userWishes, setUserWishes] = useState(state.userGift.wishes)
   const allAge = [5, 6 ,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] 
   const {id} = useParams();
   let user = {
-    groupId: Number(id),
+    groupId: Number(admin === true ? state.group.id : id),
     userData:{
       name: state.userData.name,
       email: state.userData.email,
@@ -33,7 +32,7 @@ const UserGift = () => {
       gender: userGender,
       wishes: userWishes,
     },
-    admin: false,
+    admin: admin,
   }; 
 
   if (state.errorFetch === true) {
@@ -41,7 +40,7 @@ const UserGift = () => {
       <p className="g-error">Error</p>
     )
   };
-  if (state.groupCreating === true) {
+  if (state.creating === true) {
     return (
       <p>Группа загружается...</p>
     )
