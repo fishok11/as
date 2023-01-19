@@ -29,20 +29,6 @@ export const createEventDate = (path) => ({
   },
 });
 
-export const createAdminData = (path) => ({
-  type: CREATE_ADMIN_DATA,
-  payload: {
-    userData: path.userData
-  },
-});
-
-export const createAdminGift = (path) => ({
-  type: CREATE_ADMIN_GIFT,
-  payload: {
-    userGift: path.userGift
-  },
-});
-
 export const saveGroupName = (path) => {
   let isError = false;
   const groupUpdate = path.group;
@@ -136,107 +122,10 @@ export const saveEventDate = (path) => {
   };
 };
 
-export const saveAdminData = (path) => { 
-  let isError = false;
-  const isUpdate = Boolean(path.userId);
-
-  if (path.user.userData.name !=="" && 
-    path.user.userData.email !=="" && 
-    isUpdate === true) {
-      return async(dispatch) => {
-        try {
-          dispatch(groupCreating())
-          const response = await fetch('http://localhost:3002/users/' + path.userId, {
-            method: 'PUT',
-            headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(path.user)
-          })
-          
-          if (response.status < 300) {
-            dispatch(createAdminData({
-              userData: path.user.userData,
-            }));
-          } else if (response.status >= 300) {
-            isError = true;
-          };
-        } catch (error) {
-          isError = true;
-          console.log(error)
-        };
-        if (isError === true) {
-          dispatch(adminError());
-        };
-      };
-  } else {
-    return async(dispatch) => {
-      dispatch(createAdminData({
-        userData: path.user.userData,
-      }));
-    };
-  };
-};
-
-export const saveAdmin = (path) => {
-  let isError = false;
-  const isUpdate = Boolean(path.userId)
-
-  if (path.user.userGift.age !=="" && path.user.userGift.gender !=="") {
-    return async(dispatch) => {
-      try {
-        dispatch(groupCreating())
-        const response = await fetch(isUpdate ? 'http://localhost:3002/users/' + path.userId : 'http://localhost:3002/users', {
-          method: isUpdate ? 'PUT' :'POST',
-          headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(path.user)
-        })
-        const data = await response.json()
-  
-        if (response.status < 300) {
-          dispatch(createAdminGift({
-            userGift: path.user.userGift
-          }));
-          if (path.userId === null) { 
-            dispatch(saveAdminId({
-              userData: {
-                id: data.id
-              }
-            }));
-          }
-        } else if (response.status >= 300) {
-          isError = true;
-        };
-      } catch (error) {
-        isError = true;
-        console.log(error)
-      };
-      if (isError === true) {
-        dispatch(adminError());
-      };
-    }
-  } else {
-    return async(dispatch) => {
-      dispatch(createAdminGift({
-        userGift: path.user.userGift
-      }));
-    };
-  };
-};
-
 export const saveId = (path) => ({
   type: SAVE_ID,
   payload: {
     group: path.group
-  },
-});
-
-export const saveAdminId = (path) => ({
-  type: SAVE_ADMIN_ID,
-  payload: {
-    userData: path.userData
   },
 });
 
@@ -249,6 +138,20 @@ export const adminError = () => ({
 });
 
 // ===================================================================================
+
+export const createAdminData = (path) => ({
+  type: CREATE_ADMIN_DATA,
+  payload: {
+    userData: path.userData
+  },
+});
+
+export const createAdminGift = (path) => ({
+  type: CREATE_ADMIN_GIFT,
+  payload: {
+    userGift: path.userGift
+  },
+});
 
 export const createUser = (path) => ({
   type: CREATE_USER,
@@ -393,6 +296,13 @@ export const saveUserGift = (path) => {
     }
   };
 };
+
+export const saveAdminId = (path) => ({
+  type: SAVE_ADMIN_ID,
+  payload: {
+    userData: path.userData
+  },
+});
 
 export const saveUserId = (path) => ({
   type: SAVE_USER_ID,
