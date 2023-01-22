@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveUserData } from "../../store/actions/actions"
 import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
 
-const UserData = ({admin, state}) => {
+const UserData = ({admin}) => {
+  const state = useSelector(state => state.admin)
   const [userName, setUserName] = useState(state.userData.name);
   const [userEmail, setUserEmail] = useState(state.userData.email);
   const dispatch = useDispatch()

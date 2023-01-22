@@ -5,6 +5,7 @@ const GlobalButton = ({onClick, text}) => {
   return ( 
     <Button 
       variant="contained"
+      disableElevation
       onClick={onClick}
     >
       <Typography variant="button" display="block">{text}</Typography>

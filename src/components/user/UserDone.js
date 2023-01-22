@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 
 const UserDone = () => {
-  const state = useSelector(state => state.user)
+  const state = useSelector(state => state.admin)
   const {id} = useParams();
 
   if (state.errorFetch === true) {

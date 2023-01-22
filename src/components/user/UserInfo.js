@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 
 const UserInfo = () => {
   const [groupData, setGroupdata] = useState();
-  const state = useSelector(state => state.user)
+  const state = useSelector(state => state.admin)
   const {id} = useParams();
 
   useEffect(() => {

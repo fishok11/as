@@ -9,8 +9,8 @@ import RedeemIcon from '@mui/icons-material/Redeem';
 const EditUser = () => {
   return (
     <div className="ReturnToEdit-container">
-      <Step ico={<PersonIcon />} action={RETURN_CREATE_USER} stepUser='1'/>
-      <Step ico={<RedeemIcon />} action={RETURN_CREATE_USER_GIFT} stepUser='2'/>
+      <Step ico={<PersonIcon />} action={RETURN_CREATE_USER} userStep='1'/>
+      <Step ico={<RedeemIcon />} action={RETURN_CREATE_USER_GIFT} userStep='2'/>
     </div>
   )
 }

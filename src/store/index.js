@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
-import { admin } from './admin'
-import { user } from './user'
+import { group } from './group'
 
 export const reducer = combineReducers({
-  admin,
-  user,
+  group,
 })

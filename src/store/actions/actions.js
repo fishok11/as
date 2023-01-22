@@ -3,15 +3,12 @@ import {
   CREATE_EVENT_DATE, 
   CREATE_ADMIN_DATA, 
   CREATE_ADMIN_GIFT, 
-  SAVE_ID, 
-  SAVE_ADMIN_ID,
-  ERROR_ADMIN_FETCH,
-  GROUP_CREATING,
+  SAVE_GROUP_ID, 
+  ERROR_FETCH,
+  CREATING,
   CREATE_USER, 
-  ERROR_USER_FETCH,
-  USER_CREATING,
+  CREATE_USER_GIFT,
   SAVE_USER_ID,
-  CREATE_USER_GIFT
 } from "./actionTypes"
 
 
@@ -37,7 +34,7 @@ export const saveGroupName = (path) => {
   if (path.group.name !=="" && isUpdate === true) {
     return async(dispatch) => {
       try {
-        dispatch(groupCreating())
+        dispatch(creating())
         const response = await fetch('http://localhost:3002/group/' + path.groupId, {
           method: 'PUT',
           headers: {
@@ -58,7 +55,7 @@ export const saveGroupName = (path) => {
         console.log(error)
       };
       if (isError === true) {
-        dispatch(adminError());
+        dispatch(errorFetch());
       };
     };
   } else {
@@ -81,7 +78,7 @@ export const saveEventDate = (path) => {
     path.group.eventDate.budget !=="" ) {
       return async(dispatch) => {
         try {
-          dispatch(groupCreating())
+          dispatch(creating())
           const response = await fetch(isUpdate === true ? 'http://localhost:3002/group/' + path.groupId : 'http://localhost:3002/group', {
             method: isUpdate === true ? 'PUT' : 'POST',
             headers: {
@@ -96,7 +93,7 @@ export const saveEventDate = (path) => {
               eventDate: path.group.eventDate,
             }));
             if (path.groupId === null) { 
-              dispatch(saveId({
+              dispatch(saveGroupId({
                 group: {
                   id: data.id
                 }
@@ -110,7 +107,7 @@ export const saveEventDate = (path) => {
           console.log(error)
         };
         if (isError === true) {
-          dispatch(adminError());
+          dispatch(errorFetch());
         };
       };
   } else {
@@ -122,19 +119,19 @@ export const saveEventDate = (path) => {
   };
 };
 
-export const saveId = (path) => ({
-  type: SAVE_ID,
+export const saveGroupId = (path) => ({
+  type: SAVE_GROUP_ID,
   payload: {
     group: path.group
   },
 });
 
-export const groupCreating = () => ({
-  type: GROUP_CREATING,
+export const creating = () => ({
+  type: CREATING,
 });
 
-export const adminError = () => ({
-  type: ERROR_ADMIN_FETCH,
+export const errorFetch = () => ({
+  type: ERROR_FETCH,
 });
 
 // ===================================================================================
@@ -177,7 +174,7 @@ export const saveUserData = (path) => {
     isUpdate === true) {
     return async (dispatch) => {
       try {
-        dispatch(userCreating())
+        dispatch(creating())
         const response = await fetch('http://localhost:3002/users/' + path.userId, {
           method: 'PUT',
           headers: {
@@ -204,7 +201,7 @@ export const saveUserData = (path) => {
         isError = true;
       };
       if (isError === true) {
-        dispatch(userError());
+        dispatch(errorFetch());
       };
     };
   } else {
@@ -232,7 +229,7 @@ export const saveUserGift = (path) => {
   if (path.user.userGift.age !== "" && path.user.userGift.gender !== "") {
     return async (dispatch) => {
       try {
-        dispatch(userCreating())
+        dispatch(creating())
         const response = await fetch(isUpdate ===  true ? 'http://localhost:3002/users/' + path.userId : 'http://localhost:3002/users', {
           method: isUpdate ===  true ? 'PUT' : 'POST',
           headers: {
@@ -254,20 +251,11 @@ export const saveUserGift = (path) => {
             }));
           }
           if (path.userId === null) {
-            if (path.user.admin === true) {
-              dispatch(saveAdminId({
-                userData: {
-                  id: data.id
-                }
-              }));
-            }
-            if (path.user.admin === false) {
-              dispatch(saveUserId({
-                userData: {
-                  userId: data.id
-                },
-              }));
-            }
+            dispatch(saveUserId({
+              userData: {
+                userId: data.id
+              },
+            }));
           }
         } else if (response.status >= 300) {
           isError = true;
@@ -276,7 +264,7 @@ export const saveUserGift = (path) => {
         isError = true;
       };
       if (isError === true) {
-        dispatch(userError());
+        dispatch(errorFetch());
       };
     };
   } else {
@@ -297,24 +285,9 @@ export const saveUserGift = (path) => {
   };
 };
 
-export const saveAdminId = (path) => ({
-  type: SAVE_ADMIN_ID,
-  payload: {
-    userData: path.userData
-  },
-});
-
 export const saveUserId = (path) => ({
   type: SAVE_USER_ID,
   payload: {
     userData: path.userData
   },
-});
-
-export const userCreating = () => ({
-  type: USER_CREATING,
-});
-
-export const userError = () => ({
-  type: ERROR_USER_FETCH,
 });

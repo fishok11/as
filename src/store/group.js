@@ -5,15 +5,19 @@ import {
   CREATE_ADMIN_GIFT, 
   RETURN_CREATE_GROUP_NAME,
   RETURN_CREATE_EVENT_DATE,
-  RETURN_CREATE_GROUP_OWNER,
-  RETURN_CREATE_YOUR_GIFT,
-  SAVE_ID,
-  SAVE_ADMIN_ID, 
-  ERROR_ADMIN_FETCH,
-  GROUP_CREATING,
-} from "../store/actions/actionTypes"
+  RETURN_CREATE_ADMIN_DATA,
+  RETURN_CREATE_ADMIN_GIFT,
+  SAVE_GROUP_ID,
+  CREATE_USER, 
+  SAVE_USER_ID,
+  CREATE_USER_GIFT,
+  RETURN_CREATE_USER,
+  RETURN_CREATE_USER_GIFT,
+  ERROR_FETCH,
+  CREATING,
+} from "./actions/actionTypes"
 
-const initialStateAdmin = {
+const initialState = {
   group:{
     id: null,
     name: "",
@@ -43,13 +47,15 @@ const initialStateAdmin = {
     edit: false,
   },
   step: 1,
+  userStep: 1,
   saveGroup: false,
   errorFetch: false,
-  groupCreating: false,
+  creating: false,
 }
 
-export const admin = (state = initialStateAdmin, action) => {
+export const group = (state = initialState, action) => {
   switch(action.type) {
+    //======================================================== GROUP & ADMIN
     case CREATE_GROUP_NAME: {
       const groupName = action.payload.group.name
 
@@ -76,7 +82,7 @@ export const admin = (state = initialStateAdmin, action) => {
               edit: true,
             },
             errorFetch: false,
-            groupCreating: false,
+            creating: false,
           }
         }
         if (state.step === 3) {
@@ -93,7 +99,7 @@ export const admin = (state = initialStateAdmin, action) => {
               edit: true,
             },
             errorFetch: false,
-            groupCreating: false,
+            creating: false,
           }
         }
         if (state.step === 4) {
@@ -110,7 +116,7 @@ export const admin = (state = initialStateAdmin, action) => {
               edit: true,
             },
             errorFetch: false,
-            groupCreating: false,
+            creating: false,
           }
         }
         if (state.step === 5) {
@@ -123,7 +129,7 @@ export const admin = (state = initialStateAdmin, action) => {
               edit: false, 
             },
             errorFetch: false,
-            groupCreating: false,
+            creating: false,
           }
         }
       } else {
@@ -141,7 +147,7 @@ export const admin = (state = initialStateAdmin, action) => {
           },
           step: 2,
           errorFetch: false,
-          groupCreating: false,
+          creating: false,
         }
       }
       break
@@ -181,7 +187,7 @@ export const admin = (state = initialStateAdmin, action) => {
               edit: true,
             },
             errorFetch: false,
-            groupCreating: false,
+            creating: false,
           }
         }
         if (state.step === 4) {
@@ -201,7 +207,7 @@ export const admin = (state = initialStateAdmin, action) => {
               edit: true,
             },
             errorFetch: false,
-            groupCreating: false,
+            creating: false,
           }
         }
         if (state.step === 5) {
@@ -217,7 +223,7 @@ export const admin = (state = initialStateAdmin, action) => {
               edit: false,
             },
             errorFetch: false,
-            groupCreating: false,
+            creating: false,
           }
         }
       } else {
@@ -238,7 +244,7 @@ export const admin = (state = initialStateAdmin, action) => {
           },
           step: 3,
           errorFetch: false,
-          groupCreating: false,
+          creating: false,
         }
       }
       break
@@ -270,7 +276,7 @@ export const admin = (state = initialStateAdmin, action) => {
               edit: true,
             },
             errorFetch: false,
-            groupCreating: false,
+            creating: false,
           }
         }
         if (state.step === 5) {
@@ -283,7 +289,7 @@ export const admin = (state = initialStateAdmin, action) => {
               edit: false,
             },
             errorFetch: false,
-            groupCreating: false,
+            creating: false,
           }
         }
       } else {
@@ -301,7 +307,7 @@ export const admin = (state = initialStateAdmin, action) => {
           },
           step: 4,
           errorFetch: false,
-          groupCreating: false,
+          creating: false,
         }
       }
       break
@@ -334,7 +340,7 @@ export const admin = (state = initialStateAdmin, action) => {
           },
           step: 5,
           saveGroup: true,
-          groupCreating: false,
+          creating: false,
         }
       }
     }
@@ -387,7 +393,7 @@ export const admin = (state = initialStateAdmin, action) => {
       }
 
     }
-    case RETURN_CREATE_GROUP_OWNER: {
+    case RETURN_CREATE_ADMIN_DATA: {
       if (state.step >= 3) {
         return {
           ...state,
@@ -414,7 +420,7 @@ export const admin = (state = initialStateAdmin, action) => {
         }
       }
     }
-    case RETURN_CREATE_YOUR_GIFT: {
+    case RETURN_CREATE_ADMIN_GIFT: {
       if (state.step >= 4) {
         return {
           ...state,
@@ -441,7 +447,7 @@ export const admin = (state = initialStateAdmin, action) => {
         }
       }
     }
-    case SAVE_ID: {
+    case SAVE_GROUP_ID: {
       const groupId = action.payload.group.id;
 
       return {
@@ -450,11 +456,130 @@ export const admin = (state = initialStateAdmin, action) => {
           ...state.group,
           id: groupId,
         },
-        groupCreating: false,
+        creating: false,
       }
     }
-    case SAVE_ADMIN_ID: {
-      const userId = action.payload.userData.id;
+    // ========================================================= USER
+    case CREATE_USER: {
+      const userName = action.payload.userData.name
+      const userEmail = action.payload.userData.email
+
+      if (userName === "" || userEmail === "") {
+        return {
+          ...state,
+          userData: {    
+            ...state.userData,      
+            error: true,
+          },
+        }
+      } else if (state.userStep > 1) {
+        if (state.userStep === 2) {
+          return {
+            ...state,
+            userData: {
+              ...state.userData,
+              name: userName,
+              email: userEmail,
+              edit: false,
+            },
+            userGift: {
+              ...state.userGift,
+              edit: true,
+            },
+            errorFetch: false,
+            creating: false,
+          }
+        }
+        if (state.userStep === 3) {
+          return {
+            ...state,
+            userData: {
+              ...state.userData,
+              name: userName,
+              email: userEmail,
+              edit: false,
+            },
+            errorFetch: false,
+            creating: false,
+          }
+        }
+      } else {
+        return {
+          ...state,
+          userData: {    
+            ...state.userData,      
+            name: userName,
+            email: userEmail,
+            error: false,
+            edit: false,
+          },
+          userGift: {
+            edit: true,
+          },
+          userStep: 2,
+          errorFetch: false,
+          creating: false,
+        }
+      }
+      break
+    } 
+    case CREATE_USER_GIFT: {
+      const userAge = action.payload.userGift.age
+      const userGender = action.payload.userGift.gender
+      const userWishes = action.payload.userGift.wishes
+
+      if (userAge === "" || userGender === "") {
+        return {
+          ...state,
+          userGift: {    
+            ...state.userGift,      
+            error: true,
+          },
+        }
+      } else {
+        return {
+          ...state,
+          userGift: {
+            ...state.userGift,  
+            age: userAge,
+            gender: userGender,
+            wishes: userWishes,
+            edit: false,
+          },
+          userStep: 3,
+          errorFetch: false,
+          creating: false,
+        }
+      }
+    }
+    case RETURN_CREATE_USER: {
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          edit: true,
+        },
+        userGift: {
+          ...state.userGift,
+          edit: false,
+        },
+      }
+    }
+    case RETURN_CREATE_USER_GIFT: {
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          edit: false,
+        },
+        userGift: {
+          ...state.userGift,
+          edit: true,
+        },
+      }
+    }
+    case SAVE_USER_ID: {
+      const userId = action.payload.userData.userId;
 
       return {
         ...state,
@@ -462,20 +587,21 @@ export const admin = (state = initialStateAdmin, action) => {
           ...state.userData,
           id: userId,
         },
-        groupCreating: false,
+        creating: false,
       }
     }
-    case ERROR_ADMIN_FETCH: {
+    //========================================================== FETCH STATUS
+    case ERROR_FETCH: {
       return {
         ...state,
         errorFetch: true,
-        groupCreating: false,
+        creating: false,
       }
     }
-    case GROUP_CREATING: {
+    case CREATING: {
       return {
         ...state,
-        groupCreating: true,
+        creating: true,
       }
     }
     default: {

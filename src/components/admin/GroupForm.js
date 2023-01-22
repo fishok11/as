@@ -7,22 +7,22 @@ import EditGroup from "../navigation/EditGroup";
 import { useSelector } from "react-redux";
 
 
-const GroupAdminForm = () => {
+const GroupForm = () => {
   const state = useSelector(state => state.admin)
 
   return (
     <div className="Group-container">
     <EditGroup/>
-    {(state.step >= 1 && state.group.edit) && (<GroupName/>)}
-    {(state.step >= 2 && state.eventDate.edit) && (<GroupDates/>)}
-    {(state.step >= 3 && state.userData.edit) && (<UserData admin={true} state={state}/>)}
-    {(state.step >= 4 && state.userGift.edit) && (<UserGift admin={true} state={state}/>)}
+    {(state.step >= 1 && state.group.edit === true) && (<GroupName/>)}
+    {(state.step >= 2 && state.eventDate.edit === true) && (<GroupDates/>)}
+    {(state.step >= 3 && state.userData.edit === true) && (<UserData admin={true} />)}
+    {(state.step >= 4 && state.userGift.edit === true) && (<UserGift admin={true} />)}
     {
-      state.step >= 5 &&
+      (state.step >= 5 &&
       state.group.edit === false &&
       state.eventDate.edit === false &&
       state.userData.edit === false &&
-      state.userGift.edit === false && (
+      state.userGift.edit === false) && (
         <GroupDone/>
       )
     }
@@ -30,4 +30,4 @@ const GroupAdminForm = () => {
   )
 };
 
-export default GroupAdminForm;
+export default GroupForm;

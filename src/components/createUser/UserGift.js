@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -14,7 +14,8 @@ import Typography from '@mui/material/Typography';
 import { saveUserGift } from "../../store/actions/actions";
 import GlobalButton from "../navigation/GlobalButton";
 
-const UserGift = ({admin, state}) => {
+const UserGift = ({admin}) => {
+  const state = useSelector(state => state.admin)
   const dispatch = useDispatch()
   const [userAge, setUserAge] = useState('')
   const [userGender, setUserGender] = useState('')
