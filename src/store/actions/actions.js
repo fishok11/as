@@ -6,11 +6,16 @@ import {
   SAVE_GROUP_ID, 
   ERROR_FETCH,
   CREATING,
-  CREATE_USER, 
+  CREATE_USER_DATA, 
   CREATE_USER_GIFT,
   SAVE_USER_ID,
+  CLOSE_EDITING_GROUP_NAME,
+  CLOSE_EDITING_EVENT_DATE,
+  CLOSE_EDITING_USER_DATA,
+  CLOSE_EDITING_USER_GIFT,
 } from "./actionTypes"
 
+//=============================================== ACTIONS
 
 export const createGroupName = (path) => ({
   type: CREATE_GROUP_NAME,
@@ -25,6 +30,74 @@ export const createEventDate = (path) => ({
     eventDate: path.eventDate,
   },
 });
+
+export const saveGroupId = (path) => ({
+  type: SAVE_GROUP_ID,
+  payload: {
+    group: path.group
+  },
+});
+
+export const createAdminData = (path) => ({
+  type: CREATE_ADMIN_DATA,
+  payload: {
+    userData: path.userData
+  },
+});
+
+export const createAdminGift = (path) => ({
+  type: CREATE_ADMIN_GIFT,
+  payload: {
+    userGift: path.userGift
+  },
+});
+
+export const createUser = (path) => ({
+  type: CREATE_USER_DATA,
+  payload: {
+    userData: path.userData
+  }
+});
+
+export const createUserGift = (path) => ({
+  type: CREATE_USER_GIFT,
+  payload: {
+    userGift: path.userGift
+  }
+});
+
+export const saveUserId = (path) => ({
+  type: SAVE_USER_ID,
+  payload: {
+    userData: path.userData
+  },
+}); 
+
+export const closeEditingGroupName = () => ({
+  type: CLOSE_EDITING_GROUP_NAME,
+});
+
+export const closeEditingEventDate = () => ({
+  type: CLOSE_EDITING_EVENT_DATE,
+});
+
+export const closeEditingUserData = () => ({
+  type: CLOSE_EDITING_USER_DATA,
+});
+
+export const closeEditingUserGift = () => ({
+  type: CLOSE_EDITING_USER_GIFT,
+});
+
+export const creating = () => ({
+  type: CREATING,
+});
+
+export const errorFetch = () => ({
+  type: ERROR_FETCH,
+});
+
+//=============================================== FETCH
 
 export const saveGroupName = (path) => {
   let isError = false;
@@ -44,9 +117,13 @@ export const saveGroupName = (path) => {
         })
         
         if (response.status < 300) {
-          dispatch(createGroupName({
-            group: path.group,
-          }));
+          if (path.profile === true) {
+            dispatch(closeEditingGroupName())
+          } else {
+            dispatch(createGroupName({
+              group: path.group,
+            }));
+          }
         } else if (response.status >= 300) {
           isError = true;
         };
@@ -59,6 +136,7 @@ export const saveGroupName = (path) => {
       };
     };
   } else {
+    console.log(3)
     return async(dispatch) => {
       dispatch(createGroupName({
         group: path.group,
@@ -89,9 +167,13 @@ export const saveEventDate = (path) => {
           const data = await response.json()
 
           if (response.status < 300) {
-            dispatch(createEventDate({
-              eventDate: path.group.eventDate,
-            }));
+            if (path.profile === true) {
+              dispatch(closeEditingEventDate())
+            } else {
+              dispatch(createEventDate({
+                eventDate: path.group.eventDate,
+              }));
+            }
             if (path.groupId === null) { 
               dispatch(saveGroupId({
                 group: {
@@ -119,51 +201,6 @@ export const saveEventDate = (path) => {
   };
 };
 
-export const saveGroupId = (path) => ({
-  type: SAVE_GROUP_ID,
-  payload: {
-    group: path.group
-  },
-});
-
-export const creating = () => ({
-  type: CREATING,
-});
-
-export const errorFetch = () => ({
-  type: ERROR_FETCH,
-});
-
-// ===================================================================================
-
-export const createAdminData = (path) => ({
-  type: CREATE_ADMIN_DATA,
-  payload: {
-    userData: path.userData
-  },
-});
-
-export const createAdminGift = (path) => ({
-  type: CREATE_ADMIN_GIFT,
-  payload: {
-    userGift: path.userGift
-  },
-});
-
-export const createUser = (path) => ({
-  type: CREATE_USER,
-  payload: {
-    userData: path.userData
-  }
-});
-
-export const createUserGift = (path) => ({
-  type: CREATE_USER_GIFT,
-  payload: {
-    userGift: path.userGift
-  }
-});
-
 export const saveUserData = (path) => {
   let isError = false;
   const isUpdate = Boolean(path.userId)
@@ -184,12 +221,15 @@ export const saveUserData = (path) => {
         })
   
         if (response.status < 300) {
-          if (path.user.admin === true) {
+          if (path.profile === true) {
+            dispatch(closeEditingUserData())
+          }
+          if (path.user.admin === true && path.profile === false) {
             dispatch(createAdminData({
               userData: path.user.userData,
             }));
           }
-          if (path.user.admin === false) {
+          if (path.user.admin === false && path.profile === false) {
             dispatch(createUser({
               userData: path.user.userData
             }));
@@ -240,12 +280,15 @@ export const saveUserGift = (path) => {
         const data = await response.json()
   
         if (response.status < 300) {
-          if (path.user.admin === true) {
+          if (path.profile === true) {
+            dispatch(closeEditingUserGift())
+          }
+          if (path.user.admin === true && path.profile === false) {
             dispatch(createAdminGift({
               userGift: path.user.userGift
             }));
           }
-          if (path.user.admin === false) {
+          if (path.user.admin === false && path.profile === false) {
             dispatch(createUserGift({
               userGift: path.user.userGift
             }));
@@ -284,10 +327,3 @@ export const saveUserGift = (path) => {
     }
   };
 };
-
-export const saveUserId = (path) => ({
-  type: SAVE_USER_ID,
-  payload: {
-    userData: path.userData
-  },
-});

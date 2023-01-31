@@ -14,8 +14,8 @@ import Typography from '@mui/material/Typography';
 import { saveUserGift } from "../../store/actions/actions";
 import GlobalButton from "../navigation/GlobalButton";
 
-const UserGift = ({admin}) => {
-  const state = useSelector(state => state.admin)
+const UserGift = ({admin, userId, profile, userDB}) => {
+  const state = useSelector(state => state.group)
   const dispatch = useDispatch()
   const [userAge, setUserAge] = useState('')
   const [userGender, setUserGender] = useState('')
@@ -25,8 +25,8 @@ const UserGift = ({admin}) => {
   let user = {
     groupId: Number(admin === true ? state.group.id : id),
     userData:{
-      name: state.userData.name,
-      email: state.userData.email,
+      name: profile === true ? userDB.userData.name : state.userData.name,
+      email: profile === true ? userDB.userData.email : state.userData.email,
     },
     userGift: {
       age: userAge,
@@ -61,7 +61,7 @@ const UserGift = ({admin}) => {
           <Select 
             labelId="demo-select-small"
             id="demo-select-small"
-            label="Возраст получателя"
+            label="Ваш возраст"
             value={userAge}
             onChange={event => setUserAge(event.target.value)}
           >
@@ -75,7 +75,7 @@ const UserGift = ({admin}) => {
           fullWidth
           error={state.userGift.error === true}
         >
-          <FormLabel id="demo-radio-buttons-group-label">Пол</FormLabel>
+          <FormLabel id="demo-radio-buttons-group-label">Ваш пол</FormLabel>
           <RadioGroup 
             value={userGender}
             onChange={event => setUserGender(event.target.value)}
@@ -101,7 +101,8 @@ const UserGift = ({admin}) => {
           text={"OK"}
           onClick={() => dispatch(saveUserGift({
             user,
-            userId: state.userData.id,
+            userId: userId,
+            profile: profile,
           }))}
         />
       </div>

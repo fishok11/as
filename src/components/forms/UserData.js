@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography';
 import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
 
-const UserData = ({admin}) => {
-  const state = useSelector(state => state.admin)
+const UserData = ({admin, userId, profile, userDB}) => {
+  const state = useSelector(state => state.group)
   const [userName, setUserName] = useState(state.userData.name);
   const [userEmail, setUserEmail] = useState(state.userData.email);
   const dispatch = useDispatch()
@@ -19,9 +19,9 @@ const UserData = ({admin}) => {
       email: userEmail,
     },
     userGift: {
-      age: state.userGift.age,
-      gender: state.userGift.gender,
-      wishes: state.userGift.wishes,
+      age: profile === true ? userDB.userGift.age : state.userGift.age,
+      gender: profile === true ? userDB.userGift.gender : state.userGift.gender,
+      wishes: profile === true ? userDB.userGift.gender : state.userGift.wishes,
     },
     admin: admin,
   };
@@ -49,7 +49,8 @@ const UserData = ({admin}) => {
           text={"OK"}
           onClick={() => dispatch(saveUserData({
             user,
-            userId: state.userData.id,
+            userId: userId,
+            profile: profile,
           }))}
         />
       </div>

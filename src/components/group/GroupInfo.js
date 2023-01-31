@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
 
 const GroupInfo = () => {
-  const state = useSelector(state => state.admin)
+  const state = useSelector(state => state.group)
 
   return (
     <div>

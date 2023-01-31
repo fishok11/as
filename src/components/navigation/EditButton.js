@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import Button from '@mui/material/Button';
 
-const Step = ({ico, action, adminStep, userStep}) => {
+const EditButton = ({ico, action, adminStep, userStep}) => {
   const dispatch = useDispatch()
-  const state = useSelector(state => state.admin)
+  const state = useSelector(state => state.group)
 
   return (
     <Button
@@ -18,4 +18,4 @@ const Step = ({ico, action, adminStep, userStep}) => {
   )
 };
 
-export default Step;
+export default EditButton;

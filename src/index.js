@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import thunk from 'redux-thunk';
 import './index.css';
 import User from "./components/user/User";
-import Group from "./components/admin/Group";
+import Group from "./components/group/Group";
 import UserProfile from "./components/user/UserProfile";
 
 const store = configureStore({reducer}, applyMiddleware(thunk))

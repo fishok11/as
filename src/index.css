@@ -3,7 +3,7 @@ body {
   font-family: Calibri, sans-serif;
   color: #575656;
   font-size: 16px;
-  background-color: #E7EBF0;
+  background-color: #d6d9dd;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -11,7 +11,7 @@ body {
 }
 :root {
   --main-grey:#9c9fa3;
-  --main-border-radius: 6px;
+  --main-border-radius: 3px;
   --shadow-input: inset 0 1px 4px #11111145
 }
 h2 {
@@ -44,10 +44,12 @@ h3 {
   box-sizing: border-box;
   animation: pop-in 1s forwards;
   background-color: #ffffff;
+  border-radius: var(--main-border-radius);
 }
 .Group-container--info {
   padding: 5px 15px;
   margin-bottom: 10px;
+  border-radius: var(--main-border-radius);
 }
 @keyframes pop-in {
   0% {
@@ -63,13 +65,6 @@ h3 {
     opacity: 1;
   }
 }
-/* .g-button {
-  color: #ffffff;
-  font-size: 16px;
-  margin-top: 15px;
-  padding: 10px;
-  width: 100px; 
-} */
 .ReturnToEdit-container {
   display: flex;
   justify-content: space-around;
@@ -88,5 +83,15 @@ h3 {
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   box-shadow: var(--shadow-input);
   font-size: 13px;
-  margin: 15px 0;
+  margin: 7px 0;
+}
+.UserProfile__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.UserProfile__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

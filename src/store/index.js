@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { group } from './group'
+import { group } from './reducer'
 
 export const reducer = combineReducers({
   group,

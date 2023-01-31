@@ -1,4 +1,4 @@
-import Step from "./Step";
+import EditButton from "./EditButton";
 import { 
   RETURN_CREATE_GROUP_NAME,
   RETURN_CREATE_EVENT_DATE,
@@ -13,10 +13,10 @@ import RedeemIcon from '@mui/icons-material/Redeem';
 const EditGroup = () => {
   return (
     <div className="ReturnToEdit-container">
-      <Step ico={<PeopleIcon />} action={RETURN_CREATE_GROUP_NAME} adminStep='1'/>
-      <Step ico={<CalendarMonthIcon />} action={RETURN_CREATE_EVENT_DATE} adminStep='2'/>
-      <Step ico={<PersonIcon />} action={RETURN_CREATE_ADMIN_DATA} adminStep='3'/>
-      <Step ico={<RedeemIcon />} action={RETURN_CREATE_ADMIN_GIFT} adminStep='4'/>
+      <EditButton ico={<PeopleIcon />} action={RETURN_CREATE_GROUP_NAME} adminStep='1'/>
+      <EditButton ico={<CalendarMonthIcon />} action={RETURN_CREATE_EVENT_DATE} adminStep='2'/>
+      <EditButton ico={<PersonIcon />} action={RETURN_CREATE_ADMIN_DATA} adminStep='3'/>
+      <EditButton ico={<RedeemIcon />} action={RETURN_CREATE_ADMIN_GIFT} adminStep='4'/>
     </div>
   )
 }

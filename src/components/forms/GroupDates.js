@@ -11,15 +11,15 @@ import Typography from '@mui/material/Typography';
 import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
 
-const GroupDates = () => {
-  const state = useSelector(state => state.admin)
+const GroupDates = ({id, profile, groupDB}) => {
+  const state = useSelector(state => state.group)
   const dispatch = useDispatch()
   const [budget, setBudget] = useState(state.eventDate.budget)
   const [registrationDate, setRegistrationDate] = useState(dayjs())
   const [drawDate, setDrawDate] = useState(dayjs())
   const [exchangeDate, setExchangeDate] = useState(dayjs())
   let group = {
-    name: state.group.name,
+    name: profile === true ? groupDB.name : state.group.name,
     eventDate: {
       budget: budget,
       registrationDate: dayjs(registrationDate).format('DD/MM/YYYY'),
@@ -75,7 +75,8 @@ const GroupDates = () => {
         onClick={() => (
           dispatch(saveEventDate({
             group,
-            groupId: state.group.id,
+            groupId: id,
+            profile: profile,
           })) 
         )}
       />

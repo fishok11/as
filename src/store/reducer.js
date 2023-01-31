@@ -8,11 +8,19 @@ import {
   RETURN_CREATE_ADMIN_DATA,
   RETURN_CREATE_ADMIN_GIFT,
   SAVE_GROUP_ID,
-  CREATE_USER, 
-  SAVE_USER_ID,
+  CREATE_USER_DATA, 
   CREATE_USER_GIFT,
   RETURN_CREATE_USER,
   RETURN_CREATE_USER_GIFT,
+  SAVE_USER_ID,
+  EDIT_GROUP_NAME,
+  EDIT_EVENT_DATE,
+  EDIT_USER_DATA,
+  EDIT_USER_GIFT,
+  CLOSE_EDITING_GROUP_NAME,
+  CLOSE_EDITING_EVENT_DATE,
+  CLOSE_EDITING_USER_DATA,
+  CLOSE_EDITING_USER_GIFT,
   ERROR_FETCH,
   CREATING,
 } from "./actions/actionTypes"
@@ -23,6 +31,7 @@ const initialState = {
     name: "",
     error: false,
     edit: true,
+    editProfile: false,
   },
   eventDate: {
     budget: "",
@@ -460,7 +469,7 @@ export const group = (state = initialState, action) => {
       }
     }
     // ========================================================= USER
-    case CREATE_USER: {
+    case CREATE_USER_DATA: {
       const userName = action.payload.userData.name
       const userEmail = action.payload.userData.email
 
@@ -588,6 +597,128 @@ export const group = (state = initialState, action) => {
           id: userId,
         },
         creating: false,
+      }
+    }
+    //========================================================== EDIT PROFILE
+    case EDIT_GROUP_NAME: {
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          editProfile: true,
+        },
+        eventDate: {
+          ...state.eventDate,
+          edit: false,
+        },
+        userData: {
+          ...state.userData,
+          edit: false,
+        },
+        userGift: {
+          ...state.userGift,
+          edit: false,
+        },
+      }
+    }
+    case EDIT_EVENT_DATE: {
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          editProfile: false,
+        },
+        eventDate: {
+          ...state.eventDate,
+          edit: true,
+        },
+        userData: {
+          ...state.userData,
+          edit: false,
+        },
+        userGift: {
+          ...state.userGift,
+          edit: false,
+        },
+      }
+    }
+    case EDIT_USER_DATA: {
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          editProfile: false,
+        },
+        eventDate: {
+          ...state.eventDate,
+          edit: false,
+        },
+        userData: {
+          ...state.userData,
+          edit: true,
+        },
+        userGift: {
+          ...state.userGift,
+          edit: false,
+        },
+      }
+    }
+    case EDIT_USER_GIFT: {
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          editProfile: false,
+        },
+        eventDate: {
+          ...state.eventDate,
+          edit: false,
+        },
+        userData: {
+          ...state.userData,
+          edit: false,
+        },
+        userGift: {
+          ...state.userGift,
+          edit: true,
+        },
+      }
+    }
+    case CLOSE_EDITING_GROUP_NAME: {
+      console.log(state.group)
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          editProfile: false,
+        },
+      }
+    }
+    case CLOSE_EDITING_EVENT_DATE: {
+      return {
+        ...state,
+        eventDate: {
+          ...state.eventDate,
+          edit: false,
+        },
+      }
+    }
+    case CLOSE_EDITING_USER_DATA: {
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          edit: false,
+        },
+      }
+    }
+    case CLOSE_EDITING_USER_GIFT: {
+      return {
+        ...state,
+        userGift: {
+          ...state.userGift,
+          edit: false,
+        },
       }
     }
     //========================================================== FETCH STATUS
