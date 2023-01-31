@@ -27,7 +27,6 @@ const UserProfile = () => {
     .then(res => res.json())
     .then(data => setGroup(data))
   }, [id]);
-
   useEffect(() => {
     fetch('http://localhost:3002/users/' + userId)
     .then(res => res.json())
@@ -40,6 +39,7 @@ const UserProfile = () => {
   if (user === undefined) {
     return null
   } 
+  
   return (
     <div className="Group-container ">
       {state.group.editProfile === false && 

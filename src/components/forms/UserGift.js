@@ -22,8 +22,9 @@ const UserGift = ({admin, userId, profile, userDB}) => {
   const [userWishes, setUserWishes] = useState(state.userGift.wishes)
   const allAge = [5, 6 ,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] 
   const {id} = useParams();
+  const getId = Number(admin === true ? state.group.id : id);
   let user = {
-    groupId: Number(admin === true ? state.group.id : id),
+    groupId: Number(profile === true ? id : getId),
     userData:{
       name: profile === true ? userDB.userData.name : state.userData.name,
       email: profile === true ? userDB.userData.email : state.userData.email,

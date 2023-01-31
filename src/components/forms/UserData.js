@@ -7,13 +7,14 @@ import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
 
 const UserData = ({admin, userId, profile, userDB}) => {
-  const state = useSelector(state => state.group)
+  const state = useSelector(state => state.group);
   const [userName, setUserName] = useState(state.userData.name);
   const [userEmail, setUserEmail] = useState(state.userData.email);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const {id} = useParams();
+  const getId = Number(admin === true ? state.group.id : id);
   let user = {
-    groupId: Number(admin === true ? state.group.id : id),
+    groupId: Number(profile === true ? id : getId),
     userData:{
       name: userName,
       email: userEmail,

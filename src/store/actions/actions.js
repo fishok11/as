@@ -205,13 +205,13 @@ export const saveUserData = (path) => {
   let isError = false;
   const isUpdate = Boolean(path.userId)
   const userUpdate = path.user
-
+  console.log(path.userId)
   if (path.user.userData.name !=="" && 
     path.user.userData.email !=="" && 
     isUpdate === true) {
     return async (dispatch) => {
       try {
-        dispatch(creating())
+        // dispatch(creating())
         const response = await fetch('http://localhost:3002/users/' + path.userId, {
           method: 'PUT',
           headers: {
@@ -265,11 +265,11 @@ export const saveUserData = (path) => {
 export const saveUserGift = (path) => {
   let isError = false;
   const isUpdate = Boolean(path.userId)
-  
+  console.log(path.userId)
   if (path.user.userGift.age !== "" && path.user.userGift.gender !== "") {
     return async (dispatch) => {
       try {
-        dispatch(creating())
+        // dispatch(creating())
         const response = await fetch(isUpdate ===  true ? 'http://localhost:3002/users/' + path.userId : 'http://localhost:3002/users', {
           method: isUpdate ===  true ? 'PUT' : 'POST',
           headers: {
