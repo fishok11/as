@@ -14,6 +14,10 @@ import {
   EDIT_USER_DATA,
   EDIT_USER_GIFT,
 } from "../../store/actions/actionTypes"
+import { 
+  GROUP_URL, 
+  USER_URL 
+} from "../../util";
 
 const UserProfile = () => {
   const state = useSelector(state => state.group)
@@ -23,12 +27,12 @@ const UserProfile = () => {
   const {userId} = useParams();
 
   useEffect(() => {
-    fetch('http://localhost:3002/group/' + id)
+    fetch(GROUP_URL + id)
     .then(res => res.json())
     .then(data => setGroup(data))
   }, [id]);
   useEffect(() => {
-    fetch('http://localhost:3002/users/' + userId)
+    fetch(USER_URL + userId)
     .then(res => res.json())
     .then(data => setUser(data))
   }, [userId]);

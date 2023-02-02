@@ -1,4 +1,10 @@
 import { 
+  GROUPS_URL, 
+  GROUP_URL, 
+  USERS_URL, 
+  USER_URL 
+} from "../../util";
+import { 
   CREATE_GROUP_NAME, 
   CREATE_EVENT_DATE, 
   CREATE_ADMIN_DATA, 
@@ -13,9 +19,10 @@ import {
   CLOSE_EDITING_EVENT_DATE,
   CLOSE_EDITING_USER_DATA,
   CLOSE_EDITING_USER_GIFT,
+  RESET_STATE,
 } from "./actionTypes"
 
-//=============================================== ACTIONS
+//======================================================================= ACTIONS
 
 export const createGroupName = (path) => ({
   type: CREATE_GROUP_NAME,
@@ -97,7 +104,11 @@ export const errorFetch = () => ({
   type: ERROR_FETCH,
 });
 
-//=============================================== FETCH
+export const resetState = () => ({
+  type: RESET_STATE,
+});
+
+//================================================================ FETCH
 
 export const saveGroupName = (path) => {
   let isError = false;
@@ -108,7 +119,7 @@ export const saveGroupName = (path) => {
     return async(dispatch) => {
       try {
         dispatch(creating())
-        const response = await fetch('http://localhost:3002/group/' + path.groupId, {
+        const response = await fetch(GROUP_URL + path.groupId, {
           method: 'PUT',
           headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -136,7 +147,6 @@ export const saveGroupName = (path) => {
       };
     };
   } else {
-    console.log(3)
     return async(dispatch) => {
       dispatch(createGroupName({
         group: path.group,
@@ -157,7 +167,7 @@ export const saveEventDate = (path) => {
       return async(dispatch) => {
         try {
           dispatch(creating())
-          const response = await fetch(isUpdate === true ? 'http://localhost:3002/group/' + path.groupId : 'http://localhost:3002/group', {
+          const response = await fetch(isUpdate === true ? GROUP_URL + path.groupId : GROUPS_URL, {
             method: isUpdate === true ? 'PUT' : 'POST',
             headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -205,14 +215,14 @@ export const saveUserData = (path) => {
   let isError = false;
   const isUpdate = Boolean(path.userId)
   const userUpdate = path.user
-  console.log(path.userId)
+
   if (path.user.userData.name !=="" && 
     path.user.userData.email !=="" && 
     isUpdate === true) {
     return async (dispatch) => {
       try {
-        // dispatch(creating())
-        const response = await fetch('http://localhost:3002/users/' + path.userId, {
+        dispatch(creating())
+        const response = await fetch(USER_URL + path.userId, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -265,12 +275,12 @@ export const saveUserData = (path) => {
 export const saveUserGift = (path) => {
   let isError = false;
   const isUpdate = Boolean(path.userId)
-  console.log(path.userId)
+
   if (path.user.userGift.age !== "" && path.user.userGift.gender !== "") {
     return async (dispatch) => {
       try {
-        // dispatch(creating())
-        const response = await fetch(isUpdate ===  true ? 'http://localhost:3002/users/' + path.userId : 'http://localhost:3002/users', {
+        dispatch(creating())
+        const response = await fetch(isUpdate ===  true ? USER_URL + path.userId : USERS_URL, {
           method: isUpdate ===  true ? 'PUT' : 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8'

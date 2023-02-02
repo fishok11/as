@@ -36,17 +36,7 @@ const UserGift = ({admin, userId, profile, userDB}) => {
     },
     admin: admin,
   }; 
-
-  if (state.errorFetch === true) {
-    return (
-      <p className="g-error">Error</p>
-    )
-  };
-  if (state.creating === true) {
-    return (
-      <p>Группа загружается...</p>
-    )
-  }; 
+ 
   return (
     <>
       <div className="g-container__form">

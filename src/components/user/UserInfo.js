@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography';
+import { GROUP_URL } from "../../util";
 
 const UserInfo = () => {
   const [groupData, setGroupdata] = useState();
@@ -9,7 +10,7 @@ const UserInfo = () => {
   const {id} = useParams();
 
   useEffect(() => {
-    fetch('http://localhost:3002/group/' + id)
+    fetch(GROUP_URL + id)
     .then(res => res.json())
     .then(data => setGroupdata(data))
   }, [id])

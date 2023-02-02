@@ -23,6 +23,7 @@ import {
   CLOSE_EDITING_USER_GIFT,
   ERROR_FETCH,
   CREATING,
+  RESET_STATE,
 } from "./actions/actionTypes"
 
 const initialState = {
@@ -685,7 +686,6 @@ export const group = (state = initialState, action) => {
       }
     }
     case CLOSE_EDITING_GROUP_NAME: {
-      console.log(state.group)
       return {
         ...state,
         group: {
@@ -733,6 +733,11 @@ export const group = (state = initialState, action) => {
       return {
         ...state,
         creating: true,
+      }
+    }
+    case RESET_STATE: {
+      return {
+        ...initialState,
       }
     }
     default: {
