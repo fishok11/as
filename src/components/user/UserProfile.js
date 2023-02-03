@@ -1,26 +1,28 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
-import GroupName from '../forms/GroupName'
-import GroupDates from '../forms/GroupDates'
-import UserData from '../forms/UserData'
-import UserGift from '../forms/UserGift'
-import EditButton from '../navigation/EditButton'
+import GroupName from '../forms/GroupName';
+import GroupDates from '../forms/GroupDates';
+import UserData from '../forms/UserData';
+import UserGift from '../forms/UserGift';
+import EditButton from '../navigation/EditButton';
 import EditIcon from '@mui/icons-material/Edit';
-import { 
+import {
   EDIT_GROUP_NAME, 
   EDIT_EVENT_DATE,
   EDIT_USER_DATA,
   EDIT_USER_GIFT,
-} from "../../store/actions/actionTypes"
-import { 
+} from "../../store/actions/actionTypes";
+import {
   GROUP_URL, 
-  USER_URL 
+  USER_URL,
 } from "../../util";
+import { resetEditProfile } from "../../store/actions/actions";
 
 const UserProfile = () => {
-  const state = useSelector(state => state.group)
+  const state = useSelector(state => state.group);
+  const dispatch = useDispatch();
   const [group, setGroup] = useState();
   const [user, setUser] = useState();
   const {id} = useParams();
@@ -30,12 +32,14 @@ const UserProfile = () => {
     fetch(GROUP_URL + id)
     .then(res => res.json())
     .then(data => setGroup(data))
-  }, [id]);
+    dispatch(resetEditProfile())
+  }, [id, dispatch, state.editProfile]);
   useEffect(() => {
     fetch(USER_URL + userId)
     .then(res => res.json())
     .then(data => setUser(data))
-  }, [userId]);
+    dispatch(resetEditProfile())
+  }, [userId, dispatch, state.editProfile]);
 
   if (group === undefined) {
     return null
@@ -43,10 +47,9 @@ const UserProfile = () => {
   if (user === undefined) {
     return null
   } 
-  
   return (
     <div className="Group-container ">
-      {state.group.editProfile === false && 
+      {state.group.editProfileGroup === false && 
       state.eventDate.edit === false && 
       state.userData.edit === false && 
       state.userGift.edit === false && (<>
@@ -74,7 +77,7 @@ const UserProfile = () => {
         </div>
       </>)}
       <>
-        {state.group.editProfile === true && (<GroupName id={id} profile={true} groupDB={group} />)}
+        {state.group.editProfileGroup === true && (<GroupName id={id} profile={true} groupDB={group} />)}
         {state.eventDate.edit === true && (<GroupDates id={id} profile={true} groupDB={group} />)}
         {state.userData.edit === true && (<UserData admin={user.admin} userId={userId} profile={true} userDB={user} />)}
         {state.userGift.edit === true && (<UserGift admin={user.admin} userId={userId} profile={true} userDB={user} />)}

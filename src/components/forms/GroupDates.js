@@ -30,7 +30,7 @@ const GroupDates = ({id, profile, groupDB}) => {
 
   return (
     <div className="g-container__form">
-      <Typography variant="h6">Регистрация участников</Typography>
+      <Typography variant="h6">Данные группы</Typography>
       
       <GlobalInput 
         label="Бюджет" 

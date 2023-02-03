@@ -48,7 +48,7 @@ const UserGift = ({admin, userId, profile, userDB}) => {
           size="small"
           error={state.userGift.error === true}
         >
-          <InputLabel id="demo-select-small">Возраст получателя</InputLabel>
+          <InputLabel id="demo-select-small">Ваш возраст</InputLabel>
           <Select 
             labelId="demo-select-small"
             id="demo-select-small"

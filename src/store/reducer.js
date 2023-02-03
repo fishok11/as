@@ -21,6 +21,7 @@ import {
   CLOSE_EDITING_EVENT_DATE,
   CLOSE_EDITING_USER_DATA,
   CLOSE_EDITING_USER_GIFT,
+  RESET_EDIT_PROFILE,
   ERROR_FETCH,
   CREATING,
   RESET_STATE,
@@ -32,7 +33,7 @@ const initialState = {
     name: "",
     error: false,
     edit: true,
-    editProfile: false,
+    editProfileGroup: false,
   },
   eventDate: {
     budget: "",
@@ -58,9 +59,9 @@ const initialState = {
   },
   step: 1,
   userStep: 1,
-  saveGroup: false,
   errorFetch: false,
   creating: false,
+  editProfile: false,
 }
 
 export const group = (state = initialState, action) => {
@@ -606,7 +607,7 @@ export const group = (state = initialState, action) => {
         ...state,
         group: {
           ...state.group,
-          editProfile: true,
+          editProfileGroup: true,
         },
         eventDate: {
           ...state.eventDate,
@@ -627,7 +628,7 @@ export const group = (state = initialState, action) => {
         ...state,
         group: {
           ...state.group,
-          editProfile: false,
+          editProfileGroup: false,
         },
         eventDate: {
           ...state.eventDate,
@@ -648,7 +649,7 @@ export const group = (state = initialState, action) => {
         ...state,
         group: {
           ...state.group,
-          editProfile: false,
+          editProfileGroup: false,
         },
         eventDate: {
           ...state.eventDate,
@@ -669,7 +670,7 @@ export const group = (state = initialState, action) => {
         ...state,
         group: {
           ...state.group,
-          editProfile: false,
+          editProfileGroup: false,
         },
         eventDate: {
           ...state.eventDate,
@@ -690,8 +691,9 @@ export const group = (state = initialState, action) => {
         ...state,
         group: {
           ...state.group,
-          editProfile: false,
+          editProfileGroup: false,
         },
+        editProfile: true,
       }
     }
     case CLOSE_EDITING_EVENT_DATE: {
@@ -701,6 +703,7 @@ export const group = (state = initialState, action) => {
           ...state.eventDate,
           edit: false,
         },
+        editProfile: true,
       }
     }
     case CLOSE_EDITING_USER_DATA: {
@@ -710,6 +713,7 @@ export const group = (state = initialState, action) => {
           ...state.userData,
           edit: false,
         },
+        editProfile: true,
       }
     }
     case CLOSE_EDITING_USER_GIFT: {
@@ -719,6 +723,13 @@ export const group = (state = initialState, action) => {
           ...state.userGift,
           edit: false,
         },
+        editProfile: true,
+      }
+    }
+    case RESET_EDIT_PROFILE: {
+      return {
+        ...state,
+        editProfile: false,
       }
     }
     //========================================================== FETCH STATUS

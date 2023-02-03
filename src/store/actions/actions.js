@@ -19,10 +19,13 @@ import {
   CLOSE_EDITING_EVENT_DATE,
   CLOSE_EDITING_USER_DATA,
   CLOSE_EDITING_USER_GIFT,
+  RESET_EDIT_PROFILE,
   RESET_STATE,
 } from "./actionTypes"
 
-//======================================================================= ACTIONS
+//================================================================================== ACTIONS
+
+//================================= GROUP & ADMIN
 
 export const createGroupName = (path) => ({
   type: CREATE_GROUP_NAME,
@@ -59,6 +62,8 @@ export const createAdminGift = (path) => ({
   },
 });
 
+//================================= USER
+
 export const createUser = (path) => ({
   type: CREATE_USER_DATA,
   payload: {
@@ -80,6 +85,8 @@ export const saveUserId = (path) => ({
   },
 }); 
 
+//================================= EDIT PROFILE
+
 export const closeEditingGroupName = () => ({
   type: CLOSE_EDITING_GROUP_NAME,
 });
@@ -96,6 +103,12 @@ export const closeEditingUserGift = () => ({
   type: CLOSE_EDITING_USER_GIFT,
 });
 
+export const resetEditProfile = () => ({
+  type: RESET_EDIT_PROFILE,
+});
+
+//================================= FETCH STATUS
+
 export const creating = () => ({
   type: CREATING,
 });
@@ -108,7 +121,9 @@ export const resetState = () => ({
   type: RESET_STATE,
 });
 
-//================================================================ FETCH
+//================================================================================== FETCH
+
+//================================= FETCH GROUP
 
 export const saveGroupName = (path) => {
   let isError = false;
@@ -210,6 +225,8 @@ export const saveEventDate = (path) => {
     };
   };
 };
+
+//================================= FETCH USER
 
 export const saveUserData = (path) => {
   let isError = false;
