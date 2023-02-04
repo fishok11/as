@@ -350,7 +350,6 @@ export const group = (state = initialState, action) => {
             edit: false,
           },
           step: 5,
-          saveGroup: true,
           creating: false,
         }
       }
@@ -402,7 +401,6 @@ export const group = (state = initialState, action) => {
           ...state
         }
       }
-
     }
     case RETURN_CREATE_ADMIN_DATA: {
       if (state.step >= 3) {

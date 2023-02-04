@@ -3,7 +3,8 @@ body {
   font-family: Calibri, sans-serif;
   color: #575756;
   font-size: 16px;
-  background-color: #bdcadb;
+  background-image: url(./img/layered-waves-haikei.svg);
+  background-size: cover;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -11,7 +12,7 @@ body {
 }
 :root {
   --main-grey:#9c9fa3;
-  --main-border-radius: 3px;
+  --main-border-radius: 5px;
   --shadow-link: inset 0 1px 4px #11111145
 }
 h2 {
@@ -44,12 +45,12 @@ h3 {
   box-sizing: border-box;
   animation: pop-in 1s forwards;
   background-color: #ffffff;
-  border-radius: var(--main-border-radius);
+  border-radius: 10px;
 }
 .Group-container--info {
   padding: 5px 15px;
   margin-bottom: 10px;
-  border-radius: var(--main-border-radius);
+  border-radius: 10px;
 }
 @keyframes pop-in {
   0% {

@@ -6,6 +6,8 @@ const GlobalButton = ({onClick, text}) => {
     <Button 
       variant="contained"
       disableElevation
+      fullWidth
+      sx={{mt: '10px'}}
       onClick={onClick}
     >
       <Typography variant="button" display="block">{text}</Typography>

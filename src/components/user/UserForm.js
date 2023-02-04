@@ -1,18 +1,11 @@
 import UserDone from "./UserDone";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import UserGift from "../forms/UserGift";
 import UserData from "../forms/UserData";
 import EditUser from "../navigation/EditUser";
-import { useEffect } from "react";
-import { resetState } from "../../store/actions/actions";
 
 const UserForm = () => {
   const state = useSelector(state => state.group);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(resetState())
-  }, [dispatch]);
   
   return (
     <div className="Group-container">
