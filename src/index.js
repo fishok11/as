@@ -24,6 +24,6 @@ root.render(
         <Route path={`/group/:id/user-profile/:userId`} element={<UserProfile />}/>
       </Routes>
     </Provider>
-    <Toaster />
+    <Toaster position="bottom-center"/>
   </BrowserRouter>
 );
