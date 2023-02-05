@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
+import GlobalLink from "../navigation/GlobalLink";
+import LinkProfile from "../navigation/LinkProfile";
 
 const GroupDone = () => {
   const state = useSelector(state => state.group)
@@ -8,17 +9,17 @@ const GroupDone = () => {
   return (
     <div className="g-container__form">
       <Typography variant="h6">Группа готова</Typography>
-      <Typography variant="body2">Адрес регистрации участников группы:</Typography>
-      <Link to={`/group/${state.group.id}`} className="g-link">
-        http://localhost:3000/group/{state.group.id}
-      </Link>
-      <Typography variant="body2" sx={{ mb: '15px' }}>Отправте эту ссылку всем участникам.</Typography>    
+      <Typography variant="body2">Адрес регистрации участников группы,</Typography>
+      <Typography variant="body2" >отправте эту ссылку всем участникам:</Typography>    
+      <GlobalLink 
+        defaultValue={`http://localhost:3000/group/${state.group.id}`} 
+      />
 
-      <Typography variant="body2">Ссылка на ваш профиль:</Typography>
-      <Link to={`/group/${state.group.id}/user-profile/${state.userData.id}`} className="g-link">
-        http://localhost:3000/group/{state.group.id}/user-profile/{state.userData.id}
-      </Link>
-      <Typography variant="body2">Не потеряйте ее.</Typography>
+      <Typography variant="body2" sx={{ textAlign: 'center', mt: '15px' }}>Ссылка на ваш профиль <br/> (Не потеряйте ее):</Typography>
+      <GlobalLink 
+        defaultValue={`http://localhost:3000/group/${state.group.id}/user-profile/${state.userData.id}`} 
+      />
+      <LinkProfile href={`/group/${state.group.id}/user-profile/${state.userData.id}`} />
     </div>
   )
 };

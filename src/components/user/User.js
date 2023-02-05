@@ -11,7 +11,6 @@ const User = () => {
     dispatch(resetState())
   }, [dispatch]);
 
-  console.log(state)
   return (
     <>
       <UserInfo />

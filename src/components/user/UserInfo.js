@@ -17,7 +17,7 @@ const UserInfo = () => {
   
   if (groupData === undefined) {
     return null
-  } 
+  }
   return (
     <>
       <div className="Group-container Group-container--info">
@@ -26,10 +26,10 @@ const UserInfo = () => {
       <div className="Group-container Group-container--info">
         <Typography variant="subtitle1">{groupData.eventDate.budget}₽, Регистрация до {groupData.eventDate.registrationDate}</Typography>
       </div>
-      {state.step >= 2 && (<div className="Group-container Group-container--info">
+      {state.userStep >= 2 && (<div className="Group-container Group-container--info">
         <Typography variant="subtitle1">{state.userData.name}, {state.userData.email}</Typography> 
       </div>)}
-      {state.step >= 3 && (<div className="Group-container Group-container--info">
+      {state.userStep >= 3 && (<div className="Group-container Group-container--info">
         <Typography variant="subtitle1">Подарок для {state.userGift.gender} пола {state.userGift.age} лет</Typography>
       </div>)}
     </>
