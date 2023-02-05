@@ -19,7 +19,7 @@ const GlobalLink = ({defaultValue}) => {
     <div className='GlobalLink-container'>
       <input ref={clipboard.target} defaultValue={defaultValue} onFocus={onFocus} className="g-link" />
       <button onClick={onClick} className="GlobalLink--button">{copy === true 
-        ? <DoneIcon sx={{ width: '12px', height: '12px'}}/> 
+        ? <DoneIcon sx={{ width: '12px', height: '12px', color: '#1976d2'}}/> 
         : <ContentCopyIcon sx={{ width: '12px', height: '12px'}}/>
       }</button>
     </div>

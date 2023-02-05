@@ -22,7 +22,7 @@ import {
   RESET_EDIT_PROFILE,
   RESET_STATE,
 } from "./actionTypes"
-
+import toast from 'react-hot-toast';
 //================================================================================== ACTIONS
 
 //================================= GROUP & ADMIN
@@ -126,14 +126,12 @@ export const resetState = () => ({
 //================================= FETCH GROUP
 
 export const saveGroupName = (path) => {
-  let isError = false;
   const groupUpdate = path.group;
   const isUpdate = Boolean(path.groupId);
 
   if (path.group.name !=="" && isUpdate === true) {
     return async(dispatch) => {
       try {
-        dispatch(creating())
         const response = await fetch(GROUP_URL + path.groupId, {
           method: 'PUT',
           headers: {
@@ -150,15 +148,13 @@ export const saveGroupName = (path) => {
               group: path.group,
             }));
           }
+          toast.success ('Группа изменена!');
         } else if (response.status >= 300) {
-          isError = true;
+          toast.error('Ошибка!');
         };
       } catch (error) {
-        isError = true;
+        toast.error('Ошибка!');
         console.log(error)
-      };
-      if (isError === true) {
-        dispatch(errorFetch());
       };
     };
   } else {
@@ -171,7 +167,6 @@ export const saveGroupName = (path) => {
 };
 
 export const saveEventDate = (path) => {
-  let isError = false;
   const groupUpdate = path.group
   const isUpdate = Boolean(path.groupId);
 
@@ -181,7 +176,6 @@ export const saveEventDate = (path) => {
     path.group.eventDate.budget !=="" ) {
       return async(dispatch) => {
         try {
-          dispatch(creating())
           const response = await fetch(isUpdate === true ? GROUP_URL + path.groupId : GROUPS_URL, {
             method: isUpdate === true ? 'PUT' : 'POST',
             headers: {
@@ -192,6 +186,7 @@ export const saveEventDate = (path) => {
           const data = await response.json()
 
           if (response.status < 300) {
+            toast.success (isUpdate === true ? 'Группа изменена!' : 'Группа создана!');
             if (path.profile === true) {
               dispatch(closeEditingEventDate())
             } else {
@@ -207,14 +202,11 @@ export const saveEventDate = (path) => {
               }));
             }
           } else if (response.status >= 300) {
-            isError = true;
+            toast.error('Ошибка!');
           };
         } catch (error) {
-          isError = true;
+          toast.error('Ошибка!');
           console.log(error)
-        };
-        if (isError === true) {
-          dispatch(errorFetch());
         };
       };
   } else {
@@ -229,7 +221,6 @@ export const saveEventDate = (path) => {
 //================================= FETCH USER
 
 export const saveUserData = (path) => {
-  let isError = false;
   const isUpdate = Boolean(path.userId)
   const userUpdate = path.user
 
@@ -238,7 +229,6 @@ export const saveUserData = (path) => {
     isUpdate === true) {
     return async (dispatch) => {
       try {
-        dispatch(creating())
         const response = await fetch(USER_URL + path.userId, {
           method: 'PUT',
           headers: {
@@ -261,14 +251,13 @@ export const saveUserData = (path) => {
               userData: path.user.userData
             }));
           }
+          toast.success ('Ваши данные изменены');
         } else if (response.status >= 300) {
-          isError = true;
+          toast.error('Ошибка!');
         };
       } catch (error) {
-        isError = true;
-      };
-      if (isError === true) {
-        dispatch(errorFetch());
+        toast.error('Ошибка!');
+        console.log(error)
       };
     };
   } else {
@@ -290,13 +279,11 @@ export const saveUserData = (path) => {
 };
 
 export const saveUserGift = (path) => {
-  let isError = false;
   const isUpdate = Boolean(path.userId)
 
   if (path.user.userGift.age !== "" && path.user.userGift.gender !== "") {
     return async (dispatch) => {
       try {
-        dispatch(creating())
         const response = await fetch(isUpdate ===  true ? USER_URL + path.userId : USERS_URL, {
           method: isUpdate ===  true ? 'PUT' : 'POST',
           headers: {
@@ -305,7 +292,7 @@ export const saveUserGift = (path) => {
           body: JSON.stringify(path.user)
         })
         const data = await response.json()
-  
+
         if (response.status < 300) {
           if (path.profile === true) {
             dispatch(closeEditingUserGift())
@@ -327,14 +314,13 @@ export const saveUserGift = (path) => {
               },
             }));
           }
+          toast.success (isUpdate === true ? 'Ваши данные изменены!' : 'Ваши данные сохранены!');
         } else if (response.status >= 300) {
-          isError = true;
+          toast.error('Ошибка!');
         };
       } catch (error) {
-        isError = true;
-      };
-      if (isError === true) {
-        dispatch(errorFetch());
+        toast.error('Ошибка!');
+        console.log(error)
       };
     };
   } else {

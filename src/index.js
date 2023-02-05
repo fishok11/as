@@ -6,10 +6,12 @@ import { applyMiddleware, configureStore } from '@reduxjs/toolkit'
 import { reducer } from './store';
 import { BrowserRouter } from 'react-router-dom'
 import thunk from 'redux-thunk';
+import { Toaster } from 'react-hot-toast';
 import './index.css';
 import User from "./components/user/User";
 import Group from "./components/group/Group";
 import UserProfile from "./components/user/UserProfile";
+
 
 const store = configureStore({reducer}, applyMiddleware(thunk))
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,5 +24,6 @@ root.render(
         <Route path={`/group/:id/user-profile/:userId`} element={<UserProfile />}/>
       </Routes>
     </Provider>
+    <Toaster />
   </BrowserRouter>
 );
