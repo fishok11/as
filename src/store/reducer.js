@@ -59,8 +59,6 @@ const initialState = {
   },
   step: 1,
   userStep: 1,
-  errorFetch: false,
-  creating: false,
   editProfile: false,
 }
 
@@ -92,8 +90,6 @@ export const group = (state = initialState, action) => {
               ...state.eventDate,
               edit: true,
             },
-            errorFetch: false,
-            creating: false,
           }
         }
         if (state.step === 3) {
@@ -109,8 +105,6 @@ export const group = (state = initialState, action) => {
               ...state.userData,
               edit: true,
             },
-            errorFetch: false,
-            creating: false,
           }
         }
         if (state.step === 4) {
@@ -126,8 +120,6 @@ export const group = (state = initialState, action) => {
               ...state.userGift,
               edit: true,
             },
-            errorFetch: false,
-            creating: false,
           }
         }
         if (state.step === 5) {
@@ -139,8 +131,6 @@ export const group = (state = initialState, action) => {
               error: false,
               edit: false, 
             },
-            errorFetch: false,
-            creating: false,
           }
         }
       } else {
@@ -157,8 +147,6 @@ export const group = (state = initialState, action) => {
             edit: true,
           },
           step: 2,
-          errorFetch: false,
-          creating: false,
         }
       }
       break
@@ -197,8 +185,6 @@ export const group = (state = initialState, action) => {
               ...state.userData,
               edit: true,
             },
-            errorFetch: false,
-            creating: false,
           }
         }
         if (state.step === 4) {
@@ -217,8 +203,6 @@ export const group = (state = initialState, action) => {
               ...state.userGift,
               edit: true,
             },
-            errorFetch: false,
-            creating: false,
           }
         }
         if (state.step === 5) {
@@ -233,8 +217,6 @@ export const group = (state = initialState, action) => {
               error: false,
               edit: false,
             },
-            errorFetch: false,
-            creating: false,
           }
         }
       } else {
@@ -254,8 +236,6 @@ export const group = (state = initialState, action) => {
             edit: true,
           },
           step: 3,
-          errorFetch: false,
-          creating: false,
         }
       }
       break
@@ -286,8 +266,6 @@ export const group = (state = initialState, action) => {
               ...state.userGift,
               edit: true,
             },
-            errorFetch: false,
-            creating: false,
           }
         }
         if (state.step === 5) {
@@ -299,8 +277,6 @@ export const group = (state = initialState, action) => {
               email: userDataEmail,
               edit: false,
             },
-            errorFetch: false,
-            creating: false,
           }
         }
       } else {
@@ -317,8 +293,6 @@ export const group = (state = initialState, action) => {
             edit: true,
           },
           step: 4,
-          errorFetch: false,
-          creating: false,
         }
       }
       break
@@ -350,7 +324,6 @@ export const group = (state = initialState, action) => {
             edit: false,
           },
           step: 5,
-          creating: false,
         }
       }
     }
@@ -465,7 +438,6 @@ export const group = (state = initialState, action) => {
           ...state.group,
           id: groupId,
         },
-        creating: false,
       }
     }
     // ========================================================= USER
@@ -495,8 +467,6 @@ export const group = (state = initialState, action) => {
               ...state.userGift,
               edit: true,
             },
-            errorFetch: false,
-            creating: false,
           }
         }
         if (state.userStep === 3) {
@@ -508,8 +478,6 @@ export const group = (state = initialState, action) => {
               email: userEmail,
               edit: false,
             },
-            errorFetch: false,
-            creating: false,
           }
         }
       } else {
@@ -526,8 +494,6 @@ export const group = (state = initialState, action) => {
             edit: true,
           },
           userStep: 2,
-          errorFetch: false,
-          creating: false,
         }
       }
       break
@@ -556,8 +522,6 @@ export const group = (state = initialState, action) => {
             edit: false,
           },
           userStep: 3,
-          errorFetch: false,
-          creating: false,
         }
       }
     }
@@ -596,7 +560,6 @@ export const group = (state = initialState, action) => {
           ...state.userData,
           id: userId,
         },
-        creating: false,
       }
     }
     //========================================================== EDIT PROFILE
@@ -731,19 +694,6 @@ export const group = (state = initialState, action) => {
       }
     }
     //========================================================== FETCH STATUS
-    case ERROR_FETCH: {
-      return {
-        ...state,
-        errorFetch: true,
-        creating: false,
-      }
-    }
-    case CREATING: {
-      return {
-        ...state,
-        creating: true,
-      }
-    }
     case RESET_STATE: {
       return {
         ...initialState,

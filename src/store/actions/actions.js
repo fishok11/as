@@ -109,14 +109,6 @@ export const resetEditProfile = () => ({
 
 //================================= FETCH STATUS
 
-export const creating = () => ({
-  type: CREATING,
-});
-
-export const errorFetch = () => ({
-  type: ERROR_FETCH,
-});
-
 export const resetState = () => ({
   type: RESET_STATE,
 });

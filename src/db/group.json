@@ -1,15 +1,5 @@
 {
   "group": [
-    {
-      "name": "с",
-      "eventDate": {
-        "budget": "с",
-        "registrationDate": "05/02/2023",
-        "drawDate": "05/02/2023",
-        "exchangeDate": "05/02/2023"
-      },
-      "id": 1
-    }
   ],
   "users": []
 }
