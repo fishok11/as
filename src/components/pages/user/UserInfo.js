@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography';
-import { GROUP_URL } from "../../util";
+import { GROUP_URL } from "../../../util";
 
 const UserInfo = () => {
   const [groupData, setGroupdata] = useState();

@@ -2,23 +2,23 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
-import GroupName from '../forms/GroupName';
-import GroupDates from '../forms/GroupDates';
-import UserData from '../forms/UserData';
-import UserGift from '../forms/UserGift';
-import EditButton from '../navigation/EditButton';
+import GroupName from '../../forms/GroupName';
+import GroupDates from '../../forms/GroupDates';
+import UserData from '../../forms/UserData';
+import UserGift from '../../forms/UserGift';
+import EditButton from '../../navigation/EditButton';
 import EditIcon from '@mui/icons-material/Edit';
 import {
   EDIT_GROUP_NAME, 
   EDIT_EVENT_DATE,
   EDIT_USER_DATA,
   EDIT_USER_GIFT,
-} from "../../store/actions/actionTypes";
+} from "../../../store/actions/actionTypes";
 import {
   GROUP_URL, 
   USER_URL,
-} from "../../util";
-import { resetEditProfile } from "../../store/actions/actions";
+} from "../../../util";
+import { resetEditProfile } from "../../../store/actions/actions";
 
 const UserProfile = () => {
   const state = useSelector(state => state.group);

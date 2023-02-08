@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { resetState } from "../../store/actions/actions";
+import { resetState } from "../../../store/actions/actions";
 import UserInfo from "./UserInfo";
 import UserForm from "./UserForm";
 

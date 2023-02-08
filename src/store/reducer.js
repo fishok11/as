@@ -22,8 +22,6 @@ import {
   CLOSE_EDITING_USER_DATA,
   CLOSE_EDITING_USER_GIFT,
   RESET_EDIT_PROFILE,
-  ERROR_FETCH,
-  CREATING,
   RESET_STATE,
 } from "./actions/actionTypes"
 

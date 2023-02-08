@@ -1,8 +1,8 @@
 import UserDone from "./UserDone";
 import { useSelector } from "react-redux";
-import UserGift from "../forms/UserGift";
-import UserData from "../forms/UserData";
-import EditUser from "../navigation/EditUser";
+import UserGift from "../../forms/UserGift";
+import UserData from "../../forms/UserData";
+import EditUser from "../../navigation/EditUser";
 
 const UserForm = () => {
   const state = useSelector(state => state.group);
