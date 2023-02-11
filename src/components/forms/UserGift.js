@@ -14,20 +14,20 @@ import Typography from '@mui/material/Typography';
 import { saveUserGift } from "../../store/actions/actions";
 import GlobalButton from "../navigation/GlobalButton";
 
-const UserGift = ({admin, userId, profile, userDB}) => {
-  const state = useSelector(state => state.group)
-  const dispatch = useDispatch()
-  const [userAge, setUserAge] = useState('')
-  const [userGender, setUserGender] = useState('')
-  const [userWishes, setUserWishes] = useState(state.userGift.wishes)
-  const allAge = [5, 6 ,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] 
+const UserGift = ({admin, userId, profile, userDb, recipientId}) => {
+  const state = useSelector(state => state.group);
+  const dispatch = useDispatch();
+  const [userAge, setUserAge] = useState(profile === true ? userDb.userGift.age : state.userGift.age);
+  const [userGender, setUserGender] = useState(profile === true ? userDb.userGift.gender : state.userGift.gender);
+  const [userWishes, setUserWishes] = useState(profile === true ? userDb.userGift.wishes : state.userGift.wishes);
+  const allAge = [5, 6 ,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] ;
   const {id} = useParams();
   const getId = Number(admin === true ? state.group.id : id);
   let user = {
     groupId: Number(profile === true ? id : getId),
     userData:{
-      name: profile === true ? userDB.userData.name : state.userData.name,
-      email: profile === true ? userDB.userData.email : state.userData.email,
+      name: profile === true ? userDb.userData.name : state.userData.name,
+      email: profile === true ? userDb.userData.email : state.userData.email,
     },
     userGift: {
       age: userAge,
@@ -35,6 +35,7 @@ const UserGift = ({admin, userId, profile, userDB}) => {
       wishes: userWishes,
     },
     admin: admin,
+    recipientId:  profile === true ? recipientId : null,
   }; 
  
   return (

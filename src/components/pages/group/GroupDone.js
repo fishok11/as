@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
-import GlobalLink from "../navigation/GlobalLink";
-import LinkProfile from "../navigation/LinkProfile";
+import GlobalLink from "../../navigation/GlobalLink";
+import LinkProfile from "../../navigation/LinkProfile";
 
 const GroupDone = () => {
   const state = useSelector(state => state.group)

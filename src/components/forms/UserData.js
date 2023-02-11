@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography';
 import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
 
-const UserData = ({admin, userId, profile, userDB}) => {
+const UserData = ({admin, userId, profile, userDb, recipientId}) => {
   const state = useSelector(state => state.group);
-  const [userName, setUserName] = useState(state.userData.name);
-  const [userEmail, setUserEmail] = useState(state.userData.email);
+  const [userName, setUserName] = useState(profile === true ? userDb.userData.name : state.userData.name);
+  const [userEmail, setUserEmail] = useState(profile === true ? userDb.userData.email : state.userData.email);
   const dispatch = useDispatch();
   const {id} = useParams();
   const getId = Number(admin === true ? state.group.id : id);
@@ -20,11 +20,12 @@ const UserData = ({admin, userId, profile, userDB}) => {
       email: userEmail,
     },
     userGift: {
-      age: profile === true ? userDB.userGift.age : state.userGift.age,
-      gender: profile === true ? userDB.userGift.gender : state.userGift.gender,
-      wishes: profile === true ? userDB.userGift.gender : state.userGift.wishes,
+      age: profile === true ? userDb.userGift.age : state.userGift.age,
+      gender: profile === true ? userDb.userGift.gender : state.userGift.gender,
+      wishes: profile === true ? userDb.userGift.wishes : state.userGift.wishes,
     },
     admin: admin,
+    recipientId: profile === true ? recipientId : null,
   };
 
   return (

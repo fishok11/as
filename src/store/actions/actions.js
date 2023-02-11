@@ -330,3 +330,37 @@ export const saveUserGift = (path) => {
     }
   };
 };
+
+export const selectRecipient = (path) => {
+  const rand = function(arr) {
+    const rand = Math.floor(Math.random() * arr.length);
+
+    if ((arr[rand].id !== Number(path.userId)) === true && arr[rand].groupId === Number(path.id)) {
+      return arr[rand];
+    }
+  }
+
+  return async () => {
+    try {
+      const response = await fetch(USER_URL + path.userId, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+          ...path.user,
+          recipientId: rand(path.users).id,
+        })
+      })
+
+      if (response.status < 300) {
+        toast.success ('Получатель выбран!');
+      } else if (response.status >= 300) {
+        toast.error('Ошибка!');
+      };
+    } catch (error) {
+      toast.error('Ошибка!');
+      console.log(error)
+    };
+  };
+}

@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import { Toaster } from 'react-hot-toast';
 import './index.css';
 import User from "./components/pages/user/User";
-import Group from "./components/group/Group";
+import Group from "./components/pages/group/Group";
 import UserProfile from "./components/pages/user/UserProfile";
 
 
