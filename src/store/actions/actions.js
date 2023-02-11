@@ -335,6 +335,15 @@ export const selectRecipient = (path) => {
   const rand = function(arr) {
     const rand = Math.floor(Math.random() * arr.length);
 
+    arr = arr.filter(function (user, index, arr) {
+      for (index = 0; index < arr.length; index++) {
+        if (user.id === arr[index].recipientId) {
+          return false;
+        };
+      };
+      return user;
+    });
+
     if ((arr[rand].id !== Number(path.userId)) === true && arr[rand].groupId === Number(path.id)) {
       return arr[rand];
     }

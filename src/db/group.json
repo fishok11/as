@@ -1,61 +1,6 @@
 {
   "group": [
-    {
-      "name": "Group",
-      "eventDate": {
-        "budget": "2000",
-        "registrationDate": "11/02/2023",
-        "drawDate": "11/02/2023",
-        "exchangeDate": "11/02/2023"
-      },
-      "id": 1
-    }
   ],
   "users": [
-    {
-      "groupId": 1,
-      "userData": {
-        "name": "Seva",
-        "email": "seva@emal.com"
-      },
-      "userGift": {
-        "age": 13,
-        "gender": "женского",
-        "wishes": "fsdfsacac"
-      },
-      "admin": true,
-      "recipientId": 3,
-      "id": 1
-    },
-    {
-      "groupId": 1,
-      "userData": {
-        "name": "dima",
-        "email": "dima"
-      },
-      "userGift": {
-        "age": 20,
-        "gender": "мужского",
-        "wishes": "qqcasc"
-      },
-      "admin": false,
-      "recipientId": 1,
-      "id": 2
-    },
-    {
-      "groupId": 1,
-      "userData": {
-        "name": "sasha",
-        "email": "sasha"
-      },
-      "userGift": {
-        "age": 15,
-        "gender": "женского",
-        "wishes": ""
-      },
-      "admin": false,
-      "recipientId": 1,
-      "id": 3
-    }
   ]
 }
