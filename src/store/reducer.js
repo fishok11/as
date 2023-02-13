@@ -23,6 +23,7 @@ import {
   CLOSE_EDITING_USER_GIFT,
   RESET_EDIT_PROFILE,
   RESET_STATE,
+  SELECT_RECIPIENT,
 } from "./actions/actionTypes"
 
 const initialState = {
@@ -58,6 +59,7 @@ const initialState = {
   step: 1,
   userStep: 1,
   editProfile: false,
+  recipient: false,
 }
 
 export const group = (state = initialState, action) => {
@@ -689,6 +691,12 @@ export const group = (state = initialState, action) => {
       return {
         ...state,
         editProfile: false,
+      }
+    }
+    case SELECT_RECIPIENT: {
+      return {
+        ...state,
+        recipient: true,
       }
     }
     //========================================================== FETCH STATUS

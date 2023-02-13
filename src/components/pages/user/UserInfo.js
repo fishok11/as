@@ -5,26 +5,30 @@ import Typography from '@mui/material/Typography';
 import { GROUP_URL } from "../../../util";
 
 const UserInfo = () => {
-  const [groupData, setGroupdata] = useState();
+  const [group, setGroup] = useState();
   const state = useSelector(state => state.group)
   const {id} = useParams();
 
   useEffect(() => {
-    fetch(GROUP_URL + id)
-    .then(res => res.json())
-    .then(data => setGroupdata(data))
+    const fetchData = async () => {
+      const response = await fetch(GROUP_URL + id);
+      const data = await response.json();
+      setGroup(data)
+    }
+    fetchData()
+    .catch(console.error)
   }, [id])
   
-  if (groupData === undefined) {
+  if (group === undefined) {
     return null
   }
   return (
     <>
       <div className="Group-container Group-container--info">
-        <Typography variant="subtitle1">{groupData.name}</Typography>
+        <Typography variant="subtitle1">{group.name}</Typography>
       </div>
       <div className="Group-container Group-container--info">
-        <Typography variant="subtitle1">{groupData.eventDate.budget}₽, Регистрация до {groupData.eventDate.registrationDate}</Typography>
+        <Typography variant="subtitle1">{group.eventDate.budget}₽, Регистрация до {group.eventDate.registrationDate}</Typography>
       </div>
       {state.userStep >= 2 && (<div className="Group-container Group-container--info">
         <Typography variant="subtitle1">{state.userData.name}, {state.userData.email}</Typography> 

@@ -67,7 +67,7 @@ const UserProfile = () => {
     fetchUserDbData()
     .catch(console.error);
     dispatch(resetEditProfile());
-  }, [userId, dispatch, state.editProfile]);
+  }, [userId, dispatch, state.editProfile, state.recipient]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +83,7 @@ const UserProfile = () => {
     return null
   };
   return (
-    <div className="Group-container ">
+    <div className="Group-container">
       {state.group.editProfileGroup === false && 
       state.eventDate.edit === false && 
       state.userData.edit === false && 
@@ -111,12 +111,6 @@ const UserProfile = () => {
           </div>
         </div>
       </>)}
-      <>
-        {state.group.editProfileGroup === true && (<GroupName id={id} profile={true} groupDB={group} />)}
-        {state.eventDate.edit === true && (<GroupDates id={id} profile={true} groupDB={group} />)}
-        {state.userData.edit === true && (<UserData admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
-        {state.userGift.edit === true && (<UserGift admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
-      </>
       {state.group.editProfileGroup === false && 
       state.eventDate.edit === false && 
       state.userData.edit === false && 
@@ -127,7 +121,7 @@ const UserProfile = () => {
         onClick={() => dispatch(selectRecipient({
           user: user,
           userId: userId,
-          id: id,
+          groupId: id,
           users: users,
         }))}
       />)}
@@ -141,8 +135,14 @@ const UserProfile = () => {
           {recipient.userGift.wishes !== "" && (<Typography variant="subtitle1">Пожелания {recipient.userData.name}: {recipient.userGift.wishes}</Typography>)}
         </>)}
       </div>
+      <>
+        {state.group.editProfileGroup === true && (<GroupName id={id} profile={true} groupDB={group} />)}
+        {state.eventDate.edit === true && (<GroupDates id={id} profile={true} groupDB={group} />)}
+        {state.userData.edit === true && (<UserData admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
+        {state.userGift.edit === true && (<UserGift admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
+      </>
     </div>
-  )
+  );
 };
 
 export default UserProfile;

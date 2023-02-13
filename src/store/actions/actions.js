@@ -19,6 +19,7 @@ import {
   CLOSE_EDITING_USER_GIFT,
   RESET_EDIT_PROFILE,
   RESET_STATE,
+  SELECT_RECIPIENT,
 } from "./actionTypes"
 import toast from 'react-hot-toast';
 //================================================================================== ACTIONS
@@ -105,6 +106,10 @@ export const resetEditProfile = () => ({
   type: RESET_EDIT_PROFILE,
 });
 
+export const resetSelectRecipient = () => ({
+  type: SELECT_RECIPIENT,
+});
+
 //================================= FETCH STATUS
 
 export const resetState = () => ({
@@ -116,7 +121,6 @@ export const resetState = () => ({
 //================================= FETCH GROUP
 
 export const saveGroupName = (path) => {
-  const groupUpdate = path.group;
   const isUpdate = Boolean(path.groupId);
 
   if (path.group.name !=="" && isUpdate === true) {
@@ -127,24 +131,24 @@ export const saveGroupName = (path) => {
           headers: {
           'Content-Type': 'application/json;charset=utf-8'
           },
-          body: JSON.stringify(groupUpdate)
-        })
+          body: JSON.stringify(path.group)
+        });
         
         if (response.status < 300) {
+          toast.success ('Группа изменена!');
           if (path.profile === true) {
-            dispatch(closeEditingGroupName())
+            dispatch(closeEditingGroupName());
           } else {
             dispatch(createGroupName({
               group: path.group,
             }));
           }
-          toast.success ('Группа изменена!');
         } else if (response.status >= 300) {
           toast.error('Ошибка!');
         };
       } catch (error) {
         toast.error('Ошибка!');
-        console.log(error)
+        console.log(error);
       };
     };
   } else {
@@ -157,7 +161,6 @@ export const saveGroupName = (path) => {
 };
 
 export const saveEventDate = (path) => {
-  const groupUpdate = path.group
   const isUpdate = Boolean(path.groupId);
 
   if (path.group.eventDate.budget !=="" && 
@@ -171,14 +174,14 @@ export const saveEventDate = (path) => {
             headers: {
             'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify(groupUpdate)
-          })
-          const data = await response.json()
+            body: JSON.stringify(path.group)
+          });
+          const data = await response.json();
 
           if (response.status < 300) {
             toast.success (isUpdate === true ? 'Группа изменена!' : 'Группа создана!');
             if (path.profile === true) {
-              dispatch(closeEditingEventDate())
+              dispatch(closeEditingEventDate());
             } else {
               dispatch(createEventDate({
                 eventDate: path.group.eventDate,
@@ -196,7 +199,7 @@ export const saveEventDate = (path) => {
           };
         } catch (error) {
           toast.error('Ошибка!');
-          console.log(error)
+          console.log(error);
         };
       };
   } else {
@@ -211,8 +214,7 @@ export const saveEventDate = (path) => {
 //================================= FETCH USER
 
 export const saveUserData = (path) => {
-  const isUpdate = Boolean(path.userId)
-  const userUpdate = path.user
+  const isUpdate = Boolean(path.userId);
 
   if (path.user.userData.name !=="" && 
     path.user.userData.email !=="" && 
@@ -224,12 +226,12 @@ export const saveUserData = (path) => {
           headers: {
             'Content-Type': 'application/json;charset=utf-8'
           },
-          body: JSON.stringify(userUpdate)
-        })
+          body: JSON.stringify(path.user)
+        });
   
         if (response.status < 300) {
           if (path.profile === true) {
-            dispatch(closeEditingUserData())
+            dispatch(closeEditingUserData());
           }
           if (path.user.admin === true && path.profile === false) {
             dispatch(createAdminData({
@@ -247,7 +249,7 @@ export const saveUserData = (path) => {
         };
       } catch (error) {
         toast.error('Ошибка!');
-        console.log(error)
+        console.log(error);
       };
     };
   } else {
@@ -269,7 +271,7 @@ export const saveUserData = (path) => {
 };
 
 export const saveUserGift = (path) => {
-  const isUpdate = Boolean(path.userId)
+  const isUpdate = Boolean(path.userId);
 
   if (path.user.userGift.age !== "" && path.user.userGift.gender !== "") {
     return async (dispatch) => {
@@ -280,12 +282,12 @@ export const saveUserGift = (path) => {
             'Content-Type': 'application/json;charset=utf-8'
           },
           body: JSON.stringify(path.user)
-        })
-        const data = await response.json()
+        });
+        const data = await response.json();
 
         if (response.status < 300) {
           if (path.profile === true) {
-            dispatch(closeEditingUserGift())
+            dispatch(closeEditingUserGift());
           }
           if (path.user.admin === true && path.profile === false) {
             dispatch(createAdminGift({
@@ -310,7 +312,7 @@ export const saveUserGift = (path) => {
         };
       } catch (error) {
         toast.error('Ошибка!');
-        console.log(error)
+        console.log(error);
       };
     };
   } else {
@@ -332,24 +334,25 @@ export const saveUserGift = (path) => {
 };
 
 export const selectRecipient = (path) => {
-  const rand = function(arr) {
-    const rand = Math.floor(Math.random() * arr.length);
+  const rand = arr => {
+    const randomUser = Math.floor(Math.random() * arr.length);
 
-    arr = arr.filter(function (user, index, arr) {
-      for (index = 0; index < arr.length; index++) {
-        if (user.id === arr[index].recipientId) {
+    arr = arr.filter((user, i, arr) => {
+      if (user.id === Number(path.userId)) {
+        return false;
+      };
+      for (i = 0; i < arr.length; i++) {
+        if (user.id === arr[i].recipientId || arr[i].groupId !== Number(path.groupId)) {
           return false;
         };
       };
-      return user;
+      return true;
     });
+    console.log(arr)
+    return arr[randomUser];
+  };
 
-    if ((arr[rand].id !== Number(path.userId)) === true && arr[rand].groupId === Number(path.id)) {
-      return arr[rand];
-    }
-  }
-
-  return async () => {
+  return async (dispatch) => {
     try {
       const response = await fetch(USER_URL + path.userId, {
         method: 'PUT',
@@ -360,16 +363,17 @@ export const selectRecipient = (path) => {
           ...path.user,
           recipientId: rand(path.users).id,
         })
-      })
+      });
 
       if (response.status < 300) {
+        dispatch(resetSelectRecipient())
         toast.success ('Получатель выбран!');
       } else if (response.status >= 300) {
         toast.error('Ошибка!');
       };
     } catch (error) {
       toast.error('Ошибка!');
-      console.log(error)
+      console.log(error);
     };
   };
 }
