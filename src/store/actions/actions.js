@@ -348,7 +348,7 @@ export const selectRecipient = (path) => {
       };
       return true;
     });
-    console.log(arr)
+
     return arr[randomUser];
   };
 

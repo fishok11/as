@@ -92,11 +92,11 @@ const UserProfile = () => {
           <Typography variant="h6" sx={{textAlign: 'center'}}>Группа</Typography>
           <div className="UserProfile__item">
             <Typography variant="subtitle1">{group.name}</Typography>
-            {userDb.admin === true && (<EditButton ico={<EditIcon />} action={EDIT_GROUP_NAME} />)}
+            <EditButton ico={<EditIcon />} action={EDIT_GROUP_NAME} adminEdit={userDb.admin}/>
           </div>
           <div className="UserProfile__item">
             <Typography variant="subtitle1">{group.eventDate.budget}₽, Регистрация до {group.eventDate.registrationDate}</Typography>
-            {userDb.admin === true && (<EditButton ico={<EditIcon />} action={EDIT_EVENT_DATE} />)}
+            <EditButton ico={<EditIcon />} action={EDIT_EVENT_DATE} adminEdit={userDb.admin}/>
           </div>
         </div>
         <div className="UserProfile__container">
@@ -110,31 +110,22 @@ const UserProfile = () => {
             <EditButton ico={<EditIcon />} action={EDIT_USER_GIFT} />
           </div>
         </div>
-      </>)}
-      {state.group.editProfileGroup === false && 
-      state.eventDate.edit === false && 
-      state.userData.edit === false && 
-      state.userGift.edit === false &&
-      userDb.recipientId === null && 
-      (<GlobalButton 
-        text={"Выбрать получателя"}
-        onClick={() => dispatch(selectRecipient({
-          user: user,
-          userId: userId,
-          groupId: id,
-          users: users,
-        }))}
-      />)}
-      <div className="UserProfile__container">
-        {recipient !== undefined && 
-        state.group.editProfileGroup === false && 
-        state.eventDate.edit === false && 
-        state.userData.edit === false && 
-        state.userGift.edit === false && (<>
+        {recipient !== undefined && (<div className="UserProfile__container UserProfile__container--recipient">
           <Typography variant="subtitle1">Вы дарите подарок {recipient.userData.name}</Typography>
-          {recipient.userGift.wishes !== "" && (<Typography variant="subtitle1">Пожелания {recipient.userData.name}: {recipient.userGift.wishes}</Typography>)}
-        </>)}
-      </div>
+          {recipient.userGift.wishes !== "" && (
+            <Typography variant="subtitle1">Пожелания {recipient.userData.name}: {recipient.userGift.wishes}</Typography>
+          )}
+        </div>)}
+        {userDb.recipientId === null && (<GlobalButton 
+          text={"Выбрать получателя"}
+          onClick={() => dispatch(selectRecipient({
+            user: user,
+            userId: userId,
+            groupId: id,
+            users: users,
+          }))}
+        />)}
+      </>)}
       <>
         {state.group.editProfileGroup === true && (<GroupName id={id} profile={true} groupDB={group} />)}
         {state.eventDate.edit === true && (<GroupDates id={id} profile={true} groupDB={group} />)}
