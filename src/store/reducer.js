@@ -21,7 +21,7 @@ import {
   CLOSE_EDITING_EVENT_DATE,
   CLOSE_EDITING_USER_DATA,
   CLOSE_EDITING_USER_GIFT,
-  RESET_EDIT_PROFILE,
+  RESET_UPDATE_PROFILE,
   RESET_STATE,
   SELECT_RECIPIENT,
 } from "./actions/actionTypes"
@@ -32,7 +32,7 @@ const initialState = {
     name: "",
     error: false,
     edit: true,
-    editProfileGroup: false,
+    editProfile: false,
   },
   eventDate: {
     budget: "",
@@ -41,6 +41,7 @@ const initialState = {
     exchangeDate: "",
     error: false,
     edit: false,
+    editProfile: false,
   },
   userData: {
     id: null,
@@ -48,6 +49,7 @@ const initialState = {
     email: "",
     error: false,
     edit: false,
+    editProfile: false,
   },
   userGift: {
     age: "",
@@ -55,10 +57,11 @@ const initialState = {
     wishes: "",
     error: false,
     edit: false,
+    editProfile: false,
   },
   step: 1,
   userStep: 1,
-  editProfile: false,
+  updateProfile: false,
   recipient: false,
 }
 
@@ -568,19 +571,19 @@ export const group = (state = initialState, action) => {
         ...state,
         group: {
           ...state.group,
-          editProfileGroup: true,
+          editProfile: true,
         },
         eventDate: {
           ...state.eventDate,
-          edit: false,
+          editProfile: false,
         },
         userData: {
           ...state.userData,
-          edit: false,
+          editProfile: false,
         },
         userGift: {
           ...state.userGift,
-          edit: false,
+          editProfile: false,
         },
       }
     }
@@ -589,19 +592,19 @@ export const group = (state = initialState, action) => {
         ...state,
         group: {
           ...state.group,
-          editProfileGroup: false,
+          editProfile: false,
         },
         eventDate: {
           ...state.eventDate,
-          edit: true,
+          editProfile: true,
         },
         userData: {
           ...state.userData,
-          edit: false,
+          editProfile: false,
         },
         userGift: {
           ...state.userGift,
-          edit: false,
+          editProfile: false,
         },
       }
     }
@@ -610,19 +613,19 @@ export const group = (state = initialState, action) => {
         ...state,
         group: {
           ...state.group,
-          editProfileGroup: false,
+          editProfile: false,
         },
         eventDate: {
           ...state.eventDate,
-          edit: false,
+          editProfile: false,
         },
         userData: {
           ...state.userData,
-          edit: true,
+          editProfile: true,
         },
         userGift: {
           ...state.userGift,
-          edit: false,
+          editProfile: false,
         },
       }
     }
@@ -631,19 +634,19 @@ export const group = (state = initialState, action) => {
         ...state,
         group: {
           ...state.group,
-          editProfileGroup: false,
+          editProfile: false,
         },
         eventDate: {
           ...state.eventDate,
-          edit: false,
+          editProfile: false,
         },
         userData: {
           ...state.userData,
-          edit: false,
+          editProfile: false,
         },
         userGift: {
           ...state.userGift,
-          edit: true,
+          editProfile: true,
         },
       }
     }
@@ -652,9 +655,9 @@ export const group = (state = initialState, action) => {
         ...state,
         group: {
           ...state.group,
-          editProfileGroup: false,
+          editProfile: false,
         },
-        editProfile: true,
+        updateProfile: true,
       }
     }
     case CLOSE_EDITING_EVENT_DATE: {
@@ -662,9 +665,9 @@ export const group = (state = initialState, action) => {
         ...state,
         eventDate: {
           ...state.eventDate,
-          edit: false,
+          editProfile: false,
         },
-        editProfile: true,
+        updateProfile: true,
       }
     }
     case CLOSE_EDITING_USER_DATA: {
@@ -672,9 +675,9 @@ export const group = (state = initialState, action) => {
         ...state,
         userData: {
           ...state.userData,
-          edit: false,
+          editProfile: false,
         },
-        editProfile: true,
+        updateProfile: true,
       }
     }
     case CLOSE_EDITING_USER_GIFT: {
@@ -682,15 +685,15 @@ export const group = (state = initialState, action) => {
         ...state,
         userGift: {
           ...state.userGift,
-          edit: false,
+          editProfile: false,
         },
-        editProfile: true,
+        updateProfile: true,
       }
     }
-    case RESET_EDIT_PROFILE: {
+    case RESET_UPDATE_PROFILE: {
       return {
         ...state,
-        editProfile: false,
+        updateProfile: false,
       }
     }
     case SELECT_RECIPIENT: {

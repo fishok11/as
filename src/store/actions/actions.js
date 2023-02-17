@@ -17,7 +17,7 @@ import {
   CLOSE_EDITING_EVENT_DATE,
   CLOSE_EDITING_USER_DATA,
   CLOSE_EDITING_USER_GIFT,
-  RESET_EDIT_PROFILE,
+  RESET_UPDATE_PROFILE,
   RESET_STATE,
   SELECT_RECIPIENT,
 } from "./actionTypes"
@@ -102,8 +102,8 @@ export const closeEditingUserGift = () => ({
   type: CLOSE_EDITING_USER_GIFT,
 });
 
-export const resetEditProfile = () => ({
-  type: RESET_EDIT_PROFILE,
+export const resetUpdateProfile = () => ({
+  type: RESET_UPDATE_PROFILE,
 });
 
 export const resetSelectRecipient = () => ({
@@ -335,8 +335,6 @@ export const saveUserGift = (path) => {
 
 export const selectRecipient = (path) => {
   const rand = arr => {
-    const randomUser = Math.floor(Math.random() * arr.length);
-
     arr = arr.filter((user, i, arr) => {
       if (user.id === Number(path.userId)) {
         return false;
@@ -349,7 +347,12 @@ export const selectRecipient = (path) => {
       return true;
     });
 
-    return arr[randomUser];
+
+    const randomUserId = Math.floor(Math.random() * arr.length);
+
+    const randomUser = arr[randomUserId]
+
+    return randomUser;
   };
 
   return async (dispatch) => {

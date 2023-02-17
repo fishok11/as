@@ -7,7 +7,7 @@ const GlobalLink = ({defaultValue}) => {
   const [copy, setCopy] = useState(false);
   const clipboard = useClipboard();
   const onFocus = (e) => e.target.select();
-  const onClick = function () {
+  const onClick = () => {
     clipboard.copy();
     setCopy(true);
     setTimeout(() => {
@@ -18,7 +18,8 @@ const GlobalLink = ({defaultValue}) => {
   return (
     <div className='GlobalLink-container'>
       <input ref={clipboard.target} defaultValue={defaultValue} onFocus={onFocus} className="g-link" />
-      <button onClick={onClick} className="GlobalLink--button">{copy === true 
+      <button onClick={onClick} className="GlobalLink--button">{
+        copy 
         ? <DoneIcon sx={{ width: '12px', height: '12px', color: '#1976d2'}}/> 
         : <ContentCopyIcon sx={{ width: '12px', height: '12px'}}/>
       }</button>

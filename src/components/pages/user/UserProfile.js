@@ -20,7 +20,7 @@ import {
   USERS_URL, 
   USER_URL,
 } from "../../../util";
-import { resetEditProfile, selectRecipient } from "../../../store/actions/actions";
+import { resetUpdateProfile, selectRecipient } from "../../../store/actions/actions";
 
 const UserProfile = () => {
   const state = useSelector(state => state.group);
@@ -42,9 +42,9 @@ const UserProfile = () => {
       setGroup(data)
     }
     fetchData()
-    .catch(console.error)
-    dispatch(resetEditProfile())
-  }, [id, dispatch, state.editProfile]);
+    .catch(error => console.log(error));
+    dispatch(resetUpdateProfile())
+  }, [id, dispatch, state.updateProfile]);
 
   useEffect(() => {
     const fetchUserDbData = async () => {
@@ -60,14 +60,14 @@ const UserProfile = () => {
 
       if (userDbData.recipientId !== null) {
         fetcRecipienthData()
-        .catch(console.error);
+        .catch(error => console.log(error));
       };
     };
 
     fetchUserDbData()
-    .catch(console.error);
-    dispatch(resetEditProfile());
-  }, [userId, dispatch, state.editProfile, state.recipient]);
+    .catch(error => console.log(error));
+    dispatch(resetUpdateProfile());
+  }, [userId, dispatch, state.updateProfile, state.recipient]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,7 +76,7 @@ const UserProfile = () => {
       setUsers(data)
     }
     fetchData()
-    .catch(console.error)
+    .catch(error => console.log(error));
   }, []);
 
   if (group === undefined || userDb === undefined || users === undefined) {
@@ -84,10 +84,10 @@ const UserProfile = () => {
   };
   return (
     <div className="Group-container">
-      {state.group.editProfileGroup === false && 
-      state.eventDate.edit === false && 
-      state.userData.edit === false && 
-      state.userGift.edit === false && (<>
+      {state.group.editProfile === false && 
+      state.eventDate.editProfile === false && 
+      state.userData.editProfile === false && 
+      state.userGift.editProfile === false && (<>
         <div className="UserProfile__container">
           <Typography variant="h6" sx={{textAlign: 'center'}}>Группа</Typography>
           <div className="UserProfile__item">
@@ -127,10 +127,10 @@ const UserProfile = () => {
         />)}
       </>)}
       <>
-        {state.group.editProfileGroup === true && (<GroupName id={id} profile={true} groupDB={group} />)}
-        {state.eventDate.edit === true && (<GroupDates id={id} profile={true} groupDB={group} />)}
-        {state.userData.edit === true && (<UserData admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
-        {state.userGift.edit === true && (<UserGift admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
+        {state.group.editProfile === true && (<GroupName id={id} profile={true} groupDB={group} />)}
+        {state.eventDate.editProfile === true && (<GroupDates id={id} profile={true} groupDB={group} />)}
+        {state.userData.editProfile === true && (<UserData admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
+        {state.userGift.editProfile === true && (<UserGift admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
       </>
     </div>
   );
