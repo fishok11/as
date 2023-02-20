@@ -1,61 +1,6 @@
 {
   "group": [
-    {
-      "name": "c",
-      "eventDate": {
-        "budget": "as",
-        "registrationDate": "16/02/2023",
-        "drawDate": "16/02/2023",
-        "exchangeDate": "16/02/2023"
-      },
-      "id": 1
-    }
   ],
   "users": [
-    {
-      "groupId": 1,
-      "userData": {
-        "name": "1",
-        "email": "1"
-      },
-      "userGift": {
-        "age": 14,
-        "gender": "женского",
-        "wishes": "ca"
-      },
-      "admin": true,
-      "recipientId": null,
-      "id": 1
-    },
-    {
-      "groupId": 1,
-      "userData": {
-        "name": "2",
-        "email": "2"
-      },
-      "userGift": {
-        "age": 12,
-        "gender": "женского",
-        "wishes": "сфы"
-      },
-      "admin": false,
-      "recipientId": null,
-      "id": 2
-    },
-    {
-      "groupId": 1,
-      "userData": {
-        "name": "3",
-        "email": "3"
-      },
-      "userGift": {
-        "age": 12,
-        "gender": "женского",
-        "wishes": "v sdvsv"
-      },
-      "admin": false,
-      "recipientId": null,
-      "id": 3
-    }
   ]
 }
