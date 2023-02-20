@@ -347,7 +347,6 @@ export const selectRecipient = (path) => {
       return true;
     });
 
-
     const randomUserId = Math.floor(Math.random() * arr.length);
 
     const randomUser = arr[randomUserId]

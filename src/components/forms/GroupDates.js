@@ -34,6 +34,7 @@ const GroupDates = ({id, profile, groupDB}) => {
       
       <GlobalInput 
         label="Бюджет" 
+        type="number"
         error={state.eventDate.error === true}
         value={budget}
         onChange={event => setBudget(event.target.value)}

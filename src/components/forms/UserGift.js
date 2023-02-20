@@ -20,11 +20,9 @@ const UserGift = ({admin, userId, profile, userDb, recipientId}) => {
   const [userAge, setUserAge] = useState(profile === true ? userDb.userGift.age : state.userGift.age);
   const [userGender, setUserGender] = useState(profile === true ? userDb.userGift.gender : state.userGift.gender);
   const [userWishes, setUserWishes] = useState(profile === true ? userDb.userGift.wishes : state.userGift.wishes);
-  const allAge = [5, 6 ,7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] ;
   const {id} = useParams();
-  const getId = Number(admin === true ? state.group.id : id);
   let user = {
-    groupId: Number(profile === true ? id : getId),
+    groupId: Number(profile === true || admin === false ? id : state.group.id),
     userData:{
       name: profile === true ? userDb.userData.name : state.userData.name,
       email: profile === true ? userDb.userData.email : state.userData.email,
@@ -37,6 +35,7 @@ const UserGift = ({admin, userId, profile, userDb, recipientId}) => {
     admin: admin,
     recipientId:  profile === true ? recipientId : null,
   }; 
+  const allAge = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
  
   return (
     <>

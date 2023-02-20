@@ -12,9 +12,8 @@ const UserData = ({admin, userId, profile, userDb, recipientId}) => {
   const [userEmail, setUserEmail] = useState(profile === true ? userDb.userData.email : state.userData.email);
   const dispatch = useDispatch();
   const {id} = useParams();
-  const getId = Number(admin === true ? state.group.id : id);
   let user = {
-    groupId: Number(profile === true ? id : getId),
+    groupId: Number(profile === true || admin === false ? id : state.group.id),
     userData:{
       name: userName,
       email: userEmail,
