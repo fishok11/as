@@ -1,9 +1,14 @@
-import { 
-  GROUPS_URL, 
-  GROUP_URL, 
-  USERS_URL, 
-  USER_URL 
-} from "../../util";
+import db from '../../firebase'; 
+import {
+  doc,
+  collection, 
+  addDoc, 
+  updateDoc, 
+  // Timestamp, 
+  // query, 
+  // orderBy, 
+  // onSnapshot
+} from 'firebase/firestore';
 import { 
   CREATE_GROUP_NAME, 
   CREATE_EVENT_DATE, 
@@ -123,40 +128,31 @@ export const resetState = () => ({
 export const saveGroupName = (path) => {
   const isUpdate = Boolean(path.groupId);
 
-  if (path.group.name !=="" && isUpdate === true) {
+  if (path.group.name !== "" && isUpdate === true) {
     return async(dispatch) => {
       try {
-        const response = await fetch(GROUP_URL + path.groupId, {
-          method: 'PUT',
-          headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(path.group)
-        });
-        
-        if (response.status < 300) {
-          toast.success ('Группа изменена!');
-          if (path.profile === true) {
-            dispatch(closeEditingGroupName());
-          } else {
-            dispatch(createGroupName({
-              group: path.group,
-            }));
-          }
-        } else if (response.status >= 300) {
-          toast.error('Ошибка!');
-        };
+        const docGroup = doc(db, "groups", path.groupId);
+        await updateDoc(docGroup, path.group);
+
+        if (path.profile === true) {
+          dispatch(closeEditingGroupName());
+        } else {
+          dispatch(createGroupName({
+            group: path.group,
+          }));
+        }
+        toast.success('Группа изменена!');
       } catch (error) {
         toast.error('Ошибка!');
         console.log(error);
       };
     };
   } else {
-    return async(dispatch) => {
+    return (dispatch) => {
       dispatch(createGroupName({
         group: path.group,
       }));
-    }
+    };
   };
 };
 
@@ -169,34 +165,31 @@ export const saveEventDate = (path) => {
     path.group.eventDate.budget !=="" ) {
       return async(dispatch) => {
         try {
-          const response = await fetch(isUpdate === true ? GROUP_URL + path.groupId : GROUPS_URL, {
-            method: isUpdate === true ? 'PUT' : 'POST',
-            headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(path.group)
-          });
-          const data = await response.json();
+          if (isUpdate === false) {
+            const docGroup = await addDoc(collection(db, "groups"), path.group); 
+            dispatch(saveGroupId({
+              group: {
+                id: docGroup.id
+              }
+            }));
+          } else {
+            const docGroup = doc(db, "groups", path.groupId);
+            await updateDoc(docGroup, path.group);
+          }
 
-          if (response.status < 300) {
-            toast.success (isUpdate === true ? 'Группа изменена!' : 'Группа создана!');
-            if (path.profile === true) {
-              dispatch(closeEditingEventDate());
-            } else {
-              dispatch(createEventDate({
-                eventDate: path.group.eventDate,
-              }));
-            }
-            if (path.groupId === null) { 
-              dispatch(saveGroupId({
-                group: {
-                  id: data.id
-                }
-              }));
-            }
-          } else if (response.status >= 300) {
-            toast.error('Ошибка!');
-          };
+          if (path.profile === true) {
+            dispatch(closeEditingEventDate());
+          } else {
+            dispatch(createEventDate({
+              eventDate: path.group.eventDate,
+            }));
+          }
+
+          toast.success(
+            isUpdate === true 
+            ? 'Группа изменена!' 
+            : 'Группа создана!'
+          );
         } catch (error) {
           toast.error('Ошибка!');
           console.log(error);
@@ -221,32 +214,23 @@ export const saveUserData = (path) => {
     isUpdate === true) {
     return async (dispatch) => {
       try {
-        const response = await fetch(USER_URL + path.userId, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(path.user)
-        });
+        const docUser = doc(db, "users", path.userId);
+        await updateDoc(docUser, path.user);
   
-        if (response.status < 300) {
-          if (path.profile === true) {
-            dispatch(closeEditingUserData());
-          }
-          if (path.user.admin === true && path.profile === false) {
-            dispatch(createAdminData({
-              userData: path.user.userData,
-            }));
-          }
-          if (path.user.admin === false && path.profile === false) {
-            dispatch(createUser({
-              userData: path.user.userData
-            }));
-          }
-          toast.success ('Ваши данные изменены');
-        } else if (response.status >= 300) {
-          toast.error('Ошибка!');
-        };
+        if (path.profile === true) {
+          dispatch(closeEditingUserData());
+        }
+        if (path.user.admin === true && path.profile === false) {
+          dispatch(createAdminData({
+            userData: path.user.userData,
+          }));
+        }
+        if (path.user.admin === false && path.profile === false) {
+          dispatch(createUser({
+            userData: path.user.userData
+          }));
+        }
+        toast.success ('Ваши данные изменены');
       } catch (error) {
         toast.error('Ошибка!');
         console.log(error);
@@ -276,40 +260,36 @@ export const saveUserGift = (path) => {
   if (path.user.userGift.age !== "" && path.user.userGift.gender !== "") {
     return async (dispatch) => {
       try {
-        const response = await fetch(isUpdate ===  true ? USER_URL + path.userId : USERS_URL, {
-          method: isUpdate ===  true ? 'PUT' : 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(path.user)
-        });
-        const data = await response.json();
+        if (isUpdate === false) {
+          const docUser = await addDoc(collection(db, "users"), path.user); 
+          dispatch(saveUserId({
+            userData: {
+              userId: docUser.id
+            },
+          }));
+        } else {
+          const docUser = doc(db, "users", path.userId);
+          await updateDoc(docUser, path.user);
+        }
 
-        if (response.status < 300) {
-          if (path.profile === true) {
-            dispatch(closeEditingUserGift());
-          }
-          if (path.user.admin === true && path.profile === false) {
-            dispatch(createAdminGift({
-              userGift: path.user.userGift
-            }));
-          }
-          if (path.user.admin === false && path.profile === false) {
-            dispatch(createUserGift({
-              userGift: path.user.userGift
-            }));
-          }
-          if (path.userId === null) {
-            dispatch(saveUserId({
-              userData: {
-                userId: data.id
-              },
-            }));
-          }
-          toast.success (isUpdate === true ? 'Ваши данные изменены!' : 'Ваши данные сохранены!');
-        } else if (response.status >= 300) {
-          toast.error('Ошибка!');
-        };
+        if (path.profile === true) {
+          dispatch(closeEditingUserGift());
+        }
+        if (path.user.admin === true && path.profile === false) {
+          dispatch(createAdminGift({
+            userGift: path.user.userGift
+          }));
+        }
+        if (path.user.admin === false && path.profile === false) {
+          dispatch(createUserGift({
+            userGift: path.user.userGift
+          }));
+        }
+        toast.success(
+          isUpdate === true 
+          ? 'Ваши данные изменены!' 
+          : 'Ваши данные сохранены!'
+        );
       } catch (error) {
         toast.error('Ошибка!');
         console.log(error);
@@ -334,48 +314,44 @@ export const saveUserGift = (path) => {
 };
 
 export const selectRecipient = (path) => {
-  const rand = arr => {
-    arr = arr.filter((user, i, arr) => {
-      if (user.id === Number(path.userId)) {
-        return false;
-      };
-      for (i = 0; i < arr.length; i++) {
-        if (user.id === arr[i].recipientId || arr[i].groupId !== Number(path.groupId)) {
-          return false;
-        };
-      };
-      return true;
-    });
+  // const rand = arr => {
+  //   arr = arr.filter((user, i, arr) => {
+  //     if (user.id === Number(path.userId)) {
+  //       return false;
+  //     };
+  //     for (i = 0; i < arr.length; i++) {
+  //       if (user.id === arr[i].recipientId || arr[i].groupId !== Number(path.groupId)) {
+  //         return false;
+  //       };
+  //     };
+  //     return true;
+  //   });
 
-    const randomUserId = Math.floor(Math.random() * arr.length);
+  //   const randomUserId = Math.floor(Math.random() * arr.length);
 
-    const randomUser = arr[randomUserId]
+  //   const randomUser = arr[randomUserId]
 
-    return randomUser;
-  };
+  //   return randomUser;
+  // };
 
-  return async (dispatch) => {
-    try {
-      const response = await fetch(USER_URL + path.userId, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({
-          ...path.user,
-          recipientId: rand(path.users).id,
-        })
-      });
+  // return async (dispatch) => {
+  //   try {
+  //     const response = await fetch(USER_URL + path.userId, {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json;charset=utf-8'
+  //       },
+  //       body: JSON.stringify({
+  //         ...path.user,
+  //         // recipientId: ,
+  //       })
+  //     });
 
-      if (response.status < 300) {
-        dispatch(resetSelectRecipient())
-        toast.success ('Получатель выбран!');
-      } else if (response.status >= 300) {
-        toast.error('Ошибка!');
-      };
-    } catch (error) {
-      toast.error('Ошибка!');
-      console.log(error);
-    };
-  };
+  //     dispatch(resetSelectRecipient())
+  //     toast.success ('Получатель выбран!');
+  //   } catch (error) {
+  //     toast.error('Ошибка!');
+  //     console.log(error);
+  //   };
+  // };
 }

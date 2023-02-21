@@ -434,7 +434,7 @@ export const group = (state = initialState, action) => {
     }
     case SAVE_GROUP_ID: {
       const groupId = action.payload.group.id;
-
+      
       return {
         ...state,
         group: {

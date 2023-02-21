@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import db from '../../../firebase'; 
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import Typography from '@mui/material/Typography';
 import GroupName from '../../forms/GroupName';
 import GroupDates from '../../forms/GroupDates';
@@ -15,11 +17,6 @@ import {
   EDIT_USER_DATA,
   EDIT_USER_GIFT,
 } from "../../../store/actions/actionTypes";
-import {
-  GROUP_URL, 
-  USERS_URL, 
-  USER_URL,
-} from "../../../util";
 import { resetUpdateProfile, selectRecipient } from "../../../store/actions/actions";
 
 const UserProfile = () => {
@@ -36,51 +33,66 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(GROUP_URL + id);
-      const data = await response.json();
-      setGroup(data)
-    }
-    fetchData()
+    const groupData = async () => {
+      const docRef = doc(db, "groups", id);
+      const docGroup = await getDoc(docRef);
+
+      if (docGroup.exists()) {
+        setGroup(docGroup.data())
+      } else {
+        return null; 
+      };
+    };
+    groupData()
     .catch(error => console.log(error));
-    dispatch(resetUpdateProfile())
+    dispatch(resetUpdateProfile());
   }, [id, dispatch, state.updateProfile]);
 
   useEffect(() => {
-    const fetchUserDbData = async () => {
-      const response = await fetch(USER_URL + userId);
-      const userDbData = await response.json();
-      setUserDb(userDbData);
+    const userData = async () => {
+      const docRef = doc(db, "users", userId);
+      const docUserDb = await getDoc(docRef);
 
-      const fetcRecipienthData = async () => {
-        const response = await fetch(USER_URL + userDbData.recipientId);
-        const recipientData = await response.json();
-        setRecipient(recipientData);
+      if (docUserDb.exists()) {
+        setUserDb(docUserDb.data());
+      } else {
+        return null;
       };
 
-      if (userDbData.recipientId !== null) {
-        fetcRecipienthData()
+      const recipienthData = async () => {
+        const docRef = doc(db, "users", docUserDb.data().recipientId);
+        const docRecipient = await getDoc(docRef);
+  
+        if (docUserDb.exists()) {
+          setRecipient(docRecipient.data());
+        } else {
+          return null;
+        };
+      };
+
+      if (docUserDb.data().recipientId !== null) {
+        recipienthData()
         .catch(error => console.log(error));
       };
     };
 
-    fetchUserDbData()
+    userData()
     .catch(error => console.log(error));
     dispatch(resetUpdateProfile());
   }, [userId, dispatch, state.updateProfile, state.recipient]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(USERS_URL);
-      const data = await response.json();
-      setUsers(data)
+    const usersData = async () => {
+      const docRef = collection(db, "users");
+      const allUsers = await getDocs(docRef);
+      setUsers(allUsers);
     }
-    fetchData()
+    usersData()
     .catch(error => console.log(error));
-  }, []);
+  }, [users]);
 
   if (group === undefined || userDb === undefined || users === undefined) {
-    return null
+    return null;
   };
   return (
     <div className="Group-container">

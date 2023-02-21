@@ -13,7 +13,7 @@ const UserData = ({admin, userId, profile, userDb, recipientId}) => {
   const dispatch = useDispatch();
   const {id} = useParams();
   let user = {
-    groupId: Number(profile === true || admin === false ? id : state.group.id),
+    groupId: profile === true || admin === false ? id : state.group.id,
     userData:{
       name: userName,
       email: userEmail,

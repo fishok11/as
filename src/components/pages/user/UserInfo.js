@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import db from '../../../firebase'; 
+import { doc, getDoc } from "firebase/firestore";
 import Typography from '@mui/material/Typography';
-import { GROUP_URL } from "../../../util";
 
 const UserInfo = () => {
   const [group, setGroup] = useState();
@@ -11,12 +12,18 @@ const UserInfo = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(GROUP_URL + id);
-      const data = await response.json();
-      setGroup(data)
-    }
+      const docRef = doc(db, "groups", id);
+      const docGroup = await getDoc(docRef);
+
+      if (docGroup.exists()) {
+        setGroup(docGroup.data())
+      } else {
+        return null 
+      }
+    } 
+
     fetchData()
-    .catch(console.error)
+    .catch(error => console.log(error))
   }, [id])
   
   if (group === undefined) {
