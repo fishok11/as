@@ -22,7 +22,6 @@ import {
   CLOSE_EDITING_USER_DATA,
   CLOSE_EDITING_USER_GIFT,
   RESET_UPDATE_PROFILE,
-  RESET_STATE,
   SELECT_RECIPIENT,
 } from "./actions/actionTypes"
 
@@ -244,10 +243,11 @@ export const group = (state = initialState, action) => {
       break
     }
     case CREATE_ADMIN_DATA: {
-      const userDataName = action.payload.userData.name
-      const userDataEmail = action.payload.userData.email 
+      const userName = action.payload.userData.name
+      const userEmail = action.payload.userData.email 
+      const validEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
-      if (userDataName === "" || userDataEmail === "") {
+      if (userName === "" || userEmail === "" || validEmail.test(userEmail) === false) {
         return {
           ...state,
           userData: {
@@ -261,8 +261,8 @@ export const group = (state = initialState, action) => {
             ...state,
             userData: {
               ...state.userData,
-              name: userDataName,
-              email: userDataEmail,
+              name: userName,
+              email: userEmail,
               edit: false,
             },
             userGift: {
@@ -276,8 +276,8 @@ export const group = (state = initialState, action) => {
             ...state,
             userData: {
               ...state.userData,
-              name: userDataName,
-              email: userDataEmail,
+              name: userName,
+              email: userEmail,
               edit: false,
             },
           }
@@ -287,8 +287,8 @@ export const group = (state = initialState, action) => {
           ...state,
           userData: {
             ...state.userData,
-            name: userDataName,
-            email: userDataEmail,
+            name: userName,
+            email: userEmail,
             edit: false,
           },
           userGift: {
@@ -447,8 +447,9 @@ export const group = (state = initialState, action) => {
     case CREATE_USER_DATA: {
       const userName = action.payload.userData.name
       const userEmail = action.payload.userData.email
+      const validEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
-      if (userName === "" || userEmail === "") {
+      if (userName === "" || userEmail === "" || validEmail.test(userEmail) === false) {
         return {
           ...state,
           userData: {    
@@ -700,12 +701,6 @@ export const group = (state = initialState, action) => {
       return {
         ...state,
         recipient: true,
-      }
-    }
-    //========================================================== FETCH STATUS
-    case RESET_STATE: {
-      return {
-        ...initialState,
       }
     }
     default: {

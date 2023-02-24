@@ -14,7 +14,7 @@ import GlobalButton from "../navigation/GlobalButton";
 const GroupDates = ({id, profile, groupDB}) => {
   const state = useSelector(state => state.group)
   const dispatch = useDispatch()
-  const [budget, setBudget] = useState(state.eventDate.budget)
+  const [budget, setBudget] = useState(profile === true ? groupDB.eventDate.budget : state.eventDate.budget)
   const [registrationDate, setRegistrationDate] = useState(dayjs())
   const [drawDate, setDrawDate] = useState(dayjs())
   const [exchangeDate, setExchangeDate] = useState(dayjs())

@@ -23,7 +23,6 @@ import {
   CLOSE_EDITING_USER_DATA,
   CLOSE_EDITING_USER_GIFT,
   RESET_UPDATE_PROFILE,
-  RESET_STATE,
   SELECT_RECIPIENT,
 } from "./actionTypes"
 import toast from 'react-hot-toast';
@@ -45,13 +44,6 @@ export const createEventDate = (path) => ({
   },
 });
 
-export const saveGroupId = (path) => ({
-  type: SAVE_GROUP_ID,
-  payload: {
-    group: path.group
-  },
-});
-
 export const createAdminData = (path) => ({
   type: CREATE_ADMIN_DATA,
   payload: {
@@ -63,6 +55,13 @@ export const createAdminGift = (path) => ({
   type: CREATE_ADMIN_GIFT,
   payload: {
     userGift: path.userGift
+  },
+});
+
+export const saveGroupId = (path) => ({
+  type: SAVE_GROUP_ID,
+  payload: {
+    group: path.group
   },
 });
 
@@ -113,12 +112,6 @@ export const resetUpdateProfile = () => ({
 
 export const resetSelectRecipient = () => ({
   type: SELECT_RECIPIENT,
-});
-
-//================================= FETCH STATUS
-
-export const resetState = () => ({
-  type: RESET_STATE,
 });
 
 //================================================================================== FETCH
@@ -209,8 +202,8 @@ export const saveEventDate = (path) => {
 export const saveUserData = (path) => {
   const isUpdate = Boolean(path.userId);
 
-  if (path.user.userData.name !=="" && 
-    path.user.userData.email !=="" && 
+  if (path.user.userData.name !== "" && 
+    path.user.userData.email !== "" && 
     isUpdate === true) {
     return async (dispatch) => {
       try {
@@ -314,26 +307,6 @@ export const saveUserGift = (path) => {
 };
 
 export const selectRecipient = (path) => {
-  // const rand = arr => {
-  //   arr = arr.filter((user, i, arr) => {
-  //     if (user.id === Number(path.userId)) {
-  //       return false;
-  //     };
-  //     for (i = 0; i < arr.length; i++) {
-  //       if (user.id === arr[i].recipientId || arr[i].groupId !== Number(path.groupId)) {
-  //         return false;
-  //       };
-  //     };
-  //     return true;
-  //   });
-
-  //   const randomUserId = Math.floor(Math.random() * arr.length);
-
-  //   const randomUser = arr[randomUserId]
-
-  //   return randomUser;
-  // };
-
   // return async (dispatch) => {
   //   try {
   //     const response = await fetch(USER_URL + path.userId, {

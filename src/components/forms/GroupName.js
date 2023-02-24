@@ -8,7 +8,7 @@ import GlobalButton from "../navigation/GlobalButton";
 const GroupName = ({id, profile, groupDB}) => {
   const state = useSelector(state => state.group)
   const dispatch = useDispatch()
-  const [groupName, setGroupName] = useState(state.group.name)
+  const [groupName, setGroupName] = useState(profile === true ? groupDB.name : state.group.name)
   let group = {
     name: groupName,
     eventDate: {
