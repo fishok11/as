@@ -34,7 +34,7 @@ const UserGift = ({admin, userId, profile, userDb, recipientId}) => {
     },
     admin: admin,
     recipientId:  profile === true ? recipientId : null,
-  }; 
+  } 
   const allAge = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
  
   return (
@@ -99,6 +99,6 @@ const UserGift = ({admin, userId, profile, userDb, recipientId}) => {
       </div>
     </>
   )
-};
+}
 
 export default UserGift;

@@ -13,6 +13,6 @@ const GlobalButton = ({onClick, text}) => {
       <Typography variant="button" display="block">{text}</Typography>
     </Button>
   );
-};
+}
 
 export default GlobalButton;

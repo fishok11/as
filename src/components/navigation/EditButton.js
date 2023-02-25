@@ -16,6 +16,6 @@ const EditButton = ({ico, action, adminStep, userStep, adminEdit}) => {
       {ico}
     </Button>
   )
-};
+}
 
 export default EditButton;

@@ -30,10 +30,10 @@ const UserProfile = () => {
   const [recipient, setRecipient] = useState();
   let user = {
     ...userDb,
-  };
+  }
 
   useEffect(() => {
-    const groupData = async () => {
+    const groupData = async() => {
       const docRef = doc(db, "groups", id);
       const docGroup = await getDoc(docRef);
 
@@ -41,15 +41,15 @@ const UserProfile = () => {
         setGroup(docGroup.data())
       } else {
         return null; 
-      };
-    };
+      }
+    }
     groupData()
     .catch(error => console.log(error));
     dispatch(resetUpdateProfile());
   }, [id, dispatch, state.updateProfile]);
 
   useEffect(() => {
-    const userData = async () => {
+    const userData = async() => {
       const docRef = doc(db, "users", userId);
       const docUserDb = await getDoc(docRef);
 
@@ -57,9 +57,9 @@ const UserProfile = () => {
         setUserDb(docUserDb.data());
       } else {
         return null;
-      };
+      }
 
-      const recipienthData = async () => {
+      const recipienthData = async() => {
         const docRef = doc(db, "users", docUserDb.data().recipientId);
         const docRecipient = await getDoc(docRef);
   
@@ -67,14 +67,14 @@ const UserProfile = () => {
           setRecipient(docRecipient.data());
         } else {
           return null;
-        };
-      };
+        }
+      }
 
       if (docUserDb.data().recipientId !== null) {
         recipienthData()
         .catch(error => console.log(error));
-      };
-    };
+      }
+    }
 
     userData()
     .catch(error => console.log(error));
@@ -82,18 +82,18 @@ const UserProfile = () => {
   }, [userId, dispatch, state.updateProfile, state.recipient]);
 
   useEffect(() => {
-    const usersData = async () => {
+    const usersData = async() => {
       const docRef = collection(db, "users");
       const allUsers = await getDocs(docRef);
       setUsers(allUsers);
     }
     usersData()
     .catch(error => console.log(error));
-  }, [users]);
+  }, []);
 
   if (group === undefined || userDb === undefined || users === undefined) {
     return null;
-  };
+  }
   return (
     <div className="Group-container">
       {state.group.editProfile === false && 
@@ -145,7 +145,7 @@ const UserProfile = () => {
         {state.userGift.editProfile === true && (<UserGift admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
       </>
     </div>
-  );
-};
+  )
+}
 
 export default UserProfile;

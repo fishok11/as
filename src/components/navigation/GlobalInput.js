@@ -15,6 +15,6 @@ const GlobalInput = ({label, error, value, onChange, type}) => {
       onChange={onChange}
     />
   )
-};
+}
 
 export default GlobalInput;

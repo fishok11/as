@@ -23,6 +23,6 @@ const GroupDone = () => {
       <LinkProfile href={`${INDEX_URL}/group/${state.group.id}/user-profile/${state.userData.id}`} />
     </div>
   )
-};
+}
 
 export default GroupDone;

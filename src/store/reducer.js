@@ -706,5 +706,5 @@ export const group = (state = initialState, action) => {
     default: {
       return state;
     }
-  };
-};
+  }
+}

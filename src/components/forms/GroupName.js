@@ -17,7 +17,7 @@ const GroupName = ({id, profile, groupDB}) => {
       drawDate: profile === true ? groupDB.eventDate.drawDate : state.eventDate.drawDate,
       exchangeDate: profile === true ? groupDB.eventDate.exchangeDate : state.eventDate.exchangeDate,
     },
-  };
+  }
 
   return ( 
     <div className="g-container__form">
@@ -42,6 +42,6 @@ const GroupName = ({id, profile, groupDB}) => {
       />
     </div>
   );
-};
+}
 
 export default GroupName;

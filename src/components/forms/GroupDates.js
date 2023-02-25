@@ -83,6 +83,6 @@ const GroupDates = ({id, profile, groupDB}) => {
       />
     </div>
   )
-};
+}
 
 export default GroupDates;

@@ -20,6 +20,6 @@ const GroupInfo = () => {
       </div>)}
     </div>
   )
-};
+}
 
 export default GroupInfo;

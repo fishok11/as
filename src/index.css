@@ -15,17 +15,6 @@ body {
   --main-border-radius: 5px 0 0 5px;
   --shadow-link: inset 0 1px 4px #11111124;
 }
-h2 {
-  text-align: center;
-  margin: 10px 0px 0px 0px;
-  box-sizing: border-box;
-  color: #575656;
-}
-h3 {
-  text-align: center;
-  margin: 0px;
-  color: #575656;
-}
 
 .g-container__form {
   display: flex;

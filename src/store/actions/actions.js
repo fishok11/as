@@ -138,16 +138,16 @@ export const saveGroupName = (path) => {
       } catch (error) {
         toast.error('Ошибка!');
         console.log(error);
-      };
-    };
+      }
+    }
   } else {
     return (dispatch) => {
       dispatch(createGroupName({
         group: path.group,
       }));
-    };
-  };
-};
+    }
+  }
+}
 
 export const saveEventDate = (path) => {
   const isUpdate = Boolean(path.groupId);
@@ -186,16 +186,16 @@ export const saveEventDate = (path) => {
         } catch (error) {
           toast.error('Ошибка!');
           console.log(error);
-        };
-      };
+        }
+      }
   } else {
     return async(dispatch) => {
       dispatch(createEventDate({
         eventDate: path.group.eventDate,
       }));
-    };
-  };
-};
+    }
+  }
+}
 
 //================================= FETCH USER
 
@@ -227,25 +227,25 @@ export const saveUserData = (path) => {
       } catch (error) {
         toast.error('Ошибка!');
         console.log(error);
-      };
-    };
+      }
+    }
   } else {
     if (path.user.admin === true) {
       return async (dispatch) => {
         dispatch(createAdminData({
           userData: path.user.userData
         }));
-      };
+      }
     }
     if (path.user.admin === false) {
       return async (dispatch) => {
         dispatch(createUser({
           userData: path.user.userData
         }));
-      };
+      }
     }
-  };
-};
+  }
+}
 
 export const saveUserGift = (path) => {
   const isUpdate = Boolean(path.userId);
@@ -286,25 +286,25 @@ export const saveUserGift = (path) => {
       } catch (error) {
         toast.error('Ошибка!');
         console.log(error);
-      };
-    };
+      }
+    }
   } else {
     if (path.user.admin === true) {
       return async (dispatch) => {
         dispatch(createAdminGift({
           userGift: path.user.userGift
         }));
-      };
+      }
     }
     if (path.user.admin === false) {
       return async (dispatch) => {
         dispatch(createUserGift({
           userGift: path.user.userGift
         }));
-      };
+      }
     }
-  };
-};
+  }
+}
 
 export const selectRecipient = (path) => {
   // return async (dispatch) => {
@@ -325,6 +325,6 @@ export const selectRecipient = (path) => {
   //   } catch (error) {
   //     toast.error('Ошибка!');
   //     console.log(error);
-  //   };
-  // };
+  //   }
+  // }
 }

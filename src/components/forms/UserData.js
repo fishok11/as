@@ -25,7 +25,7 @@ const UserData = ({admin, userId, profile, userDb, recipientId}) => {
     },
     admin: admin,
     recipientId: profile === true ? recipientId : null,
-  };
+  }
 
   return (
     <>
@@ -57,6 +57,6 @@ const UserData = ({admin, userId, profile, userDb, recipientId}) => {
       </div>
     </>
   )
-};
+}
 
 export default UserData;

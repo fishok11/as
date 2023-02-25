@@ -13,7 +13,7 @@ const GlobalLink = ({defaultValue}) => {
     setTimeout(() => {
       setCopy(false);
     }, 1000);
-  };
+  }
 
   return (
     <div className='GlobalLink-container'>

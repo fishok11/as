@@ -9,6 +9,6 @@ const User = () => {
       <UserForm />
     </>
   )
-};
+}
 
 export default User;

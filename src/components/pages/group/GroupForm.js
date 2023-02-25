@@ -28,6 +28,6 @@ const GroupForm = () => {
     }
   </div>
   )
-};
+}
 
 export default GroupForm;
