@@ -1,7 +1,7 @@
-import GroupName from "../../forms/GroupName"
-import GroupDates from "../../forms/GroupDates"
-import UserData from "../../forms/UserData";
-import UserGift from "../../forms/UserGift";
+import GroupName from "../../screens/GroupName"
+import GroupDates from "../../screens/GroupDates"
+import UserData from "../../screens/UserData";
+import UserGift from "../../screens/UserGift";
 import GroupDone from "./GroupDone";
 import EditGroup from "../../navigation/EditGroup";
 import { useSelector } from "react-redux";

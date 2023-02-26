@@ -1,7 +1,7 @@
 import UserDone from "./UserDone";
 import { useSelector } from "react-redux";
-import UserGift from "../../forms/UserGift";
-import UserData from "../../forms/UserData";
+import UserGift from "../../screens/UserGift";
+import UserData from "../../screens/UserData";
 import EditUser from "../../navigation/EditUser";
 
 const UserForm = () => {
