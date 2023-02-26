@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
 
-const GroupDates = ({id, profile, groupDB}) => {
+const GroupDates = ({groupId, profile, groupDB}) => {
   const state = useSelector(state => state.group)
   const dispatch = useDispatch()
   const [budget, setBudget] = useState(profile === true ? groupDB.eventDate.budget : state.eventDate.budget)
@@ -49,7 +49,7 @@ const GroupDates = ({id, profile, groupDB}) => {
             renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
             value={registrationDate}
             onChange={newValue => setRegistrationDate(newValue)}
-          ></DesktopDatePicker>
+          />
 
           <DesktopDatePicker 
             label="Выбор получателей подарков до"
@@ -58,7 +58,7 @@ const GroupDates = ({id, profile, groupDB}) => {
             renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
             value={drawDate}
             onChange={newValue => setDrawDate(newValue)}
-          ></DesktopDatePicker>
+          />
         
           <DesktopDatePicker 
             label="Обмен подарками"
@@ -67,7 +67,7 @@ const GroupDates = ({id, profile, groupDB}) => {
             renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
             value={exchangeDate}
             onChange={newValue => setExchangeDate(newValue)}
-          ></DesktopDatePicker>
+          />
         </Stack>
       </LocalizationProvider>
 
@@ -76,7 +76,7 @@ const GroupDates = ({id, profile, groupDB}) => {
         onClick={() => (
           dispatch(saveEventDate({
             group,
-            groupId: id,
+            groupId: groupId,
             profile: profile,
           })) 
         )}

@@ -13,8 +13,8 @@ const GroupForm = () => {
   return (
     <div className="Group-container">
     <EditGroup/>
-    {(state.step >= 1 && state.group.edit === true) && (<GroupName id={state.group.id} profile={false} />)}
-    {(state.step >= 2 && state.eventDate.edit === true) && (<GroupDates id={state.group.id} profile={false} />)}
+    {(state.step >= 1 && state.group.edit === true) && (<GroupName groupId={state.group.id} profile={false} />)}
+    {(state.step >= 2 && state.eventDate.edit === true) && (<GroupDates groupId={state.group.id} profile={false} />)}
     {(state.step >= 3 && state.userData.edit === true) && (<UserData admin={true} userId={state.userData.id} profile={false} />)}
     {(state.step >= 4 && state.userGift.edit === true) && (<UserGift admin={true} userId={state.userData.id} profile={false} />)}
     {

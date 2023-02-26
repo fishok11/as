@@ -8,12 +8,12 @@ import GlobalButton from "../navigation/GlobalButton";
 
 const UserData = ({admin, userId, profile, userDb, recipientId}) => {
   const state = useSelector(state => state.group);
+  const dispatch = useDispatch();
+  const {groupId} = useParams();
   const [userName, setUserName] = useState(profile === true ? userDb.userData.name : state.userData.name);
   const [userEmail, setUserEmail] = useState(profile === true ? userDb.userData.email : state.userData.email);
-  const dispatch = useDispatch();
-  const {id} = useParams();
   let user = {
-    groupId: profile === true || admin === false ? id : state.group.id,
+    groupId: profile === true || admin === false ? groupId : state.group.id,
     userData:{
       name: userName,
       email: userEmail,

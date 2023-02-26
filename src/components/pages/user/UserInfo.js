@@ -8,11 +8,11 @@ import Typography from '@mui/material/Typography';
 const UserInfo = () => {
   const [group, setGroup] = useState();
   const state = useSelector(state => state.group)
-  const {id} = useParams();
+  const {groupId} = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
-      const docRef = doc(db, "groups", id);
+      const docRef = doc(db, "groups", groupId);
       const docGroup = await getDoc(docRef);
 
       if (docGroup.exists()) {
@@ -24,7 +24,7 @@ const UserInfo = () => {
 
     fetchData()
     .catch(error => console.log(error))
-  }, [id])
+  }, [groupId])
   
   if (group === undefined) {
     return null

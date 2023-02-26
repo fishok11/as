@@ -10,8 +10,8 @@ const App = () => {
     <>
       <Routes>
         <Route index element={<Group />}/>
-        <Route path={`/group/:id`} element={<User />}/>
-        <Route path={`/group/:id/user-profile/:userId`} element={<UserProfile />}/>
+        <Route path={`/group/:groupId`} element={<User />}/>
+        <Route path={`/group/:groupId/user-profile/:userId`} element={<UserProfile />}/>
       </Routes>
       <Toaster position="bottom-center"/>
     </>

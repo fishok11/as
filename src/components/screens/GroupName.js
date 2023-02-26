@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import GlobalInput from '../navigation/GlobalInput'
 import GlobalButton from "../navigation/GlobalButton";
 
-const GroupName = ({id, profile, groupDB}) => {
+const GroupName = ({groupId, profile, groupDB}) => {
   const state = useSelector(state => state.group)
   const dispatch = useDispatch()
   const [groupName, setGroupName] = useState(profile === true ? groupDB.name : state.group.name)
@@ -35,7 +35,7 @@ const GroupName = ({id, profile, groupDB}) => {
         onClick={() => (
           dispatch(saveGroupName({
             group ,
-            groupId: id,
+            groupId: groupId,
             profile: profile,
           })) 
         )}

@@ -22,7 +22,7 @@ import { resetUpdateProfile, selectRecipient } from "../../../store/actions/acti
 const UserProfile = () => {
   const state = useSelector(state => state.group);
   const dispatch = useDispatch();
-  const {id} = useParams();
+  const {groupId} = useParams();
   const {userId} = useParams();
   const [group, setGroup] = useState();
   const [userDb, setUserDb] = useState();
@@ -34,7 +34,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     const groupData = async() => {
-      const docRef = doc(db, "groups", id);
+      const docRef = doc(db, "groups", groupId);
       const docGroup = await getDoc(docRef);
 
       if (docGroup.exists()) {
@@ -46,7 +46,7 @@ const UserProfile = () => {
     groupData()
     .catch(error => console.log(error));
     dispatch(resetUpdateProfile());
-  }, [id, dispatch, state.updateProfile]);
+  }, [groupId, dispatch, state.updateProfile]);
 
   useEffect(() => {
     const userData = async() => {
@@ -133,14 +133,14 @@ const UserProfile = () => {
           onClick={() => dispatch(selectRecipient({
             user: user,
             userId: userId,
-            groupId: id,
+            groupId: groupId,
             users: users,
           }))}
         />)}
       </>)}
       <>
-        {state.group.editProfile === true && (<GroupName id={id} profile={true} groupDB={group} />)}
-        {state.eventDate.editProfile === true && (<GroupDates id={id} profile={true} groupDB={group} />)}
+        {state.group.editProfile === true && (<GroupName groupId={groupId} profile={true} groupDB={group} />)}
+        {state.eventDate.editProfile === true && (<GroupDates groupId={groupId} profile={true} groupDB={group} />)}
         {state.userData.editProfile === true && (<UserData admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
         {state.userGift.editProfile === true && (<UserGift admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
       </>

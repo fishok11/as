@@ -57,7 +57,7 @@ const UserGift = ({admin, userId, profile, userDb, recipientId}) => {
             onChange={event => setUserAge(event.target.value)}
           >
             {allAge.map(age => 
-              <MenuItem key={age} value={age} >{age}</MenuItem> 
+              <MenuItem key={age} value={age}>{age}</MenuItem> 
             )}
           </Select>
         </FormControl>
