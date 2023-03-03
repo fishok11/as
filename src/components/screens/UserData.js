@@ -33,6 +33,7 @@ const UserData = ({admin, userId, profile, userDb, recipientId}) => {
 
       <div className="g-container__form">
         <GlobalInput 
+          testId="user-data-name-input"
           label="Введите ваше имя" 
           error={state.userData.error === true}
           value={userName}
@@ -40,6 +41,7 @@ const UserData = ({admin, userId, profile, userDb, recipientId}) => {
         />
 
         <GlobalInput 
+          testId="user-data-email-input"
           label="Введите ваш email" 
           error={state.userData.error === true}
           value={userEmail}

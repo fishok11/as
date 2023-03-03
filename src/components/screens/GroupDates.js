@@ -33,6 +33,7 @@ const GroupDates = ({groupId, profile, groupDB}) => {
       <Typography variant="h6">Данные группы</Typography>
       
       <GlobalInput 
+        testId="group-date-budget-input"
         label="Бюджет" 
         type="number"
         error={state.eventDate.error === true}
