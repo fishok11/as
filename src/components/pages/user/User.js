@@ -1,12 +1,12 @@
 import UserInfo from "./UserInfo";
-import UserForm from "./UserForm";
+import UserForms from "./UserForms";
 
 const User = () => {
 
   return (
     <>
       <UserInfo />
-      <UserForm />
+      <UserForms />
     </>
   )
 }

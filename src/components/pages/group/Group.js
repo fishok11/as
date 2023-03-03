@@ -1,11 +1,11 @@
 import GroupInfo from "./GroupInfo";
-import GroupForm from "./GroupForm";
+import GroupForms from "./GroupForms";
 
 const Group = () => {
   return (
     <div>
-      <GroupInfo/>
-      <GroupForm/>
+      <GroupInfo />
+      <GroupForms />
     </div>
   )
 }

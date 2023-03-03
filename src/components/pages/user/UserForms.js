@@ -4,7 +4,7 @@ import UserGift from "../../screens/UserGift";
 import UserData from "../../screens/UserData";
 import EditUser from "../../navigation/EditUser";
 
-const UserForm = () => {
+const UserForms = () => {
   const state = useSelector(state => state.group);
   
   return (
@@ -23,4 +23,4 @@ const UserForm = () => {
   )
 }
 
-export default UserForm;
+export default UserForms;
