@@ -29,7 +29,7 @@ const GroupDates = ({groupId, profile, groupDB}) => {
   }
 
   return (
-    <div className="g-container__form">
+    <div className="g-container__form" data-testId="group-date">
       <Typography variant="h6">Данные группы</Typography>
       
       <GlobalInput 

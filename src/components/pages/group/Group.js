@@ -3,7 +3,7 @@ import GroupForms from "./GroupForms";
 
 const Group = () => {
   return (
-    <div>
+    <div data-testId="group">
       <GroupInfo />
       <GroupForms />
     </div>

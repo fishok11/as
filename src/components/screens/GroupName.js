@@ -20,10 +20,11 @@ const GroupName = ({groupId, profile, groupDB}) => {
   }
 
   return ( 
-    <div className="g-container__form">
+    <div className="g-container__form" data-testId="group-name">
       <Typography variant="h6">Название вашей группы</Typography>
       
       <GlobalInput 
+        testId="group-name-input"
         label="Введите название вашей группы" 
         error={state.group.error === true}
         value={groupName}
