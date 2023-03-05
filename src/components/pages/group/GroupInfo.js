@@ -5,7 +5,7 @@ const GroupInfo = () => {
   const state = useSelector(state => state.group)
 
   return (
-    <div data-testId="group-info">
+    <div data-testid="group-info">
       {state.step > 1 && (
         <div className="Group-container Group-container--info">
           <Typography variant="subtitle1">{state.group.name}</Typography>

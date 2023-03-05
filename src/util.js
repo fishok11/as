@@ -1,6 +1,6 @@
 export const INDEX_URL = 'http://localhost:3000'
 
-export const sattolo = (array) => { 
+export const mixUsers = (array) => { 
   const len = array.length; 
   for (let i = 0; i < len - 1; i++) { 
     let j = Math.floor(Math.random() *  (len-(i+1)))+(i+1); 

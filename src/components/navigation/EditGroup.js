@@ -12,7 +12,7 @@ import RedeemIcon from '@mui/icons-material/Redeem';
 
 const EditGroup = () => {
   return (
-    <div className="ReturnToEdit-container" data-testId="group-edit-buttons">
+    <div className="ReturnToEdit-container" data-testid="group-edit-buttons">
       <EditButton ico={<PeopleIcon />} action={RETURN_CREATE_GROUP_NAME} adminStep='1'/>
       <EditButton ico={<CalendarMonthIcon />} action={RETURN_CREATE_EVENT_DATE} adminStep='2'/>
       <EditButton ico={<PersonIcon />} action={RETURN_CREATE_ADMIN_DATA} adminStep='3'/>

@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField';
 
-const GlobalInput = ({label, error, value, onChange, type, testId}) => {
+const GlobalInput = ({label, error, value, onChange, type, testid}) => {
   return (
     <TextField
 
@@ -10,7 +10,7 @@ const GlobalInput = ({label, error, value, onChange, type, testId}) => {
       size="small"
       margin="normal"
       fullWidth
-      inputProps={{ "data-testId": testId }}
+      inputProps={{ "data-testid": testid }}
       type={type}
       error={error}
       value={value}

@@ -29,11 +29,11 @@ const GroupDates = ({groupId, profile, groupDB}) => {
   }
 
   return (
-    <div className="g-container__form" data-testId="group-date">
+    <div className="g-container__form" data-testid="group-date">
       <Typography variant="h6">Данные группы</Typography>
       
       <GlobalInput 
-        testId="group-date-budget-input"
+        testid="group-date-budget-input"
         label="Бюджет" 
         type="number"
         error={state.eventDate.error === true}
