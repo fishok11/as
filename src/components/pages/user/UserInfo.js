@@ -6,9 +6,11 @@ import { doc, getDoc } from "firebase/firestore";
 import Typography from '@mui/material/Typography';
 
 const UserInfo = () => {
-  const [group, setGroup] = useState();
   const state = useSelector(state => state.group)
+
   const {groupId} = useParams();
+  
+  const [group, setGroup] = useState();
 
   useEffect(() => {
     const fetchData = async () => {

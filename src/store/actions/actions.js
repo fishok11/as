@@ -26,6 +26,7 @@ import {
   SELECT_RECIPIENT,
 } from "./actionTypes"
 import toast from 'react-hot-toast';
+import { mixUsers } from '../../util';
 //================================================================================== ACTIONS
 
 //================================= GROUP & ADMIN
@@ -285,7 +286,7 @@ export const saveUserGift = (path) => {
         );
       } catch (error) {
         toast.error('Ошибка!');
-        console.log(error);
+        console.error(error);
       }
     }
   } else {
@@ -307,24 +308,35 @@ export const saveUserGift = (path) => {
 }
 
 export const selectRecipient = (path) => {
-  // return async (dispatch) => {
-  //   try {
-  //     const response = await fetch(USER_URL + path.userId, {
-  //       method: 'PUT',
-  //       headers: {
-  //         'Content-Type': 'application/json;charset=utf-8'
-  //       },
-  //       body: JSON.stringify({
-  //         ...path.user,
-  //         // recipientId: ,
-  //       })
-  //     });
+  let group = {
+    ...path.group,
+    recipients: Object.values(path.group.recipients).length === 0 ? {} : path.group.recipients,
+  }
+  if (Object.values(path.group.recipients).length === 0) {
+    const mixUsersArr = mixUsers(path.users);
+    path.users.forEach((user, index) => group.recipients[user.id] = mixUsersArr[index].id);
+  }
 
-  //     dispatch(resetSelectRecipient())
-  //     toast.success ('Получатель выбран!');
-  //   } catch (error) {
-  //     toast.error('Ошибка!');
-  //     console.log(error);
-  //   }
-  // }
+  const user = {
+    ...path.user,
+    recipientId: group.recipients[path.userId],
+  }
+
+  return async (dispatch) => {
+    try {
+      if (Object.values(path.group.recipients).length === 0) {
+        const docGroup = doc(db, "groups", path.groupId);
+        await updateDoc(docGroup, group);
+      }
+
+      const docUser = doc(db, "users", path.userId);
+      await updateDoc(docUser, user);
+
+      dispatch(resetSelectRecipient())
+      toast.success ('Получатель выбран!');
+    } catch (error) {
+      toast.error('Ошибка!');
+      console.log(error);
+    }
+  }
 }

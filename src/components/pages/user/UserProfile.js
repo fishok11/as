@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import db from '../../../firebase'; 
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import Typography from '@mui/material/Typography';
 import GroupName from '../../screens/GroupName';
 import GroupDates from '../../screens/GroupDates';
@@ -22,15 +22,24 @@ import { resetUpdateProfile, selectRecipient } from "../../../store/actions/acti
 const UserProfile = () => {
   const state = useSelector(state => state.group);
   const dispatch = useDispatch();
+  
   const {groupId} = useParams();
   const {userId} = useParams();
-  const [group, setGroup] = useState();
+
+  const [groupDb, setGroupDb] = useState();
   const [userDb, setUserDb] = useState();
   const [users, setUsers] = useState();
   const [recipient, setRecipient] = useState();
-  let user = {
-    ...userDb,
-  }
+
+  // let recipients = {};
+  // let group = {
+  //   ...groupDb,
+  //   recipients: recipients,
+  // }
+  // if (users !== undefined || groupDb !== undefined) {
+  //   const mixUsersArr = mixUsers(users);
+  //   users.forEach((user, index) => recipients[user.id] = mixUsersArr[index].id); 
+  // }
 
   useEffect(() => {
     const groupData = async() => {
@@ -38,7 +47,7 @@ const UserProfile = () => {
       const docGroup = await getDoc(docRef);
 
       if (docGroup.exists()) {
-        setGroup(docGroup.data())
+        setGroupDb(docGroup.data())
       } else {
         return null; 
       }
@@ -83,15 +92,22 @@ const UserProfile = () => {
 
   useEffect(() => {
     const usersData = async() => {
-      const docRef = collection(db, "users");
-      const allUsers = await getDocs(docRef);
+      const docRef = query(collection(db, "users"), where("groupId", "==", groupId));
+      const docs = await getDocs(docRef);
+      let allUsers = [];
+
+      docs.forEach((doc) => {
+        const oneUser = doc.data()
+        oneUser.id = doc.id
+        allUsers.push(oneUser)
+      });
       setUsers(allUsers);
     }
     usersData()
     .catch(error => console.log(error));
-  }, []);
+  }, [groupId]);
 
-  if (group === undefined || userDb === undefined || users === undefined) {
+  if (groupDb === undefined || userDb === undefined || users === undefined) {
     return null;
   }
   return (
@@ -103,11 +119,11 @@ const UserProfile = () => {
         <div className="UserProfile__container">
           <Typography variant="h6" sx={{textAlign: 'center'}}>Группа</Typography>
           <div className="UserProfile__item">
-            <Typography variant="subtitle1">{group.name}</Typography>
+            <Typography variant="subtitle1">{groupDb.name}</Typography>
             <EditButton ico={<EditIcon />} action={EDIT_GROUP_NAME} adminEdit={userDb.admin}/>
           </div>
           <div className="UserProfile__item">
-            <Typography variant="subtitle1">{group.eventDate.budget}₽, Регистрация до {group.eventDate.registrationDate}</Typography>
+            <Typography variant="subtitle1">{groupDb.eventDate.budget}₽, Регистрация до {groupDb.eventDate.registrationDate}</Typography>
             <EditButton ico={<EditIcon />} action={EDIT_EVENT_DATE} adminEdit={userDb.admin}/>
           </div>
         </div>
@@ -128,19 +144,23 @@ const UserProfile = () => {
             <Typography variant="subtitle1">Пожелания {recipient.userData.name}: {recipient.userGift.wishes}</Typography>
           )}
         </div>)}
-        {userDb.recipientId === null && (<GlobalButton 
+        {userDb.recipientId === null && (
+        <GlobalButton 
           text={"Выбрать получателя"}
+          profile={true}
+          drawDate={groupDb.eventDate.drawDate}
           onClick={() => dispatch(selectRecipient({
-            user: user,
+            user: userDb,
+            group: groupDb,
+            users: users,
             userId: userId,
             groupId: groupId,
-            users: users,
           }))}
         />)}
       </>)}
       <>
-        {state.group.editProfile === true && (<GroupName groupId={groupId} profile={true} groupDB={group} />)}
-        {state.eventDate.editProfile === true && (<GroupDates groupId={groupId} profile={true} groupDB={group} />)}
+        {state.group.editProfile === true && (<GroupName groupId={groupId} profile={true} groupDb={groupDb} />)}
+        {state.eventDate.editProfile === true && (<GroupDates groupId={groupId} profile={true} groupDb={groupDb} />)}
         {state.userData.editProfile === true && (<UserData admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
         {state.userGift.editProfile === true && (<UserGift admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
       </>

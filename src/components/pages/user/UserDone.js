@@ -7,6 +7,7 @@ import { INDEX_URL } from "../../../util";
 
 const UserDone = () => {
   const state = useSelector(state => state.group)
+  
   const {groupId} = useParams();
 
   return (

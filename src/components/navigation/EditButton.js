@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from '@mui/material/Button';
 
 const EditButton = ({ico, action, adminStep, userStep, adminEdit}) => {
-  const dispatch = useDispatch()
-  const state = useSelector(state => state.group)
+  const state = useSelector(state => state.group);
+  const dispatch = useDispatch();
 
   return (
     <Button

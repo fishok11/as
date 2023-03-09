@@ -17,12 +17,15 @@ import GlobalButton from "../navigation/GlobalButton";
 const UserGift = ({admin, userId, profile, userDb, recipientId}) => {
   const state = useSelector(state => state.group);
   const dispatch = useDispatch();
+  
+  const {groupId} = useParams();
+
   const [userAge, setUserAge] = useState(profile === true ? userDb.userGift.age : state.userGift.age);
   const [userGender, setUserGender] = useState(profile === true ? userDb.userGift.gender : state.userGift.gender);
   const [userWishes, setUserWishes] = useState(profile === true ? userDb.userGift.wishes : state.userGift.wishes);
-  const {id} = useParams();
+
   let user = {
-    groupId: profile === true || admin === false ? id : state.group.id,
+    groupId: profile === true || admin === false ? groupId : state.group.id,
     userData:{
       name: profile === true ? userDb.userData.name : state.userData.name,
       email: profile === true ? userDb.userData.email : state.userData.email,
@@ -73,7 +76,6 @@ const UserGift = ({admin, userId, profile, userDb, recipientId}) => {
           >
             <FormControlLabel value="мужского" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Мужской"/>
             <FormControlLabel value="женского" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Женский" />
-            <FormControlLabel value="другого" control={<Radio size="small" sx={{ my: "-5px", '& .MuiSvgIcon-root': { fontSize: 18 }}}/>} label="Другой"/>
           </RadioGroup>
         </FormControl>
 

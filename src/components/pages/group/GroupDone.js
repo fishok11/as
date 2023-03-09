@@ -5,7 +5,7 @@ import LinkProfile from "../../navigation/LinkProfile";
 import { INDEX_URL } from "../../../util";
 
 const GroupDone = () => {
-  const state = useSelector(state => state.group)
+  const state = useSelector(state => state.group);
 
   return (
     <div className="g-container__form">

@@ -495,6 +495,7 @@ export const group = (state = initialState, action) => {
             edit: false,
           },
           userGift: {
+            ...state.userGift,
             edit: true,
           },
           userStep: 2,
