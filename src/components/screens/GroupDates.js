@@ -16,9 +16,9 @@ const GroupDates = ({groupId, profile, groupDb}) => {
   const dispatch = useDispatch();
   
   const [budget, setBudget] = useState(profile === true ? groupDb.eventDate.budget : state.eventDate.budget);
-  const [registrationDate, setRegistrationDate] = useState(dayjs());
-  const [drawDate, setDrawDate] = useState(dayjs());
-  const [exchangeDate, setExchangeDate] = useState(dayjs());
+  const [registrationDate, setRegistrationDate] = useState(dayjs(profile === true ? groupDb.eventDate.registrationDate : state.eventDate.registrationDate));
+  const [drawDate, setDrawDate] = useState(dayjs(profile === true ? groupDb.eventDate.drawDate : state.eventDate.drawDate));
+  const [exchangeDate, setExchangeDate] = useState(dayjs(profile === true ? groupDb.eventDate.exchangeDate : state.eventDate.exchangeDate));
 
   let group = {
     name: profile === true ? groupDb.name : state.group.name,
@@ -50,16 +50,16 @@ const GroupDates = ({groupId, profile, groupDb}) => {
             label="Регистрация участников до"
             disableMaskedInput
             inputFormat="DD/MM/YYYY"
-            renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
+            renderInput={(params) => <TextField size="small" fullWidth margin="normal" {...params} error={state.eventDate.error === true}/>}
             value={registrationDate}
             onChange={newValue => setRegistrationDate(newValue)}
           />
 
           <DesktopDatePicker 
-            label="Выбор получателей подарков до"
+            label="Выбор получателей подарков"
             disableMaskedInput
             inputFormat="DD/MM/YYYY"
-            renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
+            renderInput={(params) => <TextField size="small" fullWidth margin="normal" {...params} error={state.eventDate.error === true}/>}
             value={drawDate}
             onChange={newValue => setDrawDate(newValue)}
           />
@@ -68,7 +68,7 @@ const GroupDates = ({groupId, profile, groupDb}) => {
             label="Обмен подарками"
             disableMaskedInput
             inputFormat="DD/MM/YYYY"
-            renderInput={(params) => <TextField size="small" error={state.eventDate.error === true} fullWidth margin="normal" {...params} />}
+            renderInput={(params) => <TextField size="small" fullWidth margin="normal" {...params} error={state.eventDate.error === true}/>}
             value={exchangeDate}
             onChange={newValue => setExchangeDate(newValue)}
           />

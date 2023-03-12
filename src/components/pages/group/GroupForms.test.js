@@ -59,7 +59,7 @@ describe("<Group />", () => {
 
     const input = screen.getByTestId("group-name-input");
 
-    fireEvent.change(input, {target: { value: "new content" }});
+    fireEvent.change(input, {target: { value: "content" }});
 
     act(() => {
       screen.queryByText(/^OK$/i).click();
