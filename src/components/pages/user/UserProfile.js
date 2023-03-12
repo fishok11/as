@@ -26,20 +26,10 @@ const UserProfile = () => {
   const {groupId} = useParams();
   const {userId} = useParams();
 
-  const [groupDb, setGroupDb] = useState();
-  const [userDb, setUserDb] = useState();
+  const [group, setGroupDb] = useState();
+  const [user, setUserDb] = useState();
   const [users, setUsers] = useState();
   const [recipient, setRecipient] = useState();
-
-  // let recipients = {};
-  // let group = {
-  //   ...groupDb,
-  //   recipients: recipients,
-  // }
-  // if (users !== undefined || groupDb !== undefined) {
-  //   const mixUsersArr = mixUsers(users);
-  //   users.forEach((user, index) => recipients[user.id] = mixUsersArr[index].id); 
-  // }
 
   useEffect(() => {
     const groupData = async() => {
@@ -107,7 +97,7 @@ const UserProfile = () => {
     .catch(error => console.log(error));
   }, [groupId]);
 
-  if (groupDb === undefined || userDb === undefined || users === undefined) {
+  if (group === undefined || user === undefined || users === undefined) {
     return null;
   }
   return (
@@ -119,22 +109,22 @@ const UserProfile = () => {
         <div className="UserProfile__container">
           <Typography variant="h6" sx={{textAlign: 'center'}}>Группа</Typography>
           <div className="UserProfile__item">
-            <Typography variant="subtitle1">{groupDb.name}</Typography>
-            <EditButton ico={<EditIcon />} action={EDIT_GROUP_NAME} adminEdit={userDb.admin}/>
+            <Typography variant="subtitle1">{group.name}</Typography>
+            <EditButton ico={<EditIcon />} action={EDIT_GROUP_NAME} adminEdit={user.admin}/>
           </div>
           <div className="UserProfile__item">
-            <Typography variant="subtitle1">{groupDb.eventDate.budget}₽, Регистрация до {groupDb.eventDate.registrationDate}</Typography>
-            <EditButton ico={<EditIcon />} action={EDIT_EVENT_DATE} adminEdit={userDb.admin}/>
+            <Typography variant="subtitle1">{group.eventDate.budget}₽, Регистрация до {group.eventDate.registrationDate}</Typography>
+            <EditButton ico={<EditIcon />} action={EDIT_EVENT_DATE} adminEdit={user.admin}/>
           </div>
         </div>
         <div className="UserProfile__container">
           <Typography variant="h6" sx={{textAlign: 'center'}}>Ваши данные</Typography>
           <div className="UserProfile__item">
-            <Typography variant="subtitle1">{userDb.userData.name}, {userDb.userData.email}</Typography> 
+            <Typography variant="subtitle1">{user.userData.name}, {user.userData.email}</Typography> 
             <EditButton ico={<EditIcon />} action={EDIT_USER_DATA} />
           </div>
           <div className="UserProfile__item">
-            <Typography variant="subtitle1">Подарок для {userDb.userGift.gender} пола {userDb.userGift.age} лет</Typography>
+            <Typography variant="subtitle1">Подарок для {user.userGift.gender} пола {user.userGift.age} лет</Typography>
             <EditButton ico={<EditIcon />} action={EDIT_USER_GIFT} />
           </div>
         </div>
@@ -144,14 +134,14 @@ const UserProfile = () => {
             <Typography variant="subtitle1">Пожелания {recipient.userData.name}: {recipient.userGift.wishes}</Typography>
           )}
         </div>)}
-        {userDb.recipientId === null && (
+        {user.recipientId === null && (
         <GlobalButton 
           text={"Выбрать получателя"}
           profile={true}
-          drawDate={groupDb.eventDate.drawDate}
+          drawDate={group.eventDate.drawDate}
           onClick={() => dispatch(selectRecipient({
-            user: userDb,
-            group: groupDb,
+            user: user,
+            group: group,
             users: users,
             userId: userId,
             groupId: groupId,
@@ -159,10 +149,10 @@ const UserProfile = () => {
         />)}
       </>)}
       <>
-        {state.group.editProfile === true && (<GroupName groupId={groupId} profile={true} groupDb={groupDb} />)}
-        {state.eventDate.editProfile === true && (<GroupDates groupId={groupId} profile={true} groupDb={groupDb} />)}
-        {state.userData.editProfile === true && (<UserData admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
-        {state.userGift.editProfile === true && (<UserGift admin={userDb.admin} userId={userId} profile={true} userDb={userDb} recipientId={userDb.recipientId} />)}
+        {state.group.editProfile === true && (<GroupName groupId={groupId} profile={true} groupDb={group} />)}
+        {state.eventDate.editProfile === true && (<GroupDates groupId={groupId} profile={true} groupDb={group} />)}
+        {state.userData.editProfile === true && (<UserData admin={user.admin} userId={userId} profile={true} userDb={user} recipientId={user.recipientId} />)}
+        {state.userGift.editProfile === true && (<UserGift admin={user.admin} userId={userId} profile={true} userDb={user} recipientId={user.recipientId} />)}
       </>
     </div>
   )

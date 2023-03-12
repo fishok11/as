@@ -310,13 +310,12 @@ export const saveUserGift = (path) => {
 export const selectRecipient = (path) => {
   let group = {
     ...path.group,
-    recipients: Object.values(path.group.recipients).length === 0 ? {} : path.group.recipients,
   }
-  if (Object.values(path.group.recipients).length === 0) {
+  if (Object.values(group.recipients).length === 0) {
     const mixUsersArr = mixUsers(path.users);
     path.users.forEach((user, index) => group.recipients[user.id] = mixUsersArr[index].id);
   }
-
+  console.log(group)
   const user = {
     ...path.user,
     recipientId: group.recipients[path.userId],
@@ -324,7 +323,7 @@ export const selectRecipient = (path) => {
 
   return async (dispatch) => {
     try {
-      if (Object.values(path.group.recipients).length === 0) {
+      if (Object.values(group.recipients).length === 0) {
         const docGroup = doc(db, "groups", path.groupId);
         await updateDoc(docGroup, group);
       }

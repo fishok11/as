@@ -4,10 +4,17 @@ import { mixUsers } from "./util";
 describe("mixUsers", () => {
   it('should return a shuffled array', () => {
     const users = [1, 2, 3];
+    let result = true; 
+    
+    for (let i = 0; i < 100; i++) { 
+      const arrayShuffled = mixUsers(users); 
+ 
+      if (arrayShuffled[0] === 1 || arrayShuffled[1] === 2 || arrayShuffled[2] === 3) { 
+        result = false; 
+        break; 
+      } 
+    } 
 
-    expect(mixUsers(users)).not.toEqual([1, 2, 3]);
-    expect(mixUsers(users)).not.toEqual([1, 3, 2]);
-    expect(mixUsers(users)).not.toEqual([2, 1, 3]);
-    expect(mixUsers(users)).not.toEqual([3, 2, 1]);
+    expect(result).toBe(true); 
   });
 });     
