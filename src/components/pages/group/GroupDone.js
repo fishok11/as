@@ -13,14 +13,14 @@ const GroupDone = () => {
       <Typography variant="body2">Адрес регистрации участников группы,</Typography>
       <Typography variant="body2" >отправте эту ссылку всем участникам:</Typography>    
       <GlobalLink 
-        defaultValue={`${INDEX_URL}/group/${state.group.id}`} 
+        defaultValue={`${INDEX_URL}/#/group/${state.group.id}`} 
       />
 
       <Typography variant="body2" sx={{ textAlign: 'center', mt: '15px' }}>Ссылка на ваш профиль <br/> (Не потеряйте ее):</Typography>
       <GlobalLink 
-        defaultValue={`${INDEX_URL}/group/${state.group.id}/user-profile/${state.userData.id}`} 
+        defaultValue={`${INDEX_URL}/#/group/${state.group.id}/user-profile/${state.userData.id}`} 
       />
-      <LinkProfile href={`${INDEX_URL}/group/${state.group.id}/user-profile/${state.userData.id}`} />
+      <LinkProfile href={`${INDEX_URL}/#/group/${state.group.id}/user-profile/${state.userData.id}`} />
     </div>
   )
 }
