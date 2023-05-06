@@ -1,4 +1,4 @@
-export const INDEX_URL = 'http://localhost:3000'
+export const INDEX_URL = 'https://fishok11.github.io/as'
 
 export const mixUsers = (arr) => { 
   const newArr = [...arr];
