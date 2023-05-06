@@ -19,7 +19,7 @@ const GroupName = ({groupId, profile, groupDb}) => {
       drawDate: profile === true ? groupDb.eventDate.drawDate : state.eventDate.drawDate,
       exchangeDate: profile === true ? groupDb.eventDate.exchangeDate : state.eventDate.exchangeDate,
     },
-    recipients: profile === true ?  groupDb.recipuents : {},
+    recipients: profile === true ?  groupDb.recipients : {},
   }
 
   return ( 
