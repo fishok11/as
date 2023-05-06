@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/as/static/css/main.b2165ed3.css",
-    "main.js": "/as/static/js/main.4c59136d.js",
+    "main.js": "/as/static/js/main.43fc824b.js",
     "static/media/layered-waves-haikei.svg": "/as/static/media/layered-waves-haikei.b17a9bd71744a3c0caa0.svg",
     "index.html": "/as/index.html",
     "main.b2165ed3.css.map": "/as/static/css/main.b2165ed3.css.map",
-    "main.4c59136d.js.map": "/as/static/js/main.4c59136d.js.map"
+    "main.43fc824b.js.map": "/as/static/js/main.43fc824b.js.map"
   },
   "entrypoints": [
     "static/css/main.b2165ed3.css",
-    "static/js/main.4c59136d.js"
+    "static/js/main.43fc824b.js"
   ]
 }
